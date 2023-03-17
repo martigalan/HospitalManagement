@@ -5,7 +5,8 @@ import java.util.Objects;
 
 public class Hospital implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = 6590616788083928968L;
 	private Integer id;
 	private String name;
 	private String location;
