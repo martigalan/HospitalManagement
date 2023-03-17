@@ -7,12 +7,12 @@ public class Illness implements Serializable {
 	private static final long serialVersionUID = -7606688736830380305L;
 	private Integer id;
 	private String condition;
-	//private Doctor doctor;
+	private Doctor doctor;
 	
-	public Illness(String condition /*, Doctor doctor*/) {
+	public Illness(String condition, Doctor doctor) {
 		super();
 		this.condition = condition;
-		//this.doctor = doctor;
+		this.doctor = doctor;
 	}
 
 	public Integer getId() {
@@ -31,13 +31,13 @@ public class Illness implements Serializable {
 		this.condition = condition;
 	}
 
-	/*public Doctor getDoctor() {
+	public Doctor getDoctor() {
 		return doctor;
 	}
 
 	public void setDoctor(Doctor doctor) {
 		this.doctor = doctor;
-	} */
+	} 
 
 	@Override
 	public int hashCode() {
@@ -58,7 +58,7 @@ public class Illness implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Illness [id=" + id + ", condition=" + condition + "]";
+		return "Illness [id=" + id + ", condition=" + condition + ", doctor=" + doctor + "]";
 	}
 	
 	
