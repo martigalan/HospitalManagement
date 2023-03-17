@@ -34,16 +34,10 @@ public class Doctor implements Serializable {
 
 
 
-
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + Arrays.hashCode(photo);
-		result = prime * result + Objects.hash(Doctor, dob, name, salary, speciality, surname);
-		return result;
+		return Objects.hash(Doctor);
 	}
-
 
 
 
@@ -56,11 +50,12 @@ public class Doctor implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Doctor other = (Doctor) obj;
-		return Objects.equals(Doctor, other.Doctor) && Objects.equals(dob, other.dob)
-				&& Objects.equals(name, other.name) && Arrays.equals(photo, other.photo)
-				&& Objects.equals(salary, other.salary) && Objects.equals(speciality, other.speciality)
-				&& Objects.equals(surname, other.surname);
+		return Objects.equals(Doctor, other.Doctor);
 	}
+
+
+
+
 
 
 
