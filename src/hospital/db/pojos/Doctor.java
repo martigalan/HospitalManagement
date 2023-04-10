@@ -8,9 +8,7 @@ import java.util.Objects;
 
 public class Doctor implements Serializable {
 
-
 	private static final long serialVersionUID = 6814981867922225263L;
-	
 	private Integer Doctor;
 	private String name;
 	private String surname;
@@ -18,9 +16,6 @@ public class Doctor implements Serializable {
 	private String speciality;
 	private Double salary;
 	private byte[] photo;
-
-
-	
 
 	public Doctor(String name, String surname, Date dob, String speciality, Double salary, byte[] photo) {
 		super();
@@ -32,14 +27,66 @@ public class Doctor implements Serializable {
 		this.photo = photo;
 	}
 
+	public Integer getDoctor() {
+		return Doctor;
+	}
 
+	public void setDoctor(Integer doctor) {
+		Doctor = doctor;
+	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
+	public String getSpeciality() {
+		return speciality;
+	}
+
+	public void setSpeciality(String speciality) {
+		this.speciality = speciality;
+	}
+
+	public Double getSalary() {
+		return salary;
+	}
+
+	public void setSalary(Double salary) {
+		this.salary = salary;
+	}
+
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(Doctor);
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -53,120 +100,10 @@ public class Doctor implements Serializable {
 		return Objects.equals(Doctor, other.Doctor);
 	}
 
-
-
-
-
-
-
-
 	@Override
 	public String toString() {
 		return "Doctor [Doctor=" + Doctor + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", speciality="
 				+ speciality + ", salary=" + salary + ", photo=" + Arrays.toString(photo) + "]";
 	}
-
-
-
-
-	public Integer getDoctor() {
-		return Doctor;
-	}
-
-
-
-
-	public void setDoctor(Integer doctor) {
-		Doctor = doctor;
-	}
-
-
-
-
-	public String getName() {
-		return name;
-	}
-
-
-
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-
-
-	public String getSurname() {
-		return surname;
-	}
-
-
-
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
-
-
-
-	public Date getDob() {
-		return dob;
-	}
-
-
-
-
-	public void setDob(Date dob) {
-		this.dob = dob;
-	}
-
-
-
-
-	public String getSpeciality() {
-		return speciality;
-	}
-
-
-
-
-	public void setSpeciality(String speciality) {
-		this.speciality = speciality;
-	}
-
-
-
-
-	public Double getSalary() {
-		return salary;
-	}
-
-
-
-
-	public void setSalary(Double salary) {
-		this.salary = salary;
-	}
-
-
-
-
-	public byte[] getPhoto() {
-		return photo;
-	}
-
-
-
-
-	public void setPhoto(byte[] photo) {
-		this.photo = photo;
-	}
-
-	
-	
-
-	
 	
 }
