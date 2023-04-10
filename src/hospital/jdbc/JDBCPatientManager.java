@@ -34,7 +34,7 @@ public class JDBCPatientManager implements PatientManager{
 	}
 
 	@Override
-	public void insertPatient() {
+	public void insertPatient(Patient patient) {
 		// TODO Auto-generated method stub
 		
 	}

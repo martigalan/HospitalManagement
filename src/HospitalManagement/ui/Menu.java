@@ -2,16 +2,18 @@ package HospitalManagement.ui;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.sql.Date;
 import java.io.IOException;
-import java.time.LocalDate;
+import java.util.List;
 
 import hospital.db.ifaces.PatientManager;
+import hospital.db.pojos.Patient;
 
 public class Menu {
 	
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-	private static PatientManager PatientM; //es la interfaz q queda por añadir, hay q importarla una vez creada
-	private static List<Patient> ListOfPatients; //List es un interface que declara métodos. Obliga a las clases que implementen el interface a implementar esos métodos
+	private static PatientManager patientManager; //es la interfaz q queda por añadir, hay q importarla una vez creada
+	private static List<Patient> patients; //List es un interface que declara métodos. Obliga a las clases que implementen el interface a implementar esos métodos
 
 	public static void main(String[] args) {
 		try {
@@ -67,12 +69,12 @@ public class Menu {
 		int year = Integer.parseInt(r.readLine());
 		int month = Integer.parseInt(r.readLine());
         int day = Integer.parseInt(r.readLine());
-        LocalDate dob = LocalDate.of(year, month, day);
+        Date dob = Date.valueOf("year/month/day");
 		System.out.println("Photo:");
-		Blob photo= r.readLine(); //Sería blob????		
-		Patient p= new Patient(name, surname, dob, photo);
-		//TODO inster patient in the database	
-		PatientM.instertPatient(p);
+		byte[] photo = null; //cómo se hace esto?
+		Patient p= new Patient(name, surname, dob, photo); //falta el hospital -> borrar nuevo constructor
+		// TODO insert patient in the database	
+		patientManager.insertPatient(p);
 	}
 	
 	public static void UpdatePatient() throws IOException{
@@ -80,7 +82,7 @@ public class Menu {
         System.out.println("Introduce the name of the patient");
         String namePatient=r.readLine();
         Patient namePatientToSee=null;
-        for(Patient p : ListOfPatients){ //// listofpatients array list es una clase que importo de java
+        for(Patient p : patients){ //// listofpatients array list es una clase que importo de java
             if(p.getName().equals(namePatient)){ 
                 namePatientToSee=p;
                 break;
@@ -116,7 +118,7 @@ public class Menu {
 		 System.out.println("Introduce the name of the patient");
 	        String namePatient=r.readLine();
 	        Patient namePatientToSee=null;
-	        for(Patient p : ListOfPatients){ //// listofpatients array list es una clase que importo de java
+	        for(Patient p : patients){ //// listofpatients array list es una clase que importo de java
 	            if(p.getName().equals(namePatient)){ 
 	                namePatientToSee=p;
 	                break;
