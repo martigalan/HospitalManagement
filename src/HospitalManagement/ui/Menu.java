@@ -67,7 +67,7 @@ public class Menu {
 		int year = Integer.parseInt(r.readLine());
 		int month = Integer.parseInt(r.readLine());
         int day = Integer.parseInt(r.readLine());
-        LocalDate fechaInicio = LocalDate.of(year, month, day);
+        LocalDate dob = LocalDate.of(year, month, day);
 		System.out.println("Photo:");
 		Blob photo= r.readLine(); //Sería blob????		
 		Patient p= new Patient(name, surname, dob, photo);
