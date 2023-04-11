@@ -2,10 +2,13 @@ package HospitalManagement.ui;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.sql.Blob;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 import hospital.db.ifaces.PatientManager;
+import hospital.db.pojos.Patient;
 
 public class Menu {
 	
@@ -21,8 +24,8 @@ public class Menu {
 			System.out.println("Choose an option, please:");
 			System.out.println("-1. Register a new Patient");
 			System.out.println("-2. Update a patient data");
-			System.out.println("-2. Search for a hospital");
-			System.out.println("-2. Exit");
+			System.out.println("-3. Search for a hospital");
+			System.out.println("-0. Exit");
 			
 			int choice = Integer.parseInt(r.readLine());
 			switch (choice) {
@@ -69,7 +72,7 @@ public class Menu {
         int day = Integer.parseInt(r.readLine());
         LocalDate dob = LocalDate.of(year, month, day);
 		System.out.println("Photo:");
-		Blob photo= r.readLine(); //Sería blob????		
+		Blob photo= r.readLine(); //Sería blob????		TODO change method::: is in rodrigos example (i think)
 		Patient p= new Patient(name, surname, dob, photo);
 		//TODO inster patient in the database	
 		PatientM.instertPatient(p);
