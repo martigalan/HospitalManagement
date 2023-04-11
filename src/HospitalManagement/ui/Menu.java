@@ -23,8 +23,8 @@ public class Menu {
 			System.out.println("Choose an option, please:");
 			System.out.println("-1. Register a new Patient");
 			System.out.println("-2. Update a patient data");
-			System.out.println("-2. Search for a hospital");
-			System.out.println("-2. Exit");
+			System.out.println("-3. Search for a hospital");
+			System.out.println("-0. Exit");
 			
 			int choice = Integer.parseInt(r.readLine());
 			switch (choice) {
