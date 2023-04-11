@@ -15,6 +15,14 @@ public class Patient implements Serializable{
 	private Hospital hospital;
 	private byte[] photo;
 	
+	public Patient(String name, String surname, Date dob, byte[] photo) {
+		super();
+		this.name = name;
+		this.surname = surname;
+		this.dob = dob;
+		this.photo = photo;
+	}
+
 	public Patient(String name, String surname, Date dob, Hospital hospital, byte[] photo) {
 		super();
 		this.name = name;
