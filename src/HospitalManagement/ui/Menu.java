@@ -1,8 +1,11 @@
 package HospitalManagement.ui;
 
 import java.io.BufferedReader;
+import java.util.Scanner;
 import java.io.InputStreamReader;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.io.IOException;
 import java.util.List;
 
@@ -14,7 +17,8 @@ public class Menu {
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 	private static PatientManager patientManager; //es la interfaz q queda por añadir, hay q importarla una vez creada
 	private static List<Patient> patients; //List es un interface que declara métodos. Obliga a las clases que implementen el interface a implementar esos métodos
-
+	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+	
 	public static void main(String[] args) {
 		try {
 			// TODO Auto-generated method stub
@@ -22,11 +26,14 @@ public class Menu {
 			System.out.println("HI");
 			System.out.println("Choose an option, please:");
 			System.out.println("-1. Register a new Patient");
-			System.out.println("-2. Update a patient data");
-			System.out.println("-2. Search for a hospital");
-			System.out.println("-2. Exit");
+			System.out.println("-2. Select a patient data"); ////////////////
+			System.out.println("-2. Select doctor data"); /////////
+			System.out.println("-3. Search for a hospital");
+			System.out.println("-4. Update doctor");
+			System.out.println("-0. Exit");
 			
-			int choice = Integer.parseInt(r.readLine());
+			Scanner sc = new Scanner(System.in);
+			int choice = sc.nextInt();
 			switch (choice) {
 				case 1: {					
 					RegisterPatient();
@@ -60,19 +67,19 @@ public class Menu {
 		
 	}
 	public static void RegisterPatient() throws IOException{
+		Scanner sc = new Scanner(System.in);
 		System.out.println("Input the patient data");
 		System.out.println("Name:");
-		String name= r.readLine();
+		String name= sc.nextLine();
 		System.out.println("Surname:");
-		String surname= r.readLine();
-		System.out.println("Date of birth:(first year, then month then day)"); //press enter after each value
-		int year = Integer.parseInt(r.readLine());
-		int month = Integer.parseInt(r.readLine());
-        int day = Integer.parseInt(r.readLine());
-        Date dob = Date.valueOf("year/month/day");
+		String surname= sc.nextLine();
+		System.out.println("Date of birth: (yyyy/MM/dd):");
+		String dob = sc.nextLine();
+		LocalDate dobLocalDate = LocalDate.parse(dob, formatter);		// java.time.LocalDate
+		Date dobDate = Date.valueOf(dobLocalDate); // java.sql.Date   
 		System.out.println("Photo:");
-		byte[] photo = null; //cómo se hace esto?
-		Patient p= new Patient(name, surname, dob, photo); //falta el hospital -> borrar nuevo constructor
+		byte[] photo = rs.getBytes("photo");
+		Patient p= new Patient(name, surname, dobDate, photo); //falta el hospital -> borrar nuevo constructor
 		// TODO insert patient in the database	
 		patientManager.insertPatient(p);
 	}
@@ -88,6 +95,7 @@ public class Menu {
                 break;
             }
         }
+        
         if(namePatientToSee!=null){
             System.out.println(namePatientToSee);
         }
@@ -124,6 +132,7 @@ public class Menu {
 	                break;
 	            }
 	        }
+	        
 	        if(namePatientToSee!=null){
 	            System.out.println(namePatientToSee);
 	        }
