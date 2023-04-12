@@ -94,7 +94,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			System.out.println("Database error.");
 			e.printStackTrace();
 		}
-		return null;
+		return listDoctors;
 	}
 
 	@Override
@@ -111,7 +111,6 @@ public class JDBCDoctorManager implements DoctorManager {
 			System.out.println("Database exception.");
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override

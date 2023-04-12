@@ -72,10 +72,10 @@ public class Menu {
         int day = Integer.parseInt(r.readLine());
         LocalDate dob = LocalDate.of(year, month, day);
 		System.out.println("Photo:");
-		Blob photo= r.readLine(); //Sería blob????		TODO change method::: is in rodrigos example (i think)
+		byte[] photo= null; // TODO change method::: is in rodrigos example (i think)
 		Patient p= new Patient(name, surname, dob, photo);
 		//TODO inster patient in the database	
-		PatientM.instertPatient(p);
+		PatientM.insertPatient(p);
 	}
 	
 	public static void UpdatePatient() throws IOException{
