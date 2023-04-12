@@ -1,0 +1,10 @@
+package hospital.db.ifaces;
+import java.util.List;
+import hospital.db.pojos.Hospital;
+import hospital.db.pojos.Machine;
+
+public interface HospitalManager {
+	public void updateHospital(String name);
+	public List<Hospital> searchByName(String name);
+	public void assignMachine (Machine machine);
+}
