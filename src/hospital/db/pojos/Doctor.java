@@ -15,17 +15,15 @@ public class Doctor implements Serializable {
 	private Date dob;
 	private String speciality;
 	private Double salary;
-	private byte[] photo;
 	private Integer hospitalId;
 
-	public Doctor(String name, String surname, Date dob, String speciality, Double salary, byte[] photo, Integer hospitalId) {
+	public Doctor(String name, String surname, Date dob, String speciality, Double salary, Integer hospitalId) {
 		super();
 		this.name = name;
 		this.surname = surname;
 		this.dob = dob;
 		this.speciality = speciality;
 		this.salary = salary;
-		this.photo = photo;
 		this.hospitalId = hospitalId;
 	}
 
@@ -76,14 +74,6 @@ public class Doctor implements Serializable {
 	public void setSalary(Double salary) {
 		this.salary = salary;
 	}
-
-	public byte[] getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(byte[] photo) {
-		this.photo = photo;
-	}
 		
 	public Integer getHospitalId() {
 		return hospitalId;
@@ -113,8 +103,7 @@ public class Doctor implements Serializable {
 	@Override
 	public String toString() {
 		return "Doctor [Doctor=" + Doctor + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", speciality="
-				+ speciality + ", salary=" + salary + ", photo=" + Arrays.toString(photo) + ", hospitalId=" + hospitalId
-				+ "]";
+				+ speciality + ", salary=" + salary + ", hospitalId=" + hospitalId + "]";
 	}
 		
 }
