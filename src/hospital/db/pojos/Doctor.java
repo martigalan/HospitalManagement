@@ -16,8 +16,9 @@ public class Doctor implements Serializable {
 	private String speciality;
 	private Double salary;
 	private byte[] photo;
+	private Integer hospitalId;
 
-	public Doctor(String name, String surname, Date dob, String speciality, Double salary, byte[] photo) {
+	public Doctor(String name, String surname, Date dob, String speciality, Double salary, byte[] photo, Integer hospitalId) {
 		super();
 		this.name = name;
 		this.surname = surname;
@@ -25,6 +26,7 @@ public class Doctor implements Serializable {
 		this.speciality = speciality;
 		this.salary = salary;
 		this.photo = photo;
+		this.hospitalId = hospitalId;
 	}
 
 	public Integer getDoctor() {
@@ -82,7 +84,15 @@ public class Doctor implements Serializable {
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
-	
+		
+	public Integer getHospitalId() {
+		return hospitalId;
+	}
+
+	public void setHospitalId(Integer hospitalId) {
+		this.hospitalId = hospitalId;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(Doctor);
@@ -103,7 +113,8 @@ public class Doctor implements Serializable {
 	@Override
 	public String toString() {
 		return "Doctor [Doctor=" + Doctor + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", speciality="
-				+ speciality + ", salary=" + salary + ", photo=" + Arrays.toString(photo) + "]";
+				+ speciality + ", salary=" + salary + ", photo=" + Arrays.toString(photo) + ", hospitalId=" + hospitalId
+				+ "]";
 	}
-	
+		
 }

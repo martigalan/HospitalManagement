@@ -22,8 +22,19 @@ public class JDBCHospitalManager implements HospitalManager{
 	}
 
 	@Override
-	public void updateHospital(String name) {
-		// TODO Auto-generated method stub
+	public void updateHospital(Hospital hospital) {
+		try {
+			String sql = "UPDATE hospital SET" + " name = ?, " + " location = ?, " + " WHERE id = ?";
+			PreparedStatement p;
+			p = c.prepareStatement(sql);
+			p.setString(1, hospital.getName());
+			p.setString(2, hospital.getLocation());
+			p.executeUpdate();
+			p.close();
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
 		
 	}
 

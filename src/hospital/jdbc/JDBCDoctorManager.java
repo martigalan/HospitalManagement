@@ -23,9 +23,21 @@ public class JDBCDoctorManager implements DoctorManager {
 	}
 	
 	@Override
-	public void updateDoctor(String name, String surname) {
-		// TODO Auto-generated method stub
-
+	public void updateDoctor(Doctor doctor) {
+		try {
+			String sql = "UPDATE doctor SET" + " speciality = ?, " + " salary = ?, " + " photo = ? " + " hospitalId = ? " + " WHERE id = ?";
+			PreparedStatement p;
+			p = c.prepareStatement(sql);
+			p.setString(1, doctor.getSpeciality());
+			p.setDouble(2, doctor.getSalary());
+			p.setBytes(3, doctor.getPhoto());
+			p.setInt(4, doctor.getHospitalId());
+			p.executeUpdate();
+			p.close();
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -44,7 +56,8 @@ public class JDBCDoctorManager implements DoctorManager {
 				String speciality = rs.getString("speciality");
 				Double salary = rs.getDouble("salary");
 				byte[] photo = rs.getBytes("photo");
-				Doctor d = new Doctor(n, sn, dob, speciality, salary, photo);
+				Integer hospitalId = rs.getInt("hospitalId");
+				Doctor d = new Doctor(n, sn, dob, speciality, salary, photo, hospitalId);
 				// Add the doctor to the list
 				listDoctors.add(d);
 			}
@@ -70,7 +83,22 @@ public class JDBCDoctorManager implements DoctorManager {
 			e.printStackTrace();
 		}
 	}
-
+	
+	@Override
+	public void deleteDoctor(int id) {
+		try {
+			String sql = "DELETE FROM doctor WHERE id = ?";
+			PreparedStatement p;
+			p = c.prepareStatement(sql);
+			p.setInt(1, id);
+			p.executeUpdate();
+			p.close();
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public void assignHospital(String hospitalName) {
 		// TODO Auto-generated method stub
