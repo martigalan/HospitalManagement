@@ -14,6 +14,7 @@ public class Patient implements Serializable{
 	private Date dob;
 	private Hospital hospital;
 	private byte[] photo;
+	private Integer hospitalId;
 	
 	public Patient(String name, String surname, Date dob, byte[] photo) {
 		super();
@@ -90,6 +91,14 @@ public class Patient implements Serializable{
 	public String toString() {
 		return "Patient [id=" + id + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", hospital="
 				+ hospital + ", photo=" + Arrays.toString(photo) + "]";
+	}
+
+	public Integer getHospitalId() {
+		return hospitalId;
+	}
+
+	public void setHospitalId(Integer hospitalId) {
+		this.hospitalId = hospitalId;
 	}
 	
 	
