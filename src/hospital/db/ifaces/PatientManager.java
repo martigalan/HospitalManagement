@@ -4,7 +4,7 @@ import hospital.db.pojos.Patient;
 
 public interface PatientManager {
 
-	public void updatePatient(String name, String surname);
+	public void updatePatient(Patient patient);
 	public List<Patient> searchByName(String name);
 	public void insertPatient(Patient patient);
 	public void assignHospital(String hospitalName);

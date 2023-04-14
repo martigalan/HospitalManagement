@@ -22,7 +22,7 @@ public class JDBCPatientManager implements PatientManager{
 	}
 	
 	@Override
-	public void updatePatient(String name, String surname) {
+	public void updatePatient(Patient patient) {
 		// TODO Auto-generated method stub
 		
 	}
