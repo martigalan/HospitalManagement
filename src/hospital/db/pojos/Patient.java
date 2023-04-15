@@ -1,8 +1,8 @@
 package hospital.db.pojos;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Objects;
 
 public class Patient implements Serializable{
@@ -14,7 +14,6 @@ public class Patient implements Serializable{
 	private Date dob;
 	private Hospital hospital;
 	private byte[] photo;
-	private Integer hospitalId;
 	
 	public Patient(String name, String surname, Date dob, byte[] photo) {
 		super();
@@ -92,15 +91,4 @@ public class Patient implements Serializable{
 		return "Patient [id=" + id + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", hospital="
 				+ hospital + ", photo=" + Arrays.toString(photo) + "]";
 	}
-
-	public Integer getHospitalId() {
-		return hospitalId;
-	}
-
-	public void setHospitalId(Integer hospitalId) {
-		this.hospitalId = hospitalId;
-	}
-	
-	
-
 }
