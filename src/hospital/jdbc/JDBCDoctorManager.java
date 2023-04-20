@@ -20,7 +20,6 @@ public class JDBCDoctorManager implements DoctorManager {
 
 	public JDBCDoctorManager(Connection c) {
 		this.c = c;
-
 	}
 	
 	@Override
@@ -41,12 +40,13 @@ public class JDBCDoctorManager implements DoctorManager {
 	}
 
 	@Override
-	public List<Doctor> searchByName(String name) {
+	public List<Doctor> searchDoctorByName(String name, String surname) {
 		List<Doctor> listDoctors = new ArrayList<Doctor>();
 		try {
 			String sql = "SELECT * FROM doctor WHERE name LIKE ?";
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setString(1, "%" + name + "%");
+			p.setString(2, "%" + surname + "%");
 			ResultSet rs = p.executeQuery();
 			while(rs.next()) {
 				// Create a new Doctor
@@ -101,17 +101,27 @@ public class JDBCDoctorManager implements DoctorManager {
 	@Override
 	public void assignHospital(String hospitalName) {
 		// TODO Auto-generated method stub
+		// aquí solo le metemos el hospitalId directamente al Doctor, no?
 
 	}
 
 	@Override
-	public void assignIllness(String illnessName) {
-		// TODO Auto-generated method stub
-
+	public void assignIllness(int illnessId, int doctorId) {
+		try {
+			String sql = "INSERT INTO doctorTreats (illnessId, doctorId) VALUES (?,?)";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, illnessId);
+			p.setInt(2, doctorId);
+			p.executeUpdate();
+			p.close();
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
-	public Doctor showInformationDoctor(int id) {
+	public Doctor getDoctor(int id) {
 		try {
 			String sql = "SELECT * FROM doctor WHERE id = ?";
 			PreparedStatement p = c.prepareStatement(sql);
@@ -133,6 +143,5 @@ public class JDBCDoctorManager implements DoctorManager {
 			e.printStackTrace();
 		}
 		return null;
-		
 	}
 }

@@ -44,7 +44,6 @@ public class ConnectionManager {
 			String table6 = "CREATE TABLE patient (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL," 
 					+ " surname TEXT NOT NULL," + " dob DATE NOT NULL," + " hospitalId INTEGER NOT NULL REFERENCES hospital(id))";
 			s.executeUpdate(table6);
-			// TODO table treats and has_illness
 			String table7 = "CREATE TABLE treats (machineId INTEGER NOT NULL REFERENCES machine(id), " + "illnessId INTEGER NOT NULL REFERENCES illness(id), " 
 			        + "successRate TEXT NOT NULL, " + "PRIMARY KEY (machinesId, illnessId))";
 			s.executeUpdate(table7);
