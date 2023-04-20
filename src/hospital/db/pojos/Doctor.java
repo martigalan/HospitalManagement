@@ -15,16 +15,16 @@ public class Doctor implements Serializable {
 	private Date dob;
 	private String speciality;
 	private Double salary;
-	private Integer hospitalId;
+	private Hospital hospital;
 
-	public Doctor(String name, String surname, Date dob, String speciality, Double salary, Integer hospitalId) {
+	public Doctor(String name, String surname, Date dob, String speciality, Double salary, Hospital hospital) {
 		super();
 		this.name = name;
 		this.surname = surname;
 		this.dob = dob;
 		this.speciality = speciality;
 		this.salary = salary;
-		this.hospitalId = hospitalId;
+		this.hospital = hospital;
 	}
 
 	public Integer getDoctor() {
@@ -75,12 +75,12 @@ public class Doctor implements Serializable {
 		this.salary = salary;
 	}
 		
-	public Integer getHospitalId() {
-		return hospitalId;
+	public Hospital getHospital() {
+		return hospital;
 	}
 
-	public void setHospitalId(Integer hospitalId) {
-		this.hospitalId = hospitalId;
+	public void setHospital(Hospital hospital) {
+		this.hospital = hospital;
 	}
 
 	@Override
@@ -103,7 +103,6 @@ public class Doctor implements Serializable {
 	@Override
 	public String toString() {
 		return "Doctor [Doctor=" + Doctor + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", speciality="
-				+ speciality + ", salary=" + salary + ", hospitalId=" + hospitalId + "]";
-	}
-		
+				+ speciality + ", salary=" + salary + ", hospital=" + hospital + "]";
+	}		
 }

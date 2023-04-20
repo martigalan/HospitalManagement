@@ -2,9 +2,6 @@ package HospitalManagement.ui;
 
 import java.io.BufferedReader;
 import java.util.Scanner;
-
-import dogclinic.pojos.Owner;
-
 import java.io.InputStreamReader;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -98,7 +95,7 @@ public class Menu {
 		String nameDoc = sc.nextLine();
 		System.out.println("Introduce the surname:");
 		String snDoc = sc.nextLine();
-		List<Doctor> doctorList = doctorManager.searchDoctorByName(nameDoc, snDoc);
+		List<Doctor> doctorList = doctorManager.searchByName(nameDoc, snDoc);
 		System.out.println(doctorList);
 		System.out.println("Please choose a doctor, type its Id:");
 		Integer id = sc.nextInt();

@@ -30,7 +30,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			p = c.prepareStatement(sql);
 			p.setString(1, doctor.getSpeciality());
 			p.setDouble(2, doctor.getSalary());
-			p.setInt(3, doctor.getHospitalId());
+			p.setInt(3, doctor.getHospital().getId());
 			p.executeUpdate();
 			p.close();
 		} catch (SQLException e) {
@@ -40,8 +40,9 @@ public class JDBCDoctorManager implements DoctorManager {
 	}
 
 	@Override
-	public List<Doctor> searchDoctorByName(String name, String surname) {
+	public List<Doctor> searchByName(String name, String surname) {
 		List<Doctor> listDoctors = new ArrayList<Doctor>();
+		JDBCHospitalManager hm = new JDBCHospitalManager(c);
 		try {
 			String sql = "SELECT * FROM doctor WHERE name LIKE ?";
 			PreparedStatement p = c.prepareStatement(sql);
@@ -56,7 +57,8 @@ public class JDBCDoctorManager implements DoctorManager {
 				String speciality = rs.getString("speciality");
 				Double salary = rs.getDouble("salary");
 				Integer hospitalId = rs.getInt("hospitalId");
-				Doctor d = new Doctor(n, sn, dob, speciality, salary, hospitalId);
+				Hospital hospital = hm.getHospital(hospitalId);
+				Doctor d = new Doctor(n, sn, dob, speciality, salary, hospital);
 				// Add the doctor to the list
 				listDoctors.add(d);
 			}
@@ -74,7 +76,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			String sql = "INSERT INTO doctor (name, surname, DoB, speciality, salary, photo) "
 					+ "VALUES ('" + doctor.getName() + "', '" + doctor.getSurname() + "', '"
 					+ doctor.getDob() + "', '" + doctor.getSpeciality() + "', '" 
-					+ doctor.getSalary() + "', '" + doctor.getHospitalId() + ")";
+					+ doctor.getSalary() + "', '" + doctor.getHospital().getId() + ")";
 			s.executeUpdate(sql);
 			s.close();
 		} catch (SQLException e) {
@@ -122,6 +124,7 @@ public class JDBCDoctorManager implements DoctorManager {
 	
 	@Override
 	public Doctor getDoctor(int id) {
+		JDBCHospitalManager hm = new JDBCHospitalManager(c);
 		try {
 			String sql = "SELECT * FROM doctor WHERE id = ?";
 			PreparedStatement p = c.prepareStatement(sql);
@@ -134,7 +137,8 @@ public class JDBCDoctorManager implements DoctorManager {
 			Date dob = rs.getDate("dob");
 			Double salary = rs.getDouble("salary");
 			Integer hospitalId = rs.getInt("hospitalId");
-			Doctor d = new Doctor(name, surname, dob, speciality, salary, hospitalId);
+			Hospital hospital = hm.getHospital(hospitalId);
+			Doctor d = new Doctor(name, surname, dob, speciality, salary, hospital);
 			rs.close();
 			p.close();
 			return d;
