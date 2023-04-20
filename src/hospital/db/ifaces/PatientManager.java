@@ -9,4 +9,5 @@ public interface PatientManager {
 	public void insertPatient(Patient patient);
 	public void assignHospital(String hospitalName);
 	public void assignIllness(String illnessName);
+	public Patient getPatient(Integer patientId);
 }

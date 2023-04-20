@@ -1,5 +1,6 @@
 package hospital.jdbc;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -66,6 +67,29 @@ public class JDBCHospitalManager implements HospitalManager{
 	public void assignMachine(Machine machine) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Hospital getHospital(Integer hosp_id) {
+		Hospital hosp = null;
+		
+		try {
+			String sql = "SELECT * FROM hospital WHERE id = ?";
+			PreparedStatement statement = c.prepareStatement(sql);
+			statement.setInt(1, hosp_id);
+			ResultSet result = statement.executeQuery();
+			result.next();
+			String name = result.getString("name");
+			String location = result.getString("location");
+			
+			hosp = new Hospital(name, location);
+			
+		}catch (SQLException e) {
+			System.out.println("Database error");
+			e.printStackTrace();
+		}
+		
+		return hosp;
 	}
 	
 	
