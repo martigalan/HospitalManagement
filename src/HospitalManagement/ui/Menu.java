@@ -14,6 +14,7 @@ import hospital.db.ifaces.PatientManager;
 import hospital.db.ifaces.HospitalManager;
 import hospital.db.pojos.Doctor;
 import hospital.db.pojos.Patient;
+import hospital.jdbc.ConnectionManager;
 
 public class Menu {
 	
@@ -23,9 +24,11 @@ public class Menu {
 	private static PatientManager patientManager; 
 	private static DoctorManager doctorManager;
 	private static HospitalManager hospitalManager;
+	private static ConnectionManager connectionManager;
 	
 	public static void main(String[] args) {
 		try {
+			connectionManager = new ConnectionManager();
 			// TODO Auto-generated method stub
 			
 			System.out.println("HI");
