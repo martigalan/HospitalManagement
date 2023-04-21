@@ -84,8 +84,19 @@ public class JDBCPatientManager implements PatientManager{
 	}
 
 	@Override
-	public void assignIllness(String illnessName) {
-		// TODO Auto-generated method stub
+	public void assignIllness(int pId, int iId, String severity) {
+		try {
+			String sql = "INSERT INTO hasIllness VALUES (?, ?, ?);";
+			PreparedStatement s = c.prepareStatement(sql);
+			s.setInt(1,iId);
+			s.setInt(2, pId);
+			s.setString(3, severity);
+			s.executeUpdate();
+			s.close();
+		}catch(SQLException ex) {
+			System.out.println("Database error");
+			ex.printStackTrace();
+		}
 		
 	}
 

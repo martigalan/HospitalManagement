@@ -9,6 +9,7 @@ import java.util.Objects;
 public class Patient implements Serializable{
 	
 	private static final long serialVersionUID = 2424327075260915600L;
+	
 	private Integer id;
 	private String name;
 	private String surname;
