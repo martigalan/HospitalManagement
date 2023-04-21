@@ -3,6 +3,7 @@ package hospital.db.pojos;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class Patient implements Serializable{
@@ -14,6 +15,7 @@ public class Patient implements Serializable{
 	private Date dob;
 	private Hospital hospital;
 	private byte[] photo;
+	private List<Illness> illness;
 	
 	public Patient(String name, String surname, Date dob, byte[] photo) {
 		super();
@@ -67,6 +69,13 @@ public class Patient implements Serializable{
 	}
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
+	}
+	public List<Illness> getIllness() {
+		return illness;
+	}
+
+	public void setIllness(List<Illness> illness) {
+		this.illness = illness;
 	}
 	
 	

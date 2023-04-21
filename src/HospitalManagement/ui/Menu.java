@@ -256,6 +256,11 @@ public class Menu {
 		Integer idDoc = sc.nextInt();
 		doctorManager.getDoctor(idDoc);
 	}
+	
+	public static void showPatient (int id) throws IOException {
+		Patient p = patientManager.getPatient(id);
+		System.out.println(p);
+	}
 }
 	
 		

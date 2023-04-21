@@ -79,7 +79,7 @@ public class JDBCPatientManager implements PatientManager{
 	
 	@Override
 	public void assignHospital(String hospitalName) {
-		// TODO Auto-generated method stub
+		// TODO JPA
 		
 	}
 
