@@ -15,6 +15,9 @@ import hospital.db.ifaces.HospitalManager;
 import hospital.db.pojos.Doctor;
 import hospital.db.pojos.Patient;
 import hospital.jdbc.ConnectionManager;
+import hospital.jdbc.JDBCDoctorManager;
+import hospital.jdbc.JDBCHospitalManager;
+import hospital.jdbc.JDBCPatientManager;
 
 public class Menu {
 	
@@ -29,6 +32,9 @@ public class Menu {
 	public static void main(String[] args) {
 		try {
 			connectionManager = new ConnectionManager();
+			patientManager = new JDBCPatientManager(connectionManager.getConnection());
+			doctorManager = new JDBCDoctorManager(connectionManager.getConnection());
+			hospitalManager = new JDBCHospitalManager(connectionManager.getConnection());
 			// TODO Auto-generated method stub
 			
 			System.out.println("HI");
@@ -82,10 +88,11 @@ public class Menu {
 		String surname= sc.nextLine();		 
 		System.out.println("Date of birth (yyyy-MM-dd):");
 		String dob = sc.nextLine();
-		LocalDate dobLocalDate = LocalDate.parse(dob, formatter);		// java.time.LocalDate
+		LocalDate dobLocalDate = LocalDate.parse(dob);		// java.time.LocalDate
 		Date dobDate = Date.valueOf(dobLocalDate);	
 		System.out.println("Photo:");
 		byte[] photo = sc.nextByte();
+		//byte[]photo =null; used for testing
 		// TODO add photo in SQLinsert
 		Patient p= new Patient(name, surname, dobDate, photo); //falta el hospital -> borrar nuevo constructor
 		// TODO insert patient in the database	

@@ -42,11 +42,11 @@ public class ConnectionManager {
 					+ " doctorId INTEGER NOT NULL REFERENCES hospital(id));";
 			s.executeUpdate(table5);
 			String table6 = "CREATE TABLE patient (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL," 
-					+ " surname TEXT NOT NULL," + " dob DATE NOT NULL," + " hospitalId INTEGER NOT NULL REFERENCES hospital(id),"
+					+ " surname TEXT NOT NULL," + " dob DATE NOT NULL," + " hospitalId INTEGER REFERENCES hospital(id),"
 					+ " photo BLOB);";
 			s.executeUpdate(table6);
 			String table7 = "CREATE TABLE treats (machineId INTEGER NOT NULL REFERENCES machine(id), " + "illnessId INTEGER NOT NULL REFERENCES illness(id), " 
-			        + "successRate TEXT NOT NULL, " + "PRIMARY KEY (machinesId, illnessId));";
+			        + "successRate TEXT NOT NULL, " + "PRIMARY KEY (machineId, illnessId));";
 			s.executeUpdate(table7);
 			String table8 = "CREATE TABLE hasIllness (illnessId INTEGER NOT NULL REFERENCES illness(id), " + "patientId INTEGER NOT NULL REFERENCES patient(id), " 
 			        + "severity TEXT NOT NULL, " + "PRIMARY KEY (illnessId, patientId));";

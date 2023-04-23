@@ -59,14 +59,14 @@ public class JDBCPatientManager implements PatientManager{
 	@Override
 	public void insertPatient(Patient patient) {
 		try {
-			String sql = "INSERT INTO patient (name, surname, dob, hospitalId, photo) " +
-		           "VALUES (?, ?, ?, ?, ?);";
+			String sql = "INSERT INTO patient (name, surname, dob, photo) " +
+		           "VALUES (?, ?, ?, ?);";
 			PreparedStatement st = c.prepareStatement(sql);
 			st.setString(1, patient.getName());
 			st.setString(2, patient.getSurname());
 			st.setDate(3, patient.getDob());
-			st.setInt(4, patient.getHospital().getId());
-			st.setBytes(5, patient.getPhoto());
+			//st.setInt(4, patient.getHospital().getId());
+			st.setBytes(4, patient.getPhoto());
 			st.executeUpdate();
 			st.close();
 		}catch(SQLException e) {
