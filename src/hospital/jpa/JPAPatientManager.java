@@ -17,6 +17,11 @@ public class JPAPatientManager implements PatientManager {
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 		em.getTransaction().commit();
+		//TODO finish this part
+		/*if (this.getPatient.getHospital().isNull()) {
+			Hospital h = new Hospital();
+			this.getPatient().createHospital();
+		}*/
 	}
 
 	public void close() {

@@ -27,6 +27,7 @@ public class Patient implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "hospitalId")
+	@Column(nullable=true)
 	private Hospital hospital;
 	private byte[] photo;
 	
