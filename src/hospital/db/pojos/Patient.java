@@ -6,18 +6,39 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "patient")
 public class Patient implements Serializable{
 	
 	private static final long serialVersionUID = 2424327075260915600L;
 	
+	@Id
+	@GeneratedValue(generator="patient")
+	@TableGenerator(name="patient", table="sqlite_sequence",
+	   	pkColumnName="name", valueColumnName="seq",
+	   	pkColumnValue="patient")
 	private Integer id;
+	
 	private String name;
 	private String surname;
 	private Date dob;
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "hospitalId")
 	private Hospital hospital;
 	private byte[] photo;
-	private List<Illness> illness;
 	
+	@OneToMany(mappedBy = "patient")
+	private List<Has> illness;
+	
+	
+	public Patient() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Patient(String name, String surname, Date dob, byte[] photo) {
 		super();
 		this.name = name;
@@ -71,15 +92,20 @@ public class Patient implements Serializable{
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
-	public List<Illness> getIllness() {
+	
+
+	public void setHospital(Hospital hospital) {
+		this.hospital = hospital;
+	}
+
+	public List<Has> getIllness() {
 		return illness;
 	}
 
-	public void setIllness(List<Illness> illness) {
+	public void setIllness(List<Has> illness) {
 		this.illness = illness;
 	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

@@ -13,11 +13,13 @@ import hospital.db.ifaces.DoctorManager;
 import hospital.db.ifaces.PatientManager;
 import hospital.db.ifaces.HospitalManager;
 import hospital.db.pojos.Doctor;
+import hospital.db.pojos.Hospital;
 import hospital.db.pojos.Patient;
 import hospital.jdbc.ConnectionManager;
 import hospital.jdbc.JDBCDoctorManager;
 import hospital.jdbc.JDBCHospitalManager;
 import hospital.jdbc.JDBCPatientManager;
+import hospital.jpa.JPAPatientManager;
 
 public class Menu {
 	
@@ -32,7 +34,7 @@ public class Menu {
 	public static void main(String[] args) {
 		try {
 			connectionManager = new ConnectionManager();
-			patientManager = new JDBCPatientManager(connectionManager.getConnection());
+			patientManager = new JPAPatientManager();
 			doctorManager = new JDBCDoctorManager(connectionManager.getConnection());
 			hospitalManager = new JDBCHospitalManager(connectionManager.getConnection());
 			// TODO Auto-generated method stub
@@ -90,12 +92,12 @@ public class Menu {
 		String dob = sc.nextLine();
 		LocalDate dobLocalDate = LocalDate.parse(dob);		// java.time.LocalDate
 		Date dobDate = Date.valueOf(dobLocalDate);	
-		System.out.println("Photo:");
-		byte[] photo = sc.nextByte();
-		//byte[]photo =null; used for testing
+		//System.out.println("Photo:");
+		//byte[] photo = sc.nextByte();
+		byte[]photo =null; //used for testing
 		// TODO add photo in SQLinsert
-		Patient p= new Patient(name, surname, dobDate, photo); //falta el hospital -> borrar nuevo constructor
-		// TODO insert patient in the database	
+		Hospital h = new Hospital();
+		Patient p= new Patient(name, surname, dobDate, h, photo); //falta el hospital -> borrar nuevo constructor
 		patientManager.insertPatient(p);
 	}
 	

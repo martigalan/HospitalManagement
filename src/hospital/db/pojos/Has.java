@@ -2,13 +2,36 @@ package hospital.db.pojos;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "hasIllness")
+@IdClass(HasId.class)
 public class Has implements Serializable{
 	
 	private static final long serialVersionUID = 18985703331804986L;
 	
-	private Patient patient;
-	private Illness illness;
+	@Id
+	private Integer patientId;
+	@Id
+	private Integer illnessId;
+	@Column(name = "severity")
 	private String severity;
+	
+	public Has() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+	@ManyToOne
+	@PrimaryKeyJoinColumn(name = "patientId", referencedColumnName = "id")
+	private Patient patient;
+	
+	@ManyToOne
+	@PrimaryKeyJoinColumn(name = "illnessId", referencedColumnName = "id")
+	private Illness illness;
 	
 	public Has(Patient patient, Illness illness, String severity) {
 		super();

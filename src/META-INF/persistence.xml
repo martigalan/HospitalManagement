@@ -10,8 +10,13 @@
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
  
 		<!-- Entity Class -->
-		<class>dogclinic.pojos.Role</class>
-		<class>dogclinic.pojos.User</class>
+		<class>hospital.db.pojos.Patient</class>
+		<class>hospital.db.pojos.Doctor</class>
+		<class>hospital.db.pojos.Hospital</class>
+		<class>hospital.db.pojos.Illness</class>
+		<class>hospital.db.pojos.Has</class>
+		<class>hospital.db.pojos.Machine</class>
+   
  
 		<properties>	
 			<!-- Connection properties -->
