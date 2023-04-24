@@ -19,42 +19,48 @@ public class Doctor implements Serializable {
 	@TableGenerator(name="doctor", table="sqlite_sequence",
 	   	pkColumnName="name", valueColumnName="seq",
 	   	pkColumnValue="doctor")
-	private Integer Doctor;
+	private Integer id;
+	@Column(name = "name")
 	private String name;
+	@Column(name = "surname")
 	private String surname;
+	@Column(name = "dob")
 	private Date dob;
+	@Column(name = "speciality")
 	private String speciality;
+	@Column(name = "salary")
 	private Double salary;
 	private Hospital hospital;
+	@Column(name = "hospitalId")
+	private Integer hospitalId;
 	
-	@ManyToMany //no entiendo lo de fetch
+	@ManyToMany 
 	@JoinTable(name = "DoctorTreats",
 	        joinColumns={@JoinColumn(name="doctorId", referencedColumnName="id")},
 	   		inverseJoinColumns={@JoinColumn(name="illnessId", referencedColumnName="id")})
 	private List<Illness> treatsIllness;
 
-	public Doctor(String name, String surname, Date dob, String speciality, Double salary, Hospital hospital) {
+	public Doctor(String name, String surname, Date dob, String speciality, Double salary, Integer hospitalId) {
 		super();
 		this.name = name;
 		this.surname = surname;
 		this.dob = dob;
 		this.speciality = speciality;
 		this.salary = salary;
-		this.hospital = hospital;
+		this.hospitalId = obtainHospitalId(hospital);
+	}
+	
+	private int obtainHospitalId (Hospital hospital) {
+		return hospital.getId();
 	}
 
-	public Doctor() {
-		super();
+	public Integer getId() {
+		return id;
 	}
-
-	public Integer getDoctor() {
-		return Doctor;
+	public void setId(Integer id) {
+		this.id = id;
 	}
-
-	public void setDoctor(Integer doctor) {
-		Doctor = doctor;
-	}
-
+	
 	public String getName() {
 		return name;
 	}
@@ -95,17 +101,17 @@ public class Doctor implements Serializable {
 		this.salary = salary;
 	}
 		
-	public Hospital getHospital() {
-		return hospital;
+	public Integer getHospitalId() {
+		return hospitalId;
 	}
 
-	public void setHospital(Hospital hospital) {
-		this.hospital = hospital;
+	public void setHospitalId(Integer hospitalId) {
+		this.hospitalId = hospitalId;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(Doctor);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -117,12 +123,14 @@ public class Doctor implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Doctor other = (Doctor) obj;
-		return Objects.equals(Doctor, other.Doctor);
+		return Objects.equals(id, other.id);
 	}
 
 	@Override
 	public String toString() {
-		return "Doctor [Doctor=" + Doctor + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", speciality="
-				+ speciality + ", salary=" + salary + ", hospital=" + hospital + "]";
-	}		
+		return "Doctor [id=" + id + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", speciality="
+				+ speciality + ", salary=" + salary + ", hospital=" + hospital + ", hospitalId=" + hospitalId
+				+ ", treatsIllness=" + treatsIllness + "]";
+	}
+
 }
