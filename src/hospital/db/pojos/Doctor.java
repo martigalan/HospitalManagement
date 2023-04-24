@@ -3,7 +3,6 @@ package hospital.db.pojos;
 import java.io.Serializable;
 
 import java.sql.Date;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,7 +27,7 @@ public class Doctor implements Serializable {
 	private Double salary;
 	private Hospital hospital;
 	
-	@ManyToMany
+	@ManyToMany //no entiendo lo de fetch
 	@JoinTable(name = "DoctorTreats",
 	        joinColumns={@JoinColumn(name="doctorId", referencedColumnName="id")},
 	   		inverseJoinColumns={@JoinColumn(name="illnessId", referencedColumnName="id")})

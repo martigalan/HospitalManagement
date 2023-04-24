@@ -16,7 +16,7 @@
 		<class>hospital.db.pojos.Illness</class>
 		<class>hospital.db.pojos.Has</class>
 		<class>hospital.db.pojos.Machine</class>
-   
+		<class>hospital.db.pojos.Treats</class>
  
 		<properties>	
 			<!-- Connection properties -->

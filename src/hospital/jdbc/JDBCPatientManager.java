@@ -1,16 +1,13 @@
 package hospital.jdbc;
 import hospital.db.ifaces.PatientManager;
 import hospital.db.pojos.Hospital;
-import hospital.db.pojos.Illness;
 import hospital.db.pojos.Patient;
 
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 

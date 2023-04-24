@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class HasId implements Serializable{
 
+	private static final long serialVersionUID = -6733737804263616085L;
 	private Integer patientId;
 	private Integer illnessId;
 	@Override
