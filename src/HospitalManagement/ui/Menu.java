@@ -87,7 +87,7 @@ public class Menu {
 		LocalDate dobLocalDate = LocalDate.parse(dob, formatter);		// java.time.LocalDate
 		Date dobDate = Date.valueOf(dobLocalDate);	
 		System.out.println("Photo:");
-		byte[] photo = sc.nextByte();
+		//byte[] photo = sc.nextByte();
 		// TODO add photo in SQLinsert
 		Patient p= new Patient(name, surname, dobDate, photo); //falta el hospital -> borrar nuevo constructor
 		// TODO insert patient in the database	
@@ -170,7 +170,7 @@ public class Menu {
 					break;
 				}
 				case 2: {
-					showPatient(id);
+					//showPatient(id);
 					//TODO show patient
 					break;
 				}				
@@ -191,7 +191,7 @@ public class Menu {
 	
 	public static void updatePatient(int id) throws IOException {
 		Scanner sc = new Scanner(System.in);
-		Patient p = PatientM.getPatient(id);
+		//Patient p = PatientM.getPatient(id);
 		//TODO get patient
 		System.out.println("Type the new data, or press enter to keep actual data");
 		System.out.println("Name (" + p.getName() + "):");
