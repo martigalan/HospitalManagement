@@ -59,16 +59,24 @@ public class JPAPatientManager implements PatientManager {
 
 	@Override
 	public void assignIllness(Patient p, Illness i, String severity) {
-		//TODO chekc if has already there
-		em.getTransaction().begin();
-		Has has = new Has();
-		em.persist(has);
-		has.setIllness(i);
-		has.setPatient(p);
-		has.setSeverity(severity);
-		p.getIllness().add(has);
-		i.getPatients().add(has);
-		em.getTransaction().commit();
+		JPAHas hM = new JPAHas();
+		Has h= hM.getHas(p.getId(), i.getId());
+		if (h != null) {
+			em.getTransaction().begin();
+			h.setSeverity(severity);
+			em.getTransaction().commit();
+		}
+		else {
+		    em.getTransaction().begin();
+		    Has has = new Has();
+		    em.persist(has);
+		    has.setIllness(i);
+		    has.setPatient(p);
+		    has.setSeverity(severity);
+		    p.getIllness().add(has);
+		    i.getPatients().add(has);
+		    em.getTransaction().commit();
+		}
 	}
 
 	@Override
