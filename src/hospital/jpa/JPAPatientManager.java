@@ -20,7 +20,7 @@ public class JPAPatientManager implements PatientManager {
 			Hospital h = new Hospital();
 			this.getPatient().createHospital();
 		}*/
-		//TODO ASK ABOUT THIS!
+		//TODO insert info
 	}
 
 	public void close() {

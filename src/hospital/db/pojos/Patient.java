@@ -127,4 +127,8 @@ public class Patient implements Serializable{
 		return "Patient [id=" + id + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", hospital="
 				+ hospital + ", photo=" + Arrays.toString(photo) + "]";
 	}
+	
+	public String shortInfo() {
+		return "Patient [id=" + id + ", name=" + name + ", surname=" + surname + "]";
+	}
 }

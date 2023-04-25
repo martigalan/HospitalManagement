@@ -1,4 +1,5 @@
 package hospital.jdbc;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,12 +11,30 @@ import hospital.db.ifaces.HospitalManager;
 import hospital.db.pojos.Hospital;
 import hospital.db.pojos.Machine;
 
-public class JDBCHospitalManager implements HospitalManager{
-	
+public class JDBCHospitalManager implements HospitalManager {
+
 	private Connection c;
 
 	public JDBCHospitalManager(Connection c) {
 		this.c = c;
+		if(this.getHospitals().isEmpty()) {
+			
+		}
+		// TODO insert info
+	}
+
+	public void insertHospital(Hospital h) {
+		try {
+			String sql = "INSERT INTO hospital (name, location)" + "VALUES (?, ?);";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setString(1, h.getName());
+			p.setString(2, h.getLocation());
+			p.executeUpdate();
+			p.close();
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
 
 	}
 
@@ -33,20 +52,20 @@ public class JDBCHospitalManager implements HospitalManager{
 			System.out.println("Database error.");
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
 	public List<Hospital> searchByName(String name) {
 		List<Hospital> list = new ArrayList<Hospital>();
-		
+
 		try {
-			String sql ="SELECT * FROM hospital WHERE name = ?";
+			String sql = "SELECT * FROM hospital WHERE name = ?";
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setString(0, "%" + name + "%");
 			ResultSet rs = p.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				String name_hosp = rs.getString("name");
 				String location = rs.getString("location");
 				Hospital h = new Hospital(name_hosp, location);
@@ -56,20 +75,20 @@ public class JDBCHospitalManager implements HospitalManager{
 			System.out.println("Database error");
 			e.printStackTrace();
 		}
-		
+
 		return list;
 	}
 
 	@Override
 	public void assignMachine(Machine machine) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public Hospital getHospital(Integer hosp_id) {
 		Hospital hosp = null;
-		
+
 		try {
 			String sql = "SELECT * FROM hospital WHERE id = ?";
 			PreparedStatement statement = c.prepareStatement(sql);
@@ -78,16 +97,35 @@ public class JDBCHospitalManager implements HospitalManager{
 			result.next();
 			String name = result.getString("name");
 			String location = result.getString("location");
-			
+
 			hosp = new Hospital(name, location);
-			
-		}catch (SQLException e) {
+
+		} catch (SQLException e) {
 			System.out.println("Database error");
 			e.printStackTrace();
 		}
-		
+
 		return hosp;
 	}
 	
-	
+	public List<Hospital> getHospitals(){
+		List<Hospital> listHospitals = new ArrayList<Hospital>();
+		try {
+			String sql = "SELECT * FROM hospital;";
+			PreparedStatement p = c.prepareStatement(sql);
+			ResultSet rs = p.executeQuery();
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				String location = rs.getString("location");
+				Hospital h = new Hospital(id, name, location);
+				listHospitals.add(h);
+			}
+		}catch(SQLException e){
+			System.out.println("Database error");
+			e.printStackTrace();
+		}
+		return listHospitals;
+	}
+
 }
