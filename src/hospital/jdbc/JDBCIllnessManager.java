@@ -10,6 +10,7 @@ public class JDBCIllnessManager implements IllnessManager {
 	
 	public JDBCIllnessManager(Connection c) {
 		this.c = c;
+		
 	}
 
 	@Override

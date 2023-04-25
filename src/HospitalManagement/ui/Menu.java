@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.sql.Blob;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 import hospital.db.ifaces.DoctorManager;
 import hospital.db.ifaces.PatientManager;
@@ -97,7 +98,8 @@ public class Menu {
 		byte[]photo =null; //used for testing
 		// TODO add photo in SQLinsert
 		Hospital h = new Hospital();
-		Patient p= new Patient(name, surname, dobDate, h, photo); //falta el hospital -> borrar nuevo constructor
+	
+		Patient p= new Patient(name, surname, dobDate, photo); //falta el hospital -> borrar nuevo constructor
 		patientManager.insertPatient(p);
 	}
 	

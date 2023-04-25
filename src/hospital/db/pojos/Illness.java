@@ -50,6 +50,22 @@ public class Illness implements Serializable {
 		this.condition = condition;
 	}
 
+	public List<Has> getPatients() {
+		return patients;
+	}
+
+	public void setPatients(List<Has> patients) {
+		this.patients = patients;
+	}
+
+	public List<Doctor> getDoctors() {
+		return doctors;
+	}
+
+	public void setDoctors(List<Doctor> doctors) {
+		this.doctors = doctors;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

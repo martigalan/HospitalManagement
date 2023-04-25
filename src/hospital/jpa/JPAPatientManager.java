@@ -2,11 +2,10 @@ package hospital.jpa;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 
 import hospital.db.ifaces.PatientManager;
-import hospital.db.pojos.Patient;
+import hospital.db.pojos.*;
 
 public class JPAPatientManager implements PatientManager {
 
@@ -17,11 +16,11 @@ public class JPAPatientManager implements PatientManager {
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 		em.getTransaction().commit();
-		//TODO finish this part
 		/*if (this.getPatient.getHospital().isNull()) {
 			Hospital h = new Hospital();
 			this.getPatient().createHospital();
 		}*/
+		//TODO ASK ABOUT THIS!
 	}
 
 	public void close() {
@@ -30,14 +29,19 @@ public class JPAPatientManager implements PatientManager {
 	
 	@Override
 	public void updatePatient(Patient patient) {
-		// TODO Auto-generated method stub
-
+		em.getTransaction().begin();
+		patient.setName(patient.getName());
+		patient.setSurname(patient.getSurname());
+		em.getTransaction().commit();
 	}
 
 	@Override
 	public List<Patient> searchByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Patient> patients;
+		Query q = em.createNativeQuery("SELECT * FROM patient WHERE name = ?", Patient.class);
+		q.setParameter(1, name);
+		patients = (List<Patient>) q.getResultList();
+		return patients;
 	}
 
 	@Override
@@ -45,25 +49,35 @@ public class JPAPatientManager implements PatientManager {
 		em.getTransaction().begin();
 		em.persist(patient);
 		em.getTransaction().commit();
-
 	}
 
 	@Override
 	public void assignHospital(String hospitalName) {
-		// TODO Auto-generated method stub
+		// TODO check factors
 
 	}
 
 	@Override
-	public void assignIllness(int pId, int iId, String severity) {
-		// TODO Auto-generated method stub
-
+	public void assignIllness(Patient p, Illness i, String severity) {
+		//TODO chekc if has already there
+		em.getTransaction().begin();
+		Has has = new Has();
+		em.persist(has);
+		has.setIllness(i);
+		has.setPatient(p);
+		has.setSeverity(severity);
+		p.getIllness().add(has);
+		i.getPatients().add(has);
+		em.getTransaction().commit();
 	}
 
 	@Override
-	public Patient getPatient(Integer patientId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Patient getPatient(int patientId) {
+		Patient patient;
+		Query q = em.createNativeQuery("SELECT * FROM patient WHERE id = ?",Patient.class);
+		q.setParameter(1, patientId);
+		patient = (Patient) q.getSingleResult();
+		return patient;
 	}
 
 }

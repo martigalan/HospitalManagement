@@ -25,6 +25,7 @@ public class Doctor implements Serializable {
 	private Date dob;
 	private String speciality;
 	private Double salary;
+	 
 	private Hospital hospital;
 	
 	@ManyToMany //no entiendo lo de fetch

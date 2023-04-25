@@ -1,6 +1,7 @@
 package hospital.jdbc;
 import hospital.db.ifaces.PatientManager;
 import hospital.db.pojos.Hospital;
+import hospital.db.pojos.Illness;
 import hospital.db.pojos.Patient;
 
 import java.sql.Connection;
@@ -81,12 +82,12 @@ public class JDBCPatientManager implements PatientManager{
 	}
 
 	@Override
-	public void assignIllness(int pId, int iId, String severity) {
+	public void assignIllness(Patient p, Illness i, String severity) {
 		try {
 			String sql = "INSERT INTO hasIllness VALUES (?, ?, ?);";
 			PreparedStatement s = c.prepareStatement(sql);
-			s.setInt(1,iId);
-			s.setInt(2, pId);
+			s.setInt(1,i.getId());
+			s.setInt(2, p.getId());
 			s.setString(3, severity);
 			s.executeUpdate();
 			s.close();
@@ -98,7 +99,7 @@ public class JDBCPatientManager implements PatientManager{
 	}
 
 	@Override
-	public Patient getPatient(Integer patientId) {
+	public Patient getPatient(int patientId) {
 		Patient patient = null;
 		JDBCHospitalManager hm = new JDBCHospitalManager(c);
 		try {
