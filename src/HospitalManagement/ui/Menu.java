@@ -35,7 +35,8 @@ public class Menu {
 			System.out.println("-2. Select a patient data"); ////////////////
 			System.out.println("-2. Select doctor data"); /////////
 			System.out.println("-3. Search for a hospital");
-			System.out.println("-4. Update doctor");
+			System.out.println("-4. Update doctor"); 
+			//TODO delete with jpa doctor
 
 
 			System.out.println("-0. Exit");
@@ -170,6 +171,7 @@ public class Menu {
 				}
 				case 2: {
 					showPatient(id);
+					//TODO show patient
 					break;
 				}				
 				case 0: {
@@ -207,6 +209,8 @@ public class Menu {
 	
 		PatientM.updatePatient(p);
 	}
+	
+	
 	
 }
 			
