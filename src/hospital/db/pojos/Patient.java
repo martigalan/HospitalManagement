@@ -27,7 +27,6 @@ public class Patient implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "hospitalId")
-	@Column(nullable=true)
 	private Hospital hospital;
 	private byte[] photo;
 	
@@ -106,7 +105,7 @@ public class Patient implements Serializable{
 	public void setIllness(List<Has> illness) {
 		this.illness = illness;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -122,10 +121,14 @@ public class Patient implements Serializable{
 		Patient other = (Patient) obj;
 		return Objects.equals(id, other.id);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Patient [id=" + id + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", hospital="
 				+ hospital + ", photo=" + Arrays.toString(photo) + "]";
+	}
+	
+	public String shortInfo() {
+		return "Patient [id=" + id + ", name=" + name + ", surname=" + surname + "]";
 	}
 }

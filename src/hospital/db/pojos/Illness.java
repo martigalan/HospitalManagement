@@ -29,7 +29,12 @@ public class Illness implements Serializable {
 		super();
 	}
 
-	public Illness(String condition, Doctor doctor) {
+	public Illness(String condition) {
+		super();
+		this.condition = condition;
+	}
+	
+	public Illness(Integer id, String condition) {
 		super();
 		this.condition = condition;
 	}
@@ -48,6 +53,22 @@ public class Illness implements Serializable {
 
 	public void setCondition(String condition) {
 		this.condition = condition;
+	}
+
+	public List<Has> getPatients() {
+		return patients;
+	}
+
+	public void setPatients(List<Has> patients) {
+		this.patients = patients;
+	}
+
+	public List<Doctor> getDoctors() {
+		return doctors;
+	}
+
+	public void setDoctors(List<Doctor> doctors) {
+		this.doctors = doctors;
 	}
 
 	@Override

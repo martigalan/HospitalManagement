@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Machine implements Serializable {
 
 	private static final long serialVersionUID = -8134369376393308505L;
+	
 	private Integer id;
 	private String name;
 	private Hospital hospital;

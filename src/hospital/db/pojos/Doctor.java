@@ -30,6 +30,7 @@ public class Doctor implements Serializable {
 	private String speciality;
 	@Column(name = "salary")
 	private Double salary;
+	 
 	private Hospital hospital;
 	@Column(name = "hospitalId")
 	private Integer hospitalId;

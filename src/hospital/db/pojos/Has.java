@@ -20,7 +20,6 @@ public class Has implements Serializable{
 	
 	public Has() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 

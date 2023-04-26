@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.sql.Blob;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 import hospital.db.ifaces.DoctorManager;
 import hospital.db.ifaces.PatientManager;
@@ -96,7 +97,8 @@ public class Menu {
 		//byte[] photo = sc.nextByte();
 		byte[]photo =null; //used for testing
 		// TODO add photo in SQLinsert
-		Hospital h = new Hospital();
+		Hospital h = new Hospital(); //TODO search for MAIN hospital once the data is in the db
+	
 		Patient p= new Patient(name, surname, dobDate, h, photo); //falta el hospital -> borrar nuevo constructor
 		patientManager.insertPatient(p);
 	}
@@ -161,7 +163,10 @@ public class Menu {
 		System.out.println("Introduce the name:");
 		String name = sc.nextLine();
 		List<Patient> patientlist = patientManager.searchByName(name);
-		System.out.println(patientlist);
+		Iterator it = patientlist.iterator();
+		while(it.hasNext()) {
+			System.out.println(((Patient) it.next()).shortInfo());
+		}
 		System.out.println("Please choose a patient, type its Id:");
 		Integer id = sc.nextInt();
 		// Go to the Patient's menu
@@ -184,7 +189,7 @@ public class Menu {
 						break;
 					}
 					case 2: {
-						//showPatient(id);
+						showPatient(id);
 						break;
 					}				
 					case 0: {

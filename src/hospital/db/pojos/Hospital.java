@@ -37,6 +37,14 @@ public class Hospital implements Serializable{
 		this.location = location;
 	}
 
+	public Hospital(int id, String name, String location) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.location = location;
+	}
+
+	
 	public Integer getId() {
 		return id;
 	}
