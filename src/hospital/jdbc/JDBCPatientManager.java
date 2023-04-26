@@ -6,11 +6,9 @@ import hospital.db.pojos.Patient;
 
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,14 +57,14 @@ public class JDBCPatientManager implements PatientManager{
 	@Override
 	public void insertPatient(Patient patient) {
 		try {
-			String sql = "INSERT INTO patient (name, surname, dob, hospitalId, photo) " +
-		           "VALUES (?, ?, ?, ?, ?);";
+			String sql = "INSERT INTO patient (name, surname, dob, photo) " +
+		           "VALUES (?, ?, ?, ?);";
 			PreparedStatement st = c.prepareStatement(sql);
 			st.setString(1, patient.getName());
 			st.setString(2, patient.getSurname());
 			st.setDate(3, patient.getDob());
-			st.setInt(4, patient.getHospital().getId());
-			st.setBytes(5, patient.getPhoto());
+			//st.setInt(4, patient.getHospital().getId());
+			st.setBytes(4, patient.getPhoto());
 			st.executeUpdate();
 			st.close();
 		}catch(SQLException e) {
@@ -84,13 +82,24 @@ public class JDBCPatientManager implements PatientManager{
 	}
 
 	@Override
-	public void assignIllness(String illnessName) {
-		// TODO Auto-generated method stub
+	public void assignIllness(Patient p, Illness i, String severity) {
+		try {
+			String sql = "INSERT INTO hasIllness VALUES (?, ?, ?);";
+			PreparedStatement s = c.prepareStatement(sql);
+			s.setInt(1,i.getId());
+			s.setInt(2, p.getId());
+			s.setString(3, severity);
+			s.executeUpdate();
+			s.close();
+		}catch(SQLException ex) {
+			System.out.println("Database error");
+			ex.printStackTrace();
+		}
 		
 	}
 
 	@Override
-	public Patient getPatient(Integer patientId) {
+	public Patient getPatient(int patientId) {
 		Patient patient = null;
 		JDBCHospitalManager hm = new JDBCHospitalManager(c);
 		try {

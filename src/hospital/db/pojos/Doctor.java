@@ -1,21 +1,38 @@
 package hospital.db.pojos;
 
 import java.io.Serializable;
+
 import java.sql.Date;
-import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "doctor")
 public class Doctor implements Serializable {
 
 	private static final long serialVersionUID = 6814981867922225263L;
+	
+	@Id
+	@GeneratedValue(generator="doctor")
+	@TableGenerator(name="doctor", table="sqlite_sequence",
+	   	pkColumnName="name", valueColumnName="seq",
+	   	pkColumnValue="doctor")
 	private Integer Doctor;
 	private String name;
 	private String surname;
 	private Date dob;
 	private String speciality;
 	private Double salary;
+	 
 	private Hospital hospital;
+	
+	@ManyToMany //no entiendo lo de fetch
+	@JoinTable(name = "DoctorTreats",
+	        joinColumns={@JoinColumn(name="doctorId", referencedColumnName="id")},
+	   		inverseJoinColumns={@JoinColumn(name="illnessId", referencedColumnName="id")})
+	private List<Illness> treatsIllness;
 
 	public Doctor(String name, String surname, Date dob, String speciality, Double salary, Hospital hospital) {
 		super();
@@ -25,6 +42,10 @@ public class Doctor implements Serializable {
 		this.speciality = speciality;
 		this.salary = salary;
 		this.hospital = hospital;
+	}
+
+	public Doctor() {
+		super();
 	}
 
 	public Integer getDoctor() {

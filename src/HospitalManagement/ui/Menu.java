@@ -8,12 +8,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.sql.Blob;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 import hospital.db.ifaces.DoctorManager;
 import hospital.db.ifaces.PatientManager;
 import hospital.db.ifaces.HospitalManager;
 import hospital.db.pojos.Doctor;
+import hospital.db.pojos.Hospital;
 import hospital.db.pojos.Patient;
+import hospital.jdbc.ConnectionManager;
+import hospital.jdbc.JDBCDoctorManager;
+import hospital.jdbc.JDBCHospitalManager;
+import hospital.jdbc.JDBCPatientManager;
+import hospital.jpa.JPAPatientManager;
 
 public class Menu {
 	
@@ -23,9 +30,14 @@ public class Menu {
 	private static PatientManager patientManager; 
 	private static DoctorManager doctorManager;
 	private static HospitalManager hospitalManager;
+	private static ConnectionManager connectionManager;
 	
 	public static void main(String[] args) {
 		try {
+			connectionManager = new ConnectionManager();
+			patientManager = new JPAPatientManager();
+			doctorManager = new JDBCDoctorManager(connectionManager.getConnection());
+			hospitalManager = new JDBCHospitalManager(connectionManager.getConnection());
 			// TODO Auto-generated method stub
 			
 			System.out.println("HI");
@@ -79,13 +91,15 @@ public class Menu {
 		String surname= sc.nextLine();		 
 		System.out.println("Date of birth (yyyy-MM-dd):");
 		String dob = sc.nextLine();
-		LocalDate dobLocalDate = LocalDate.parse(dob, formatter);		// java.time.LocalDate
+		LocalDate dobLocalDate = LocalDate.parse(dob);		// java.time.LocalDate
 		Date dobDate = Date.valueOf(dobLocalDate);	
-		System.out.println("Photo:");
-		byte[] photo = sc.nextByte();
+		//System.out.println("Photo:");
+		//byte[] photo = sc.nextByte();
+		byte[]photo =null; //used for testing
 		// TODO add photo in SQLinsert
-		Patient p= new Patient(name, surname, dobDate, photo); //falta el hospital -> borrar nuevo constructor
-		// TODO insert patient in the database	
+		Hospital h = new Hospital(); //TODO search for MAIN hospital once the data is in the db
+	
+		Patient p= new Patient(name, surname, dobDate, h, photo); //falta el hospital -> borrar nuevo constructor
 		patientManager.insertPatient(p);
 	}
 	
@@ -149,7 +163,10 @@ public class Menu {
 		System.out.println("Introduce the name:");
 		String name = sc.nextLine();
 		List<Patient> patientlist = patientManager.searchByName(name);
-		System.out.println(patientlist);
+		Iterator it = patientlist.iterator();
+		while(it.hasNext()) {
+			System.out.println(((Patient) it.next()).shortInfo());
+		}
 		System.out.println("Please choose a patient, type its Id:");
 		Integer id = sc.nextInt();
 		// Go to the Patient's menu
@@ -172,7 +189,7 @@ public class Menu {
 						break;
 					}
 					case 2: {
-						//showPatient(id);
+						showPatient(id);
 						break;
 					}				
 					case 0: {
