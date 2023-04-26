@@ -64,12 +64,6 @@ public class JDBCHospitalManager implements HospitalManager{
 	}
 
 	@Override
-	public void assignMachine(Machine machine) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public Hospital getHospital(Integer hosp_id) {
 		Hospital hosp = null;
 		
