@@ -11,15 +11,9 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import hospital.db.ifaces.*;
-import hospital.db.pojos.Doctor;
-import hospital.db.pojos.Hospital;
-import hospital.db.pojos.Patient;
-import hospital.jdbc.ConnectionManager;
-import hospital.jdbc.JDBCDoctorManager;
-import hospital.jdbc.JDBCHospitalManager;
-import hospital.jdbc.JDBCPatientManager;
-import hospital.jpa.JPADoctorManager;
-import hospital.jpa.JPAPatientManager;
+import hospital.db.pojos.*;
+import hospital.jdbc.*;
+import hospital.jpa.*;
 
 public class Menu {
 
@@ -140,12 +134,12 @@ public class Menu {
 		System.out.println("Introduce the name of the patient");
 		String namePatient = r.readLine();
 		Patient namePatientToSee = null;
-		for (Patient p : patients) { // listofpatients array list es una clase que importo de java
+		/*for (Patient p : patients) { // listofpatients array list es una clase que importo de java
 			if (p.getName().equals(namePatient)) {
 				namePatientToSee = p;
 				break;
 			}
-		}
+		}*/
 		if (namePatientToSee != null) {
 			System.out.println(namePatientToSee);
 		} else {
