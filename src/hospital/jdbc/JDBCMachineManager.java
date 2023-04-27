@@ -21,7 +21,7 @@ public class JDBCMachineManager implements MachineManager{
 	@Override
 	public List<Machine> searchByName(String name) {
 		List<Machine> list = new ArrayList<Machine>();
-		
+		JDBCHospitalManager managerH = new JDBCHospitalManager(c);
 		try {
 			String sql ="SELECT * FROM machine WHERE name = ?";
 			PreparedStatement p = c.prepareStatement(sql);
@@ -31,9 +31,9 @@ public class JDBCMachineManager implements MachineManager{
 			while(rs.next()) {
 				String name_ma = rs.getString("name");
 				Integer hospID = rs.getInt("hospital.id");
-				//String hosp = rs.getString("hospital");
-				//Machine m = new Machine(name_ma, hosp);
-				//list.add(m);
+				Hospital hosp = managerH.getHospital(hospID);
+				Machine m = new Machine(name_ma, hosp);
+				list.add(m);
 			}
 		} catch (SQLException e) {
 			System.out.println("Database error");
@@ -52,7 +52,7 @@ public class JDBCMachineManager implements MachineManager{
 	@Override
 	public void insertMachine(Machine machine) {
 		try {
-			String sql = "INSERT INTO patient (name, hospitalId) " +
+			String sql = "INSERT INTO machine (name, hospitalId) " +
 		           "VALUES (?, ?);";
 			PreparedStatement st = c.prepareStatement(sql);
 			st.setString(1, machine.getName());
