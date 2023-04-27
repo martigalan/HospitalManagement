@@ -22,15 +22,26 @@ public class JPADoctorManager implements DoctorManager {
 	}
 	
 	@Override
-	public void updateDoctor(Doctor doctor) {
-		// TODO Auto-generated method stub
-
+	public void updateDoctor(Doctor doctor) throws TransactionRequiredException {
+		em.getTransaction().begin();
+		doctor.setSpeciality(doctor.getSpeciality());
+		doctor.setSalary(doctor.getSalary());
+		/*Query hospitalId = em.createNativeQuery("UPDATE doctor SET hospitalId = ?", Doctor.class);
+		int hId = doctor.getHospital().getId();
+		int updateHospitalId = hospitalId.setParameter(hId, hospitalId).executeUpdate();*/
+		doctor.setHospitalId(doctor.getHospitalId());
+		em.getTransaction().commit();
 	}
-
+	
 	@Override
 	public List<Doctor> searchByName(String name, String surname) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Doctor> doctors;
+		Query q1 = em.createNativeQuery("SELECT * FROM doctor WHERE name = ? AND surname = ?", Doctor.class);
+		q1.setParameter(1, name);
+		q1.setParameter(2, surname);
+		doctors = (List<Doctor>) q1.getResultList();
+		// Esto está bien? o debo separarlo en 2 queries
+		return doctors;
 	}
 
 	@Override
@@ -41,27 +52,41 @@ public class JPADoctorManager implements DoctorManager {
 	}
 
 	@Override
-	public void deleteDoctor(int id) {
-		// TODO Auto-generated method stub
+	public void deleteDoctor(Doctor doctor) {
+		Query q2 = em.createNativeQuery("SELECT * FROM doctor WHERE id = ?", Doctor.class);
+		q2.setParameter(1, doctor.getId());
+		Doctor doctorDeleted = (Doctor) q2.getSingleResult();
 
+		// Begin transaction
+		em.getTransaction().begin();
+		// Store the object
+		em.remove(doctorDeleted);
+		// End transaction
+		em.getTransaction().commit();
 	}
 
 	@Override
-	public void assignHospital(String hospitalName) {
+	public void assignHospital(int hospitalId) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void assignIllness(int illnessId, int doctorId) {
-		// TODO Auto-generated method stub
+		em.getTransaction().begin();
+		// TODO doctorTreats, para poder asignarle una illness
+		//Deberia crearme el objeto de esa clase, obtener los valores, y llamarle
+		//pidiendo los id con una query
+		em.getTransaction().commit();
 
 	}
 
 	@Override
 	public Doctor getDoctor(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Query q1 = em.createNativeQuery("SELECT * FROM doctor WHERE id = ?", Doctor.class);
+		q1.setParameter(1, id);
+		Doctor doctor = (Doctor) q1.getSingleResult();
+		return doctor;
 	}
 
 }
