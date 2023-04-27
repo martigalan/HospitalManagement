@@ -1,21 +1,44 @@
 package hospital.db.pojos;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.Arrays;
-import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "patient")
 public class Patient implements Serializable{
 	
 	private static final long serialVersionUID = 2424327075260915600L;
+	
+	@Id
+	@GeneratedValue(generator="patient")
+	@TableGenerator(name="patient", table="sqlite_sequence",
+	   	pkColumnName="name", valueColumnName="seq",
+	   	pkColumnValue="patient")
 	private Integer id;
+	
 	private String name;
 	private String surname;
 	private Date dob;
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "hospitalId")
 	private Hospital hospital;
 	private byte[] photo;
-	private Integer hospitalId;
 	
+	@OneToMany(mappedBy = "patient")
+	private List<Has> illness;
+	
+	
+	public Patient() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Patient(String name, String surname, Date dob, byte[] photo) {
 		super();
 		this.name = name;
@@ -70,6 +93,18 @@ public class Patient implements Serializable{
 		this.photo = photo;
 	}
 	
+
+	public void setHospital(Hospital hospital) {
+		this.hospital = hospital;
+	}
+
+	public List<Has> getIllness() {
+		return illness;
+	}
+
+	public void setIllness(List<Has> illness) {
+		this.illness = illness;
+	}
 	
 	@Override
 	public int hashCode() {
@@ -86,21 +121,14 @@ public class Patient implements Serializable{
 		Patient other = (Patient) obj;
 		return Objects.equals(id, other.id);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Patient [id=" + id + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", hospital="
 				+ hospital + ", photo=" + Arrays.toString(photo) + "]";
 	}
-
-	public Integer getHospitalId() {
-		return hospitalId;
-	}
-
-	public void setHospitalId(Integer hospitalId) {
-		this.hospitalId = hospitalId;
-	}
 	
-	
-
+	public String shortInfo() {
+		return "Patient [id=" + id + ", name=" + name + ", surname=" + surname + "]";
+	}
 }

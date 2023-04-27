@@ -1,0 +1,36 @@
+package hospital.jpa;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+
+import hospital.db.pojos.Has;
+import hospital.db.pojos.Patient;
+
+public class JPAHas {
+
+EntityManager em;
+	
+	public JPAHas() {
+		em  = Persistence.createEntityManagerFactory("hospital-provider").createEntityManager();
+		em.getTransaction().begin();
+		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
+		em.getTransaction().commit();
+	}
+
+	public void close() {
+		em.close();
+	}
+	
+	public Has getHas(int pId, int iId){
+		Has h = null;
+		em.getTransaction().begin();
+		Query q = em.createNativeQuery("SELECT * FROM hasIllness WHERE patientId = ? AND illnessId = ?", Has.class);
+		q.setParameter(1, pId);
+		q.setParameter(2, iId);
+		h = (Has) q.getResultList();
+		return h;
+	}
+}

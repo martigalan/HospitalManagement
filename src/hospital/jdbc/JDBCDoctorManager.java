@@ -2,7 +2,6 @@ package hospital.jdbc;
 
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +11,6 @@ import java.util.List;
 
 import hospital.db.ifaces.DoctorManager;
 import hospital.db.pojos.Doctor;
-import hospital.db.pojos.Hospital;
 
 public class JDBCDoctorManager implements DoctorManager {
 	
@@ -20,7 +18,6 @@ public class JDBCDoctorManager implements DoctorManager {
 
 	public JDBCDoctorManager(Connection c) {
 		this.c = c;
-
 	}
 	
 	@Override
@@ -41,12 +38,14 @@ public class JDBCDoctorManager implements DoctorManager {
 	}
 
 	@Override
-	public List<Doctor> searchByName(String name) {
+	public List<Doctor> searchByName(String name, String surname) {
 		List<Doctor> listDoctors = new ArrayList<Doctor>();
+		JDBCHospitalManager hm = new JDBCHospitalManager(c);
 		try {
 			String sql = "SELECT * FROM doctor WHERE name LIKE ?";
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setString(1, "%" + name + "%");
+			p.setString(2, "%" + surname + "%");
 			ResultSet rs = p.executeQuery();
 			while(rs.next()) {
 				// Create a new Doctor
@@ -56,6 +55,7 @@ public class JDBCDoctorManager implements DoctorManager {
 				String speciality = rs.getString("speciality");
 				Double salary = rs.getDouble("salary");
 				Integer hospitalId = rs.getInt("hospitalId");
+				//Hospital hospital = hm.getHospital(hospitalId);
 				Doctor d = new Doctor(n, sn, dob, speciality, salary, hospitalId);
 				// Add the doctor to the list
 				listDoctors.add(d);
@@ -71,7 +71,7 @@ public class JDBCDoctorManager implements DoctorManager {
 	public void insertDoctor(Doctor doctor) {
 		try {
 			Statement s = c.createStatement();
-			String sql = "INSERT INTO doctor (name, surname, DoB, speciality, salary, photo) "
+			String sql = "INSERT INTO doctor (name, surname, DoB, speciality, salary, hospitalId) "
 					+ "VALUES ('" + doctor.getName() + "', '" + doctor.getSurname() + "', '"
 					+ doctor.getDob() + "', '" + doctor.getSpeciality() + "', '" 
 					+ doctor.getSalary() + "', '" + doctor.getHospitalId() + ")";
@@ -84,12 +84,12 @@ public class JDBCDoctorManager implements DoctorManager {
 	}
 	
 	@Override
-	public void deleteDoctor(int id) {
+	public void deleteDoctor(Doctor doctor) {
 		try {
 			String sql = "DELETE FROM doctor WHERE id = ?";
 			PreparedStatement p;
 			p = c.prepareStatement(sql);
-			p.setInt(1, id);
+			p.setInt(1, doctor.getId()); 
 			p.executeUpdate();
 			p.close();
 		} catch (SQLException e) {
@@ -99,19 +99,36 @@ public class JDBCDoctorManager implements DoctorManager {
 	}
 	
 	@Override
-	public void assignHospital(String hospitalName) {
-		// TODO Auto-generated method stub
-
+	public void assignHospital(int hospitalId) {
+		try {
+			String sql = "INSERT INTO doctor (hospitalId) VALUES (?)";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, hospitalId);
+			p.executeUpdate();
+			p.close();
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void assignIllness(String illnessName) {
-		// TODO Auto-generated method stub
-
+	public void assignIllness(int illnessId, int doctorId) {
+		try {
+			String sql = "INSERT INTO doctorTreats (illnessId, doctorId) VALUES (?,?)";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, illnessId);
+			p.setInt(2, doctorId);
+			p.executeUpdate();
+			p.close();
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
-	public Doctor showInformationDoctor(int id) {
+	public Doctor getDoctor(int id) {
 		try {
 			String sql = "SELECT * FROM doctor WHERE id = ?";
 			PreparedStatement p = c.prepareStatement(sql);
@@ -124,6 +141,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			Date dob = rs.getDate("dob");
 			Double salary = rs.getDouble("salary");
 			Integer hospitalId = rs.getInt("hospitalId");
+			//Hospital hospital = hm.getHospital(hospitalId);
 			Doctor d = new Doctor(name, surname, dob, speciality, salary, hospitalId);
 			rs.close();
 			p.close();
@@ -133,6 +151,5 @@ public class JDBCDoctorManager implements DoctorManager {
 			e.printStackTrace();
 		}
 		return null;
-		
 	}
 }

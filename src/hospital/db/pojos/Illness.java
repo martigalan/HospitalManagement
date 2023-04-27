@@ -1,18 +1,42 @@
 package hospital.db.pojos;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "illness")
 public class Illness implements Serializable {
 
 	private static final long serialVersionUID = -7606688736830380305L;
+	
+	@Id
+	@GeneratedValue(generator="illness")
+	@TableGenerator(name="illness", table="sqlite_sequence",
+	   	pkColumnName="name", valueColumnName="seq",
+	   	pkColumnValue="illness")
 	private Integer id;
 	private String condition;
-	private Doctor doctor;
 	
-	public Illness(String condition, Doctor doctor) {
+	@OneToMany(mappedBy = "illness")
+	private List<Has> patients;
+	
+	@ManyToMany(mappedBy = "treatsIllness")
+	private List<Doctor> doctors;
+	
+	public Illness() {
+		super();
+	}
+
+	public Illness(String condition) {
 		super();
 		this.condition = condition;
-		this.doctor = doctor;
+	}
+	
+	public Illness(Integer id, String condition) {
+		super();
+		this.condition = condition;
 	}
 
 	public Integer getId() {
@@ -31,13 +55,21 @@ public class Illness implements Serializable {
 		this.condition = condition;
 	}
 
-	public Doctor getDoctor() {
-		return doctor;
+	public List<Has> getPatients() {
+		return patients;
 	}
 
-	public void setDoctor(Doctor doctor) {
-		this.doctor = doctor;
-	} 
+	public void setPatients(List<Has> patients) {
+		this.patients = patients;
+	}
+
+	public List<Doctor> getDoctors() {
+		return doctors;
+	}
+
+	public void setDoctors(List<Doctor> doctors) {
+		this.doctors = doctors;
+	}
 
 	@Override
 	public int hashCode() {
@@ -58,7 +90,7 @@ public class Illness implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Illness [id=" + id + ", condition=" + condition + ", doctor=" + doctor + "]";
+		return "Illness [id=" + id + ", condition=" + condition + "]";
 	}
 	
 	
