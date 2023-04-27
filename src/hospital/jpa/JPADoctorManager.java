@@ -59,7 +59,7 @@ public class JPADoctorManager implements DoctorManager {
 
 		// Begin transaction
 		em.getTransaction().begin();
-		// Store the object
+		// Remove the object
 		em.remove(doctorDeleted);
 		// End transaction
 		em.getTransaction().commit();

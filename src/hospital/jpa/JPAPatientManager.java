@@ -52,9 +52,12 @@ public class JPAPatientManager implements PatientManager {
 	}
 
 	@Override
-	public void assignHospital(String hospitalName) {
-		// TODO check factors
-
+	public void assignHospital(Hospital h) {
+		// TODO check factors in menu method
+		// to check: illnesses patient has: this shows up in menu, user chooses illness id
+		//           treats table --- get machine id for specifies illness
+		//           check doctorTreats to see availability of doctor 
+		//           check hospitals that have specified machines
 	}
 
 	@Override
