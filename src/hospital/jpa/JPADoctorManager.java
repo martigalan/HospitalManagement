@@ -26,14 +26,8 @@ public class JPADoctorManager implements DoctorManager {
 	@Override
 	public void updateDoctor(Doctor doctor) throws TransactionRequiredException {
 		em.getTransaction().begin();
-		doctor.setSpeciality(doctor.getSpeciality());
-		doctor.setSalary(doctor.getSalary());
-		/*
-		 * Query hospitalId = em.createNativeQuery("UPDATE doctor SET hospitalId = ?",
-		 * Doctor.class); int hId = doctor.getHospital().getId(); int updateHospitalId =
-		 * hospitalId.setParameter(hId, hospitalId).executeUpdate();
-		 */
-		doctor.setHospitalId(doctor.getHospitalId());
+		doctor.setName(doctor.getName());
+		doctor.setSurname(doctor.getSurname());
 		em.getTransaction().commit();
 	}
 
