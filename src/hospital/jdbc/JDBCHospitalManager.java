@@ -66,6 +66,7 @@ public class JDBCHospitalManager implements HospitalManager {
 			ResultSet rs = p.executeQuery();
 
 			while (rs.next()) {
+				int id = rs.getInt("id");
 				String name_hosp = rs.getString("name");
 				String location = rs.getString("location");
 				Hospital h = new Hospital(name_hosp, location);
