@@ -94,7 +94,9 @@ public class Has implements Serializable{
 		return "Has [patient=" + patient + ", illness=" + illness + ", severity=" + severity + "]";
 	}
 	
-	
+	public String infoIllness() {
+		return "[illness=" + illness + ", severity=" + severity + "]";
+	}
 	
 	
 }

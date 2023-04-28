@@ -175,6 +175,7 @@ public class Menu {
 		Scanner sc = new Scanner(System.in);
 		Patient p = patientM.getPatient(id);
 		List<Has> illnesses = p.getIllness();
+		System.out.println(illnesses.);
 		System.out.println("What illness do you want to treat?\n Please enter illness id: ");
 		int illnessId = sc.nextInt();
 		Illness illnessTreated = illnessM.getIllness(illnessId);
