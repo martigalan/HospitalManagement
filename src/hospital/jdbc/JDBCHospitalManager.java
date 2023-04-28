@@ -80,12 +80,6 @@ public class JDBCHospitalManager implements HospitalManager {
 	}
 
 	@Override
-	public void assignMachine(Machine machine) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public Hospital getHospital(int hospitalId) {
 		Hospital hosp = null;
 		try {
@@ -107,7 +101,7 @@ public class JDBCHospitalManager implements HospitalManager {
 	public List<Hospital> getHospitals(){
 		List<Hospital> listHospitals = new ArrayList<Hospital>();
 		try {
-			String sql = "SELECT * FROM hospital";
+			String sql = "SELECT * FROM hospital;";
 			PreparedStatement p = c.prepareStatement(sql);
 			ResultSet rs = p.executeQuery();
 			while(rs.next()) {

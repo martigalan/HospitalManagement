@@ -16,7 +16,7 @@ public class JPADoctorManager implements DoctorManager {
 	EntityManager em;
 	
 	public JPADoctorManager() {
-		EntityManager em = Persistence.createEntityManagerFactory("company-provider").createEntityManager();
+		EntityManager em = Persistence.createEntityManagerFactory("hospital-provider").createEntityManager();
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate(); //activate the FK
 		em.getTransaction().commit();
@@ -64,7 +64,7 @@ public class JPADoctorManager implements DoctorManager {
 
 		// Begin transaction
 		em.getTransaction().begin();
-		// Store the object
+		// Remove the object
 		em.remove(doctorDeleted);
 		// End transaction
 		em.getTransaction().commit();

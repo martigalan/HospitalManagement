@@ -7,7 +7,6 @@ public interface HospitalManager {
 	public void insertHospital(Hospital h);
 	public void updateHospital(Hospital hospital);
 	public List<Hospital> searchByName(String name);
-	public void assignMachine(Machine machine);
 	public Hospital getHospital(int hospitalId);
 	public List<Hospital> getHospitals();
 }
