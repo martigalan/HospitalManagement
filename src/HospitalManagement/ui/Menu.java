@@ -1,10 +1,13 @@
 package HospitalManagement.ui;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.Scanner;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -17,6 +20,7 @@ import hospital.db.ifaces.*;
 import hospital.db.pojos.*;
 import hospital.jdbc.*;
 import hospital.jpa.*;
+import hospital.db.graphics.ImageWindow;
 
 public class Menu {
 
@@ -27,6 +31,7 @@ public class Menu {
 	private static HospitalManager hospitalM;
 	private static ConnectionManager connectionManager;
 	private static IllnessManager illnessM;
+	private static boolean showImage = true;
 
 	public static void main(String[] args) {
 		try {
@@ -99,7 +104,9 @@ public class Menu {
 		String fileName = sc.nextLine();
 		File photos = new File("./photos/" + fileName);
 		InputStream streamBlob = new FileInputStream(photos);
-		byte[] photo = new byte[streamBlob.available()];		
+		byte[] photo = new byte[streamBlob.available()];
+		streamBlob.readAllBytes();
+		streamBlob.close();
 		// TODO add photo in SQLinsert
 		Hospital h = new Hospital(); // TODO search for MAIN hospital once the data is in the db
 
@@ -186,6 +193,7 @@ public class Menu {
 		System.out.println("What illness do you want to treat?\n Please enter illness id: ");
 		int illnessId = sc.nextInt();
 		Illness illnessTreated = illnessM.getIllness(illnessId);
+		//TODO solo del hospital
 	}
 
 	public static void updatePatient(int id) throws IOException {
@@ -211,6 +219,25 @@ public class Menu {
 	public static void showPatient(int id) throws IOException {
 		Patient p = patientM.getPatient(id);
 		System.out.println(p);
+		//If patient.getPhoto != null
+		// open window and show it
+		if (p.getPhoto()!=null) {
+			ByteArrayInputStream blobIn = new ByteArrayInputStream(p.getPhoto());
+			// Show the photo
+			if (showImage) {
+				ImageWindow window = new ImageWindow();
+				window.showBlob(blobIn);
+			}
+			// Write the photo in a file
+			else {
+				File outFile = new File("./photos/Output.png");
+				OutputStream blobOut = new FileOutputStream(outFile);
+				byte[] buffer = new byte[blobIn.available()];
+				blobIn.read(buffer);
+				blobOut.write(buffer);
+				blobOut.close();
+			}
+		}
 	}
 
 	public static void DoctorMenu(int id) {
