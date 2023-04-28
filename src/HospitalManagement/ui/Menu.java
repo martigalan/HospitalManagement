@@ -23,6 +23,7 @@ public class Menu {
 	private static DoctorManager doctorM;
 	private static HospitalManager hospitalM;
 	private static ConnectionManager connectionManager;
+	private static IllnessManager illnessM;
 
 	public static void main(String[] args) {
 		try {
@@ -30,6 +31,7 @@ public class Menu {
 			patientM = new JPAPatientManager();
 			doctorM = new JPADoctorManager();
 			hospitalM = new JDBCHospitalManager(connectionManager.getConnection());
+			illnessM = new JDBCIllnessManager(connectionManager.getConnection());
 			// TODO Auto-generated method stub
 
 			System.out.println("HI");
@@ -57,7 +59,7 @@ public class Menu {
 			}
 
 			case 4: {
-				searchHospital();
+				//searchHospital();
 				break;
 			}
 			case 0: {
@@ -105,7 +107,10 @@ public class Menu {
 		System.out.println("Introduce the surname:");
 		String snDoc = sc.nextLine();
 		List<Doctor> doctorList = doctorM.searchByName(nameDoc, snDoc);
-		System.out.println(doctorList);
+		Iterator it = doctorList.iterator();
+		while (it.hasNext()) {
+			System.out.println(((Doctor) it.next()).shortInfo());
+		}
 		System.out.println("Please choose a doctor, type its Id:");
 		Integer id = sc.nextInt();
 		// Go to the Doctor's menu
@@ -127,26 +132,6 @@ public class Menu {
 		PatientMenu(id);
 	}
 
-	//TODO we should see this in mockup -- agree on what to do
-	public static void searchHospital() throws IOException {
-		// TODO search hospital
-
-		System.out.println("Introduce the name of the patient");
-		String namePatient = r.readLine();
-		Patient namePatientToSee = null;
-		/*for (Patient p : patients) { // listofpatients array list es una clase que importo de java
-			if (p.getName().equals(namePatient)) {
-				namePatientToSee = p;
-				break;
-			}
-		}*/
-		if (namePatientToSee != null) {
-			System.out.println(namePatientToSee);
-		} else {
-			System.out.println("We can't find a patient with that name");
-		}
-
-	}
 
 	public static void PatientMenu(int id) {
 		while (true) {
@@ -154,6 +139,7 @@ public class Menu {
 				System.out.println("What do you want to do with the patient?:");
 				System.out.println("1. Update data");
 				System.out.println("2. Show data");
+				System.out.println("3. Search hospital");
 				System.out.println("0. Back to  principal menu");
 
 				int choice = Integer.parseInt(r.readLine());
@@ -167,8 +153,11 @@ public class Menu {
 					showPatient(id);
 					break;
 				}
+				case 3: {
+					searchHospital(id);
+				}
 				case 0: {
-					return;
+					main(null);
 				}
 				}
 
@@ -180,6 +169,15 @@ public class Menu {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private static void searchHospital(int id) {
+		Scanner sc = new Scanner(System.in);
+		Patient p = patientM.getPatient(id);
+		List<Has> illnesses = p.getIllness();
+		System.out.println("What illness do you want to treat?\n Please enter illness id: ");
+		int illnessId = sc.nextInt();
+		Illness illnessTreated = illnessM.getIllness(illnessId);
 	}
 
 	public static void updatePatient(int id) throws IOException {
@@ -215,7 +213,6 @@ public class Menu {
 				System.out.println("1. Update data");
 				System.out.println("2. Show data");
 				System.out.println("3. Delete doctor");
-				System.out.println("3. Show illness"); // illness treated by doctor or what?
 				System.out.println("0. Back to  principal menu");
 
 				int choice = Integer.parseInt(r.readLine());
@@ -231,9 +228,6 @@ public class Menu {
 				}
 				case 3: {
 					removeDoctor(id);
-				}
-				case 4: {
-					// showIllness(id);
 				}
 				case 0: {
 					return;

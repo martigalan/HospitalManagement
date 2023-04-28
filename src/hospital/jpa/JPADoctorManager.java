@@ -9,32 +9,34 @@ import hospital.db.pojos.Hospital;
 import hospital.db.pojos.Illness;
 
 public class JPADoctorManager implements DoctorManager {
-	
+
 	EntityManager em;
-	
+
 	public JPADoctorManager() {
-		EntityManager em = Persistence.createEntityManagerFactory("hospital-provider").createEntityManager();
+		em = Persistence.createEntityManagerFactory("hospital-provider").createEntityManager();
 		em.getTransaction().begin();
-		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate(); //activate the FK
+		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate(); // activate the FK
 		em.getTransaction().commit();
 	}
-	
+
 	public void close() {
 		em.close();
 	}
-	
+
 	@Override
 	public void updateDoctor(Doctor doctor) throws TransactionRequiredException {
 		em.getTransaction().begin();
 		doctor.setSpeciality(doctor.getSpeciality());
 		doctor.setSalary(doctor.getSalary());
-		/*Query hospitalId = em.createNativeQuery("UPDATE doctor SET hospitalId = ?", Doctor.class);
-		int hId = doctor.getHospital().getId();
-		int updateHospitalId = hospitalId.setParameter(hId, hospitalId).executeUpdate();*/
+		/*
+		 * Query hospitalId = em.createNativeQuery("UPDATE doctor SET hospitalId = ?",
+		 * Doctor.class); int hId = doctor.getHospital().getId(); int updateHospitalId =
+		 * hospitalId.setParameter(hId, hospitalId).executeUpdate();
+		 */
 		doctor.setHospitalId(doctor.getHospitalId());
 		em.getTransaction().commit();
 	}
-	
+
 	@Override
 	public List<Doctor> searchByName(String name, String surname) {
 		List<Doctor> doctors;

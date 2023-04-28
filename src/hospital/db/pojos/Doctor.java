@@ -29,10 +29,9 @@ public class Doctor implements Serializable {
 	private String speciality;
 	@Column(name = "salary")
 	private Double salary;
-	 
+	
+	//TODO annotations
 	private Hospital hospital;
-	@Column(name = "hospitalId")
-	private Integer hospitalId;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name="hospitalId")
@@ -145,6 +144,9 @@ public class Doctor implements Serializable {
 		return "Doctor [id=" + id + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", speciality="
 				+ speciality + ", salary=" + salary + ", hospital=" + hospital + ", hospitalId=" + hospitalId
 				+ ", treatsIllness=" + treatsIllness + "]";
+	}
+	public String shortInfo() {
+		return "Patient [id=" + id + ", name=" + name + ", surname=" + surname + "]";
 	}
 
 }

@@ -6,10 +6,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import hospital.db.ifaces.hasManager;
 import hospital.db.pojos.Has;
 import hospital.db.pojos.Patient;
 
-public class JPAHas {
+public class JPAHas implements hasManager{
 
 EntityManager em;
 	
@@ -31,6 +32,15 @@ EntityManager em;
 		q.setParameter(1, pId);
 		q.setParameter(2, iId);
 		h = (Has) q.getResultList();
+		return h;
+	}
+	
+	public List<Has> getHas(int pId){
+		List<Has> h = null;
+		em.getTransaction().begin();
+		Query q = em.createNativeQuery("SELECT * FROM hasIllness WHERE patientId = ? AND illnessId = ?", Has.class);
+		q.setParameter(1, pId);
+		h = (List<Has>) q.getResultList();
 		return h;
 	}
 }
