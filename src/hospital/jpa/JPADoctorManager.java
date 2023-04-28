@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.*;
 import hospital.db.ifaces.DoctorManager;
 import hospital.db.pojos.Doctor;
+import hospital.db.pojos.Hospital;
+import hospital.db.pojos.Illness;
 
 public class JPADoctorManager implements DoctorManager {
 	
@@ -66,19 +68,21 @@ public class JPADoctorManager implements DoctorManager {
 	}
 
 	@Override
-	public void assignHospital(int hospitalId) {
-		// TODO Auto-generated method stub
-
+	public void assignHospital(Hospital h) {
+		JPADoctorManager dM = new JPADoctorManager();
+		em.getTransaction().begin();
+		h.getDoctors().add(dM.getDoctor(h.getId()));
+		// TODO dudo mucho de que esto esté bien, ask
+		em.getTransaction().commit();
 	}
 
 	@Override
-	public void assignIllness(int illnessId, int doctorId) {
+	public void assignIllness(Doctor d, Illness i) {
 		em.getTransaction().begin();
-		// TODO doctorTreats, para poder asignarle una illness
-		//Deberia crearme el objeto de esa clase, obtener los valores, y llamarle
-		//pidiendo los id con una query
+		i.getDoctors().add(d);
+		d.getTreatsIllness().add(i);
+		// TODO ask if this is correct
 		em.getTransaction().commit();
-
 	}
 
 	@Override

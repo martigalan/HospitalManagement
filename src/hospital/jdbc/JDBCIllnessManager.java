@@ -4,12 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import hospital.db.ifaces.IllnessManager;
-import hospital.db.pojos.Hospital;
 import hospital.db.pojos.Illness;
 
 public class JDBCIllnessManager implements IllnessManager {
@@ -24,10 +22,11 @@ public class JDBCIllnessManager implements IllnessManager {
 	@Override
 	public Illness searchIllnessByName(String name) {
 		return null;
-		//TODO
+		// TODO
 	}
 
 	// This is used in the constructor to insert pre-made info in db
+	@Override
 	public void insertIllness(Illness i) {
 		try {
 			String sql = "INSERT INTO illness (condition)" + "VALUES (?);";
@@ -41,10 +40,31 @@ public class JDBCIllnessManager implements IllnessManager {
 		}
 	}
 	
+	@Override
+	public Illness getIllness(int id) {
+		try {
+			String sql = "SELECT * FROM illness WHERE id = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, id);
+			ResultSet rs = p.executeQuery();
+			rs.next();
+			String condition = rs.getString("condition");
+			Illness i = new Illness(condition);
+			rs.close();
+			p.close();
+			return i;
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
 	public List<Illness> getIllnesses(){
 		List<Illness> listIllnesses = new ArrayList<Illness>();
 		try {
-			String sql = "SELECT * FROM illness;";
+			String sql = "SELECT * FROM illness";
 			PreparedStatement p = c.prepareStatement(sql);
 			ResultSet rs = p.executeQuery();
 			while(rs.next()) {
@@ -59,6 +79,4 @@ public class JDBCIllnessManager implements IllnessManager {
 		}
 		return listIllnesses;
 	}
-
-
 }

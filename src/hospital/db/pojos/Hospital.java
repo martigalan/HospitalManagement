@@ -22,8 +22,9 @@ public class Hospital implements Serializable{
 	private String location;
 	
 	@OneToMany(mappedBy = "hospital")
-	private List<Patient> patients;
-	
+	private List<Patient> patients;	
+	@OneToMany(mappedBy= "hospital")
+	private List<Doctor> doctors;
 	
 	public Hospital() { //default hospital
 		super();
@@ -68,7 +69,14 @@ public class Hospital implements Serializable{
 	public void setLocation(String location) {
 		this.location = location;
 	}
-
+	
+	public List<Doctor> getDoctors() {
+		return doctors;
+	}
+	public void setDoctors(List<Doctor> doctors) {
+		this.doctors = doctors;
+		
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

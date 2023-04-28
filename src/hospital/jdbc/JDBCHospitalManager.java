@@ -9,7 +9,6 @@ import java.util.List;
 
 import hospital.db.ifaces.HospitalManager;
 import hospital.db.pojos.Hospital;
-import hospital.db.pojos.Machine;
 
 public class JDBCHospitalManager implements HospitalManager {
 
@@ -81,25 +80,21 @@ public class JDBCHospitalManager implements HospitalManager {
 	}
 
 	@Override
-	public Hospital getHospital(Integer hosp_id) {
+	public Hospital getHospital(int hospitalId) {
 		Hospital hosp = null;
-
 		try {
 			String sql = "SELECT * FROM hospital WHERE id = ?";
 			PreparedStatement statement = c.prepareStatement(sql);
-			statement.setInt(1, hosp_id);
+			statement.setInt(1, hospitalId);
 			ResultSet result = statement.executeQuery();
 			result.next();
 			String name = result.getString("name");
 			String location = result.getString("location");
-
 			hosp = new Hospital(name, location);
-
 		} catch (SQLException e) {
 			System.out.println("Database error");
 			e.printStackTrace();
 		}
-
 		return hosp;
 	}
 	
