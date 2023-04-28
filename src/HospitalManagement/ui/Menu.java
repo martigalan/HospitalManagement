@@ -1,6 +1,8 @@
 package HospitalManagement.ui;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.Scanner;
 import java.io.InputStreamReader;
 import java.sql.Date;
@@ -8,6 +10,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.sql.Blob;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
 import hospital.db.ifaces.*;
@@ -92,7 +95,11 @@ public class Menu {
 		Date dobDate = Date.valueOf(dobLocalDate);
 		// System.out.println("Photo:");
 		// byte[] photo = sc.nextByte();
-		byte[] photo = null; // used for testing
+		System.out.print("Type the file name as it appears in folder /photos, including extension: ");
+		String fileName = sc.nextLine();
+		File photos = new File("./photos/" + fileName);
+		InputStream streamBlob = new FileInputStream(photos);
+		byte[] photo = new byte[streamBlob.available()];		
 		// TODO add photo in SQLinsert
 		Hospital h = new Hospital(); // TODO search for MAIN hospital once the data is in the db
 
