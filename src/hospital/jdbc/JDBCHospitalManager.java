@@ -9,7 +9,6 @@ import java.util.List;
 
 import hospital.db.ifaces.HospitalManager;
 import hospital.db.pojos.Hospital;
-import hospital.db.pojos.Machine;
 
 public class JDBCHospitalManager implements HospitalManager {
 

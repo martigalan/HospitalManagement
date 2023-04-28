@@ -1,15 +1,12 @@
 package hospital.jpa;
 
-import java.sql.PreparedStatement;
 import java.util.List;
 
 import javax.persistence.*;
 import hospital.db.ifaces.DoctorManager;
 import hospital.db.pojos.Doctor;
-import hospital.db.pojos.Has;
 import hospital.db.pojos.Hospital;
 import hospital.db.pojos.Illness;
-import hospital.db.pojos.Patient;
 
 public class JPADoctorManager implements DoctorManager {
 	
