@@ -30,7 +30,8 @@ public class Doctor implements Serializable {
 	@Column(name = "salary")
 	private Double salary;
 	
-	//TODO annotations
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "hospitalId")
 	private Hospital hospital;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
@@ -41,24 +42,20 @@ public class Doctor implements Serializable {
 	   		inverseJoinColumns={@JoinColumn(name="illnessId", referencedColumnName="id")})
 	private List<Illness> treatsIllness;
 
-	public Doctor(String name, String surname, Date dob, String speciality, Double salary, Integer hospitalId) {
+	public Doctor(String name, String surname, Date dob, String speciality, Double salary, Hospital hospital) {
 		super();
 		this.name = name;
 		this.surname = surname;
 		this.dob = dob;
 		this.speciality = speciality;
 		this.salary = salary;
-		this.hospitalId = obtainHospitalId(hospital);
+		this.hospital = hospital;
 	}
 	
 	public Doctor() {
 		super();
 	}
 	
-	private int obtainHospitalId (Hospital hospital) {
-		return hospital.getId();
-	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -105,15 +102,15 @@ public class Doctor implements Serializable {
 	public void setSalary(Double salary) {
 		this.salary = salary;
 	}
-		
-	public Integer getHospitalId() {
-		return hospitalId;
+
+	public Hospital getHospital() {
+		return hospital;
 	}
 
-	public void setHospitalId(Integer hospitalId) {
-		this.hospitalId = hospitalId;
+	public void setHospital(Hospital hospital) {
+		this.hospital = hospital;
 	}
-	
+
 	public List<Illness> getTreatsIllness() {
 		return treatsIllness;
 	}
@@ -142,7 +139,7 @@ public class Doctor implements Serializable {
 	@Override
 	public String toString() {
 		return "Doctor [id=" + id + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", speciality="
-				+ speciality + ", salary=" + salary + ", hospital=" + hospital + ", hospitalId=" + hospitalId
+				+ speciality + ", salary=" + salary + ", hospital=" + hospital
 				+ ", treatsIllness=" + treatsIllness + "]";
 	}
 	public String shortInfo() {
