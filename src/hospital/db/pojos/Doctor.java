@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
-
 import javax.persistence.*;
 
 @Entity
@@ -35,6 +34,8 @@ public class Doctor implements Serializable {
 	@Column(name = "hospitalId")
 	private Integer hospitalId;
 	
+	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinColumn(name="hospitalId")
 	@ManyToMany 
 	@JoinTable(name = "DoctorTreats",
 	        joinColumns={@JoinColumn(name="doctorId", referencedColumnName="id")},
@@ -108,6 +109,14 @@ public class Doctor implements Serializable {
 
 	public void setHospitalId(Integer hospitalId) {
 		this.hospitalId = hospitalId;
+	}
+	
+	public List<Illness> getTreatsIllness() {
+		return treatsIllness;
+	}
+
+	public void setTreatsIllness(List<Illness> treatsIllness) {
+		this.treatsIllness = treatsIllness;
 	}
 
 	@Override
