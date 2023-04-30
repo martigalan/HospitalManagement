@@ -35,10 +35,11 @@ public class JDBCMachineManager implements MachineManager {
 			ResultSet rs = p.executeQuery();
 
 			while (rs.next()) {
+				Integer id = rs.getInt("id");
 				String name_ma = rs.getString("name");
 				Integer hospID = rs.getInt("hospital.id");
 				Hospital hosp = managerH.getHospital(hospID);
-				Machine m = new Machine(name_ma, hosp);
+				Machine m = new Machine(id, name_ma, hosp);
 				list.add(m);
 			}
 		} catch (SQLException e) {

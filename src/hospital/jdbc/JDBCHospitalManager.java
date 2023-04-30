@@ -65,10 +65,10 @@ public class JDBCHospitalManager implements HospitalManager {
 			ResultSet rs = p.executeQuery();
 
 			while (rs.next()) {
-				int id = rs.getInt("id");
+				Integer id = rs.getInt("id");
 				String name_hosp = rs.getString("name");
 				String location = rs.getString("location");
-				Hospital h = new Hospital(name_hosp, location);
+				Hospital h = new Hospital(id, name_hosp, location);
 				list.add(h);
 			}
 		} catch (SQLException e) {
@@ -88,9 +88,10 @@ public class JDBCHospitalManager implements HospitalManager {
 			statement.setInt(1, hospitalId);
 			ResultSet result = statement.executeQuery();
 			result.next();
+			Integer id = result.getInt("id");
 			String name = result.getString("name");
 			String location = result.getString("location");
-			hosp = new Hospital(name, location);
+			hosp = new Hospital(id, name, location);
 		} catch (SQLException e) {
 			System.out.println("Database error");
 			e.printStackTrace();

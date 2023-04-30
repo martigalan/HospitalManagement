@@ -19,12 +19,6 @@ public class JDBCIllnessManager implements IllnessManager {
 		// TODO insert info
 	}
 
-	@Override
-	public Illness searchIllnessByName(String name) {
-		return null;
-		// TODO
-	}
-
 	// This is used in the constructor to insert pre-made info in db
 	@Override
 	public void insertIllness(Illness i) {
