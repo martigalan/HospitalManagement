@@ -14,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.sql.Blob;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import hospital.db.ifaces.*;
@@ -31,6 +32,7 @@ public class Menu {
 	private static HospitalManager hospitalM;
 	private static ConnectionManager connectionManager;
 	private static IllnessManager illnessM;
+	private static MachineManager machineM;
 	private static boolean showImage = true;
 
 	public static void main(String[] args) {
@@ -40,6 +42,7 @@ public class Menu {
 			doctorM = new JPADoctorManager();
 			hospitalM = new JDBCHospitalManager(connectionManager.getConnection());
 			illnessM = new JDBCIllnessManager(connectionManager.getConnection());
+			machineM = new JDBCMachineManager(connectionManager.getConnection());
 			// TODO Auto-generated method stub
 
 			System.out.println("HI");
@@ -189,11 +192,20 @@ public class Menu {
 		Scanner sc = new Scanner(System.in);
 		Patient p = patientM.getPatient(id);
 		List<Has> illnesses = p.getIllness();
-		System.out.println();
+		for (Has hI : illnesses) {
+			System.out.println(hI.infoIllness());
+		}
 		System.out.println("What illness do you want to treat?\n Please enter illness id: ");
 		int illnessId = sc.nextInt();
 		Illness illnessTreated = illnessM.getIllness(illnessId);
-		//TODO solo del hospital
+		//now i have the illness that needs treatment
+		List<Doctor> docList = doctorM.docTreatsIllness(illnessTreated); 
+		//docList is a list of ALL the doctors that treat the specified illness
+		List<Machine> machineList = machineM.machineTreatsIllness(illnessTreated);
+		//machineList is a list of ALL the machines that treat the specified illness
+		//right now i have a list of doctors and a list of machines, now i have to compare hospitals they're at to select one
+		
+		
 	}
 
 	public static void updatePatient(int id) throws IOException {

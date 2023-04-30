@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "hospital")
 public class Hospital implements Serializable{
@@ -20,7 +21,8 @@ public class Hospital implements Serializable{
 	private Integer id;
 	private String name;
 	private String location;
-	
+	private static final Integer AV = 10;
+
 	@OneToMany(mappedBy = "hospital")
 	private List<Patient> patients;	
 	@OneToMany(mappedBy= "hospital")
@@ -76,6 +78,9 @@ public class Hospital implements Serializable{
 	public void setDoctors(List<Doctor> doctors) {
 		this.doctors = doctors;
 		
+	}
+	public static Integer getAv() {
+		return AV;
 	}
 	@Override
 	public int hashCode() {

@@ -13,4 +13,5 @@ public interface DoctorManager {
 		public void assignHospital(Hospital h);
 		public void assignIllness(Doctor d, Illness i);
 		public Doctor getDoctor(int id);
+		public List<Doctor> docTreatsIllness(Illness i);
 }

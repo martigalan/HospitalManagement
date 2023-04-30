@@ -35,9 +35,10 @@ public class ConnectionManager {
 			String table3 = "CREATE TABLE machine (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL,"
 					+ " hospitalId INTEGER NOT NULL REFERENCES hospital(id));";
 			s.executeUpdate(table3);
-			String table4 = "CREATE TABLE vets (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL,"
+			/*String table4 = "CREATE TABLE vets (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL,"
 					+ " phone INTEGER," + " email TEXT NOT NULL," + " speciality TEXT);";
-			s.executeUpdate(table4);
+			//TODO wtf
+			s.executeUpdate(table4);*/
 			String table5 = "CREATE TABLE illness (id INTEGER PRIMARY KEY AUTOINCREMENT," + " condition TEXT NOT NULL," 
 					+ " doctorId INTEGER NOT NULL REFERENCES hospital(id));";
 			s.executeUpdate(table5);

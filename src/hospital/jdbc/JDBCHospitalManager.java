@@ -80,7 +80,7 @@ public class JDBCHospitalManager implements HospitalManager {
 	}
 
 	@Override
-	public Hospital getHospital(int hospitalId) {
+	public Hospital getHospital(Integer hospitalId) {
 		Hospital hosp = null;
 		try {
 			String sql = "SELECT * FROM hospital WHERE id = ?";
@@ -117,5 +117,4 @@ public class JDBCHospitalManager implements HospitalManager {
 		}
 		return listHospitals;
 	}
-
 }

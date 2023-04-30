@@ -15,6 +15,13 @@ public class Machine implements Serializable {
 		this.name = name;
 		this.hospital = hospital;
 	}
+	
+	public Machine(Integer id, String name, Hospital hospital) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.hospital = hospital;
+	}
 
 	public Integer getId() {
 		return id;

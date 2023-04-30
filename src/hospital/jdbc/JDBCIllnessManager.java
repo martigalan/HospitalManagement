@@ -48,8 +48,9 @@ public class JDBCIllnessManager implements IllnessManager {
 			p.setInt(1, id);
 			ResultSet rs = p.executeQuery();
 			rs.next();
+			Integer iId = rs.getInt("id");
 			String condition = rs.getString("condition");
-			Illness i = new Illness(condition);
+			Illness i = new Illness(iId, condition);
 			rs.close();
 			p.close();
 			return i;

@@ -1,5 +1,6 @@
 package hospital.jpa;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -87,6 +88,22 @@ public class JPADoctorManager implements DoctorManager {
 		q1.setParameter(1, id);
 		Doctor doctor = (Doctor) q1.getSingleResult();
 		return doctor;
+	}
+	
+	@Override
+	public List<Doctor> docTreatsIllness(Illness i){
+		Query q = em.createNativeQuery("SELECT d.id FROM doctor AS d JOIN doctorTreats AS dt ON d.id = dt.doctorId"+
+	                                   " WHERE dt.illnessId = ?");
+		q.setParameter(1, i.getId());
+		List<Integer> docIds = (List<Integer>) q.getResultList();
+		List<Doctor> docList = new ArrayList();
+		Doctor d = new Doctor();
+		JPADoctorManager dM = new JPADoctorManager();
+		for (Integer id: docIds) {
+			d = dM.getDoctor(id);
+			docList.add(d);
+		}
+		return docList;
 	}
 
 }
