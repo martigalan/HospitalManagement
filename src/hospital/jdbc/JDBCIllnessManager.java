@@ -16,7 +16,10 @@ public class JDBCIllnessManager implements IllnessManager {
 
 	public JDBCIllnessManager(Connection c) {
 		this.c = c;
-		// TODO insert info
+		if (this.getIllnesses().isEmpty()){
+			//Illness i1 = new Illness(); set parameters and repeat with each illness
+			//connections between tables (patient and doctor)
+		}
 	}
 
 	// This is used in the constructor to insert pre-made info in db

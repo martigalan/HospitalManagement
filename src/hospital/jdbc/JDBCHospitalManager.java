@@ -17,7 +17,10 @@ public class JDBCHospitalManager implements HospitalManager {
 	public JDBCHospitalManager(Connection c) {
 		this.c = c;
 		if(this.getHospitals().isEmpty()) {
-			
+			Hospital mainH = new Hospital(1, "main", "main");
+			//do this with every hospital left
+			this.insertHospital(mainH);
+			//connections between tables (patient and doctor)
 		}
 		// TODO insert info
 	}
@@ -99,6 +102,7 @@ public class JDBCHospitalManager implements HospitalManager {
 		return hosp;
 	}
 	
+	@Override
 	public List<Hospital> getHospitals(){
 		List<Hospital> listHospitals = new ArrayList<Hospital>();
 		try {

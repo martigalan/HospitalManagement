@@ -204,7 +204,9 @@ public class Menu {
 		List<Machine> machineList = machineM.machineTreatsIllness(illnessTreated);
 		//machineList is a list of ALL the machines that treat the specified illness
 		//right now i have a list of doctors and a list of machines, now i have to compare hospitals they're at to select one
-		
+		//I'm going to go through the machineList seeing if there's a doctor that works at that hospital
+		//i will generate a list of doctors that work at the hospital the machine's at so that the user can choose a doctor
+		//TODO ask the group if they agree
 		
 	}
 

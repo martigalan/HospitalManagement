@@ -11,4 +11,5 @@ public interface MachineManager {
 	public void insertMachine(Machine machine);
 	public Machine getMachine(Integer id); 
 	public List<Machine> machineTreatsIllness(Illness i);
+	public List<Machine> getMachines();
 }

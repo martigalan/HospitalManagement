@@ -22,6 +22,10 @@ public class JDBCMachineManager implements MachineManager {
 
 	public JDBCMachineManager(Connection c) {
 		this.c = c;
+		if (this.getMachines().isEmpty()) {
+			//Machine m1 = new Machine() set parameters and repeat with each machine
+			//connections between tables (hospital)
+		}
 	}
 
 	@Override
@@ -120,6 +124,30 @@ public class JDBCMachineManager implements MachineManager {
 			e.printStackTrace();
 		}
 		return machines;
+	}
+	
+	@Override
+	public List<Machine> getMachines(){
+		List<Machine> listM = new ArrayList<Machine>();
+		JDBCHospitalManager hospitalM = new JDBCHospitalManager(c);
+		try {
+			String sql = "SELECT * FROM machine";
+			PreparedStatement p = c.prepareStatement(sql);
+			ResultSet rs = p.executeQuery();
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				int hId = rs.getInt("hospitalId");
+				Hospital h = new Hospital();
+				h = hospitalM.getHospital(hId);
+				Machine m = new Machine(id, name, h);
+				listM.add(m);
+			}
+		}catch(SQLException e){
+			System.out.println("Database error");
+			e.printStackTrace();
+		}
+		return listM;
 	}
 
 }

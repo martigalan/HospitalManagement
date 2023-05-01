@@ -34,8 +34,6 @@ public class Doctor implements Serializable {
 	@JoinColumn(name = "hospitalId")
 	private Hospital hospital;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
-	@JoinColumn(name="hospitalId")
 	@ManyToMany 
 	@JoinTable(name = "DoctorTreats",
 	        joinColumns={@JoinColumn(name="doctorId", referencedColumnName="id")},

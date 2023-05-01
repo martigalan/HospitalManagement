@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
+
 import hospital.db.ifaces.DoctorManager;
 import hospital.db.pojos.Doctor;
 import hospital.db.pojos.Hospital;
@@ -18,6 +19,10 @@ public class JPADoctorManager implements DoctorManager {
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate(); // activate the FK
 		em.getTransaction().commit();
+		if(this.getDoctors().isEmpty()){
+			//Doctor d1 = new Doctor () set parameters and repeat with every doctor
+			//connections between tables (hospital and treatsIllness)
+		}
 	}
 
 	public void close() {
@@ -30,6 +35,13 @@ public class JPADoctorManager implements DoctorManager {
 		doctor.setName(doctor.getName());
 		doctor.setSurname(doctor.getSurname());
 		em.getTransaction().commit();
+	}
+	
+	public List<Doctor> getDoctors(){
+		List<Doctor> doctors;
+		Query q = em.createNativeQuery("SELECT * FROM doctor ", Doctor.class);
+		doctors = q.getResultList();
+		return doctors;
 	}
 
 	@Override
