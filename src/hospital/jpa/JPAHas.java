@@ -25,6 +25,7 @@ EntityManager em;
 		em.close();
 	}
 	
+	@Override
 	public Has getHas(int pId, int iId){
 		Has h = null;
 		em.getTransaction().begin();
@@ -35,6 +36,7 @@ EntityManager em;
 		return h;
 	}
 	
+	@Override
 	public List<Has> getHas(int pId){
 		List<Has> h = null;
 		em.getTransaction().begin();

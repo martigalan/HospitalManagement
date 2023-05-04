@@ -18,7 +18,6 @@ public class JDBCHospitalManager implements HospitalManager {
 		this.c = c;
 		if(this.getHospitals().isEmpty()) {
 			
-			//connections between tables (patient and doctor)
 		}
 		// TODO insert info
 	}
