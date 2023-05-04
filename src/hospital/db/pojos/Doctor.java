@@ -1,10 +1,10 @@
 package hospital.db.pojos;
 
 import java.io.Serializable;
-
 import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
+
 import javax.persistence.*;
 
 @Entity
@@ -29,6 +29,10 @@ public class Doctor implements Serializable {
 	private String speciality;
 	@Column(name = "salary")
 	private Double salary;
+	@Column(name = "username")
+	private String username;
+	@Column(name = "password")
+	private String password;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "hospitalId")
@@ -116,7 +120,19 @@ public class Doctor implements Serializable {
 	public void setTreatsIllness(List<Illness> treatsIllness) {
 		this.treatsIllness = treatsIllness;
 	}
+	
+	public String getUsername() {
+		return username;
+	}
 
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -140,6 +156,7 @@ public class Doctor implements Serializable {
 				+ speciality + ", salary=" + salary + ", hospital=" + hospital
 				+ ", treatsIllness=" + treatsIllness + "]";
 	}
+	
 	public String shortInfo() {
 		return "Patient [id=" + id + ", name=" + name + ", surname=" + surname + "]";
 	}
