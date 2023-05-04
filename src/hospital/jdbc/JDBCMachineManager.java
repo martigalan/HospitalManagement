@@ -23,7 +23,7 @@ public class JDBCMachineManager implements MachineManager {
 	public JDBCMachineManager(Connection c) {
 		this.c = c;
 		if (this.getMachines().isEmpty()) {
-			//Machine m1 = new Machine() set parameters and repeat with each machine
+			//Machine m1 = new Machine("") set parameters and repeat with each machine
 			//connections between tables (hospital)
 		}
 	}
@@ -56,7 +56,7 @@ public class JDBCMachineManager implements MachineManager {
 
 	@Override
 	public void assignHospital(Hospital hospital, Integer machineID) {
-		// TODO ask if its right
+		// TODO Hospital id not 
 		String sql = "UPDATE machine SET hospital=? WHERE id=?";
 		PreparedStatement prep;
 		try {
