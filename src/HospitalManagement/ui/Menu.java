@@ -204,9 +204,26 @@ public class Menu {
 		List<Machine> machineList = machineM.machineTreatsIllness(illnessTreated);
 		//machineList is a list of ALL the machines that treat the specified illness
 		//right now i have a list of doctors and a list of machines, now i have to compare hospitals they're at to select one
-		//I'm going to go through the machineList seeing if there's a doctor that works at that hospital
-		//i will generate a list of doctors that work at the hospital the machine's at so that the user can choose a doctor
-		//TODO ask the group if they agree
+		//I'm going to go through the machineList seeing if there's a doctor that works at that hospital, if there's a doctor AND the hospital
+		// is available then i choose that hospital
+		for (Machine m : machineList) {
+			Hospital hMachine = m.getHospital();
+			for (Doctor d : docList) {
+				Hospital hDoctor = d.getHospital();
+				if ((hMachine.equals(hDoctor)) & (hMachine.getPatients().size() <= hMachine.getAv())){
+					patientM.assignHospital(hMachine, p);
+				}
+				return;
+			}
+			return;
+		}
+		if (p.getHospital() != null) {
+			System.out.println("Se le ha asignado este hospital: ");
+			System.out.println(p.getHospital());
+		}
+		else {
+			System.out.println("Lo sentimos, no podemos tratarle en nuestros hospitales en este momento");
+		}
 		
 	}
 

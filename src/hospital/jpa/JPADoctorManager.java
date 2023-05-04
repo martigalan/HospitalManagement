@@ -21,7 +21,7 @@ public class JPADoctorManager implements DoctorManager {
 		em.getTransaction().commit();
 		if(this.getDoctors().isEmpty()){
 			//Doctor d1 = new Doctor () set parameters and repeat with every doctor
-			//connections between tables (hospital and treatsIllness)
+			//connections between tables (hospital and treats
 		}
 	}
 

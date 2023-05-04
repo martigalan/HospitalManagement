@@ -79,7 +79,15 @@ public class Hospital implements Serializable{
 		this.doctors = doctors;
 		
 	}
-	public static Integer getAv() {
+	
+	public List<Patient> getPatients() {
+		return patients;
+	}
+	public void setPatients(List<Patient> patients) {
+		this.patients = patients;
+		
+	}
+	public Integer getAv() {
 		return AV;
 	}
 	@Override
