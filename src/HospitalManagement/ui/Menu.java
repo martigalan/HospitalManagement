@@ -50,7 +50,7 @@ public class Menu {
 			System.out.println("-1. Register a new Patient");
 			System.out.println("-2. Select a patient data"); ////////////////
 			System.out.println("-3. Select doctor data"); /////////
-			System.out.println("-4. Search for a hospital"); //TODO ONLY GIVES INFO ABOUT HOSPITALS 
+			System.out.println("-4. Search for a hospital"); // TODO ONLY GIVES INFO ABOUT HOSPITALS
 			System.out.println("-0. Exit");
 
 			Scanner sc = new Scanner(System.in);
@@ -70,7 +70,7 @@ public class Menu {
 			}
 
 			case 4: {
-				//searchHospital();
+				// searchHospital();
 				break;
 			}
 			case 0: {
@@ -149,7 +149,6 @@ public class Menu {
 		PatientMenu(id);
 	}
 
-
 	public static void PatientMenu(int id) {
 		while (true) {
 			try {
@@ -198,33 +197,38 @@ public class Menu {
 		System.out.println("What illness do you want to treat?\n Please enter illness id: ");
 		int illnessId = sc.nextInt();
 		Illness illnessTreated = illnessM.getIllness(illnessId);
-		//now i have the illness that needs treatment
-		List<Doctor> docList = doctorM.docTreatsIllness(illnessTreated); 
-		//docList is a list of ALL the doctors that treat the specified illness
+		// now i have the illness that needs treatment
+		List<Doctor> docList = doctorM.docTreatsIllness(illnessTreated);
+		// docList is a list of ALL the doctors that treat the specified illness
 		List<Machine> machineList = machineM.machineTreatsIllness(illnessTreated);
-		//machineList is a list of ALL the machines that treat the specified illness
-		//right now i have a list of doctors and a list of machines, now i have to compare hospitals they're at to select one
-		//I'm going to go through the machineList seeing if there's a doctor that works at that hospital, if there's a doctor AND the hospital
+		// machineList is a list of ALL the machines that treat the specified illness
+		// right now i have a list of doctors and a list of machines, now i have to
+		// compare hospitals they're at to select one
+		// I'm going to go through the machineList seeing if there's a doctor that works
+		// at that hospital, if there's a doctor AND the hospital
 		// is available then i choose that hospital
-		for (Machine m : machineList) {
-			Hospital hMachine = m.getHospital();
-			for (Doctor d : docList) {
-				Hospital hDoctor = d.getHospital();
-				if ((hMachine.equals(hDoctor)) & (hMachine.getPatients().size() <= hMachine.getAv())){
-					patientM.assignHospital(hMachine, p);
+		while (p.getHospital() == null) {
+			for (Machine m : machineList) {
+				Hospital hMachine = m.getHospital();
+				for (Doctor d : docList) {
+					Hospital hDoctor = d.getHospital();
+					if ((hMachine.equals(hDoctor)) & (hMachine.getPatients().size() <= hMachine.getAv())) {
+						patientM.assignHospital(hMachine, p);
+						break;
+					}
 				}
-				return;
+				if (p.getHospital() != null) {
+					break;
+				}
 			}
-			return;
+			if (p.getHospital() != null) {
+				System.out.println("Se le ha asignado este hospital: ");
+				System.out.println(p.getHospital());
+			} else {
+				System.out.println("Lo sentimos, no podemos tratarle en nuestros hospitales en este momento");
+			}
 		}
-		if (p.getHospital() != null) {
-			System.out.println("Se le ha asignado este hospital: ");
-			System.out.println(p.getHospital());
-		}
-		else {
-			System.out.println("Lo sentimos, no podemos tratarle en nuestros hospitales en este momento");
-		}
-		
+
 	}
 
 	public static void updatePatient(int id) throws IOException {
@@ -250,9 +254,9 @@ public class Menu {
 	public static void showPatient(int id) throws IOException {
 		Patient p = patientM.getPatient(id);
 		System.out.println(p);
-		//If patient.getPhoto != null
+		// If patient.getPhoto != null
 		// open window and show it
-		if (p.getPhoto()!=null) {
+		if (p.getPhoto() != null) {
 			ByteArrayInputStream blobIn = new ByteArrayInputStream(p.getPhoto());
 			// Show the photo
 			if (showImage) {
@@ -337,7 +341,7 @@ public class Menu {
 	}
 
 	public static void removeDoctor(int id) throws IOException {
-        Doctor d = doctorM.getDoctor(id);
+		Doctor d = doctorM.getDoctor(id);
 		doctorM.deleteDoctor(d);
 		System.out.println("The doctor has been removed. :(");
 	}
