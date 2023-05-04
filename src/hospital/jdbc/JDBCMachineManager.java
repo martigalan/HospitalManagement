@@ -65,7 +65,7 @@ public class JDBCMachineManager implements MachineManager {
 			prep.executeUpdate();
 			System.out.println("Update finished.");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Database exception.");
 			e.printStackTrace();
 		}
 		
