@@ -33,6 +33,7 @@ public class Menu {
 	private static ConnectionManager connectionManager;
 	private static IllnessManager illnessM;
 	private static MachineManager machineM;
+	private static hasManager hasM;
 	private static boolean showImage = true;
 
 	public static void main(String[] args) {
@@ -43,6 +44,7 @@ public class Menu {
 			hospitalM = new JDBCHospitalManager(connectionManager.getConnection());
 			illnessM = new JDBCIllnessManager(connectionManager.getConnection());
 			machineM = new JDBCMachineManager(connectionManager.getConnection());
+			hasM = new JPAHas();
 			// TODO Auto-generated method stub
 
 			System.out.println("HI");
@@ -111,12 +113,18 @@ public class Menu {
 		streamBlob.readAllBytes();
 		streamBlob.close();
 		// TODO add photo in SQLinsert
-		Hospital h = new Hospital(); // TODO search for MAIN hospital once the data is in the db
 		List<Hospital> possibleH = hospitalM.searchByName("Hospital Universitario Fundación Jimenez Díaz");
-		
+		Integer hospId = null;
+		for(Hospital hospital :possibleH) {
+			hospId = hospital.getId();
+		}
+		Hospital mainHospital = hospitalM.getHospital(hospId);
 
-		Patient p = new Patient(name, surname, dobDate, h, photo);
+		Patient p = new Patient(name, surname, dobDate, mainHospital, photo);
 		patientM.insertPatient(p);
+		
+		lookForIllness(p.getId());
+		
 	}
 
 	public static void selectDoctor() throws IOException {
@@ -195,8 +203,20 @@ public class Menu {
 	}
 
 	private static void updateIllnessSeverity(Integer id) {
-		// TODO used in updatePatient()
-		
+		//look for Has that has the p and the i needed and only setSeverity()
+		Scanner sc = new Scanner(System.in);
+		Patient p = patientM.getPatient(id);
+		System.out.println("This patient has the following illnesses: ");
+		List<Has> illnessesPHas = hasM.getHas(id);
+		for (Has hIllness : illnessesPHas) {
+			System.out.println(hIllness.infoIllness());
+		}
+		System.out.println("Enter the illness that need to be updated: ");
+		Integer illnessId = sc.nextInt();
+		Has hasIllness = hasM.getHas(id, illnessId);
+		System.out.println("Enter the new severity: ");
+		String sev = sc.nextLine();
+		hasIllness.setSeverity(sev);
 	}
 
 	private static void lookForIllness(Integer id) {
@@ -213,7 +233,6 @@ public class Menu {
 		System.out.println("Please, enter the severity of the illness: ");
 		String severity = sc.nextLine();
 		patientM.assignIllness(p, illness, severity);
-		
 	}
 
 	private static void searchHospital(int id) {
