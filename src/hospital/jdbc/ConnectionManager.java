@@ -28,6 +28,9 @@ public class ConnectionManager {
 			String table = "CREATE TABLE hospital (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL,"
 					+ " location TEXT NOT NULL);";
 			s.executeUpdate(table);
+			
+			
+			
 			String table2 = "CREATE TABLE doctor (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL," 
 					+ " surname TEXT NOT NULL," + " dob DATE NOT NULL," + " speciality TEXT NOT NULL," 
 					+ " hospitalId INTEGER NOT NULL REFERENCES hospital(id));";
