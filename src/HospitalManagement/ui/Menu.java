@@ -112,9 +112,10 @@ public class Menu {
 		streamBlob.close();
 		// TODO add photo in SQLinsert
 		Hospital h = new Hospital(); // TODO search for MAIN hospital once the data is in the db
+		List<Hospital> possibleH = hospitalM.searchByName("Hospital Universitario Fundación Jimenez Díaz");
+		
 
-
-		Patient p = new Patient(name, surname, dobDate, h, photo); // falta el hospital -> borrar nuevo constructor
+		Patient p = new Patient(name, surname, dobDate, h, photo);
 		patientM.insertPatient(p);
 	}
 
@@ -165,6 +166,7 @@ public class Menu {
 				switch (choice) {
 				case 1: {
 					updatePatient(id);
+					updateIllnessSeverity(id);
 					break;
 				}
 				case 2: {
@@ -175,7 +177,7 @@ public class Menu {
 					searchHospital(id);
 				}
 				case 4: {
-					
+					lookForIllness(id);
 				}
 				case 0: {
 					main(null);
@@ -190,6 +192,28 @@ public class Menu {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private static void updateIllnessSeverity(Integer id) {
+		// TODO used in updatePatient()
+		
+	}
+
+	private static void lookForIllness(Integer id) {
+		//this method shows a list of illnesses and the patient chooses
+		List<Illness> possibleIllnesses = illnessM.getIllnesses();
+		Patient p = patientM.getPatient(id);
+		System.out.println("Please, choose the ID of the illness the patient has: ");
+		for(Illness i : possibleIllnesses) {
+			System.out.println(i);
+		}
+		Scanner sc = new Scanner(System.in);
+		Integer iId = sc.nextInt();
+		Illness illness = illnessM.getIllness(iId);
+		System.out.println("Please, enter the severity of the illness: ");
+		String severity = sc.nextLine();
+		patientM.assignIllness(p, illness, severity);
+		
 	}
 
 	private static void searchHospital(int id) {

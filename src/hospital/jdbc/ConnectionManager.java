@@ -5,9 +5,22 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import hospital.db.ifaces.DoctorManager;
+import hospital.db.ifaces.HospitalManager;
+import hospital.db.ifaces.IllnessManager;
+import hospital.db.ifaces.MachineManager;
+import hospital.db.ifaces.PatientManager;
+import hospital.jpa.JPADoctorManager;
+import hospital.jpa.JPAPatientManager;
+
 public class ConnectionManager {
 	
 	Connection c;
+	private static PatientManager patientM; // es la interfaz q queda por añadir, hay q importarla una vez creada
+	private static DoctorManager doctorM;
+	private static HospitalManager hospitalM;
+	private static IllnessManager illnessM;
+	private static MachineManager machineM;
 	
 	public ConnectionManager() {
 		try {
@@ -24,10 +37,17 @@ public class ConnectionManager {
 	
 	private void createTables() {
 		try {
+			patientM = new JPAPatientManager();
+			doctorM = new JPADoctorManager();
+			hospitalM = new JDBCHospitalManager(this.getConnection());
+			illnessM = new JDBCIllnessManager(this.getConnection());
+			machineM = new JDBCMachineManager(this.getConnection());
+			
 			Statement s = c.createStatement();
 			String table = "CREATE TABLE hospital (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL,"
 					+ " location TEXT NOT NULL);";
 			s.executeUpdate(table);
+			
 			String table2 = "CREATE TABLE doctor (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL," 
 					+ " surname TEXT NOT NULL," + " dob DATE NOT NULL," + " speciality TEXT NOT NULL," 
 					+ " hospitalId INTEGER NOT NULL REFERENCES hospital(id));";
