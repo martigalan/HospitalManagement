@@ -15,12 +15,12 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import dogclinic.xml.SQLDateAdapter;
+import hospital.xml.SQLDateAdapter;
 
 @Entity
 @Table(name = "patient")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = { "name", "surname","dob", "hospital" })
+@XmlType(propOrder = { "dob", "hospital" }) //order of the elements
 public class Patient implements Serializable{
 	
 	private static final long serialVersionUID = 2424327075260915600L;
