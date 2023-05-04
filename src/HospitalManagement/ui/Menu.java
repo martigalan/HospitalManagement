@@ -113,6 +113,7 @@ public class Menu {
 		// TODO add photo in SQLinsert
 		Hospital h = new Hospital(); // TODO search for MAIN hospital once the data is in the db
 
+
 		Patient p = new Patient(name, surname, dobDate, h, photo); // falta el hospital -> borrar nuevo constructor
 		patientM.insertPatient(p);
 	}
@@ -156,6 +157,7 @@ public class Menu {
 				System.out.println("1. Update data");
 				System.out.println("2. Show data");
 				System.out.println("3. Search hospital");
+				System.out.println("4. Assign illness");
 				System.out.println("0. Back to  principal menu");
 
 				int choice = Integer.parseInt(r.readLine());
@@ -171,6 +173,9 @@ public class Menu {
 				}
 				case 3: {
 					searchHospital(id);
+				}
+				case 4: {
+					
 				}
 				case 0: {
 					main(null);
