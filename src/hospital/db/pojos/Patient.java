@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import dogclinic.xml.SQLDateAdapter;
+import hospital.xml.SQLDateAdapter;
 
 @Entity
 @Table(name = "patient")
