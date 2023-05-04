@@ -55,9 +55,20 @@ public class JDBCMachineManager implements MachineManager {
 	}
 
 	@Override
-	public void assignHospital(Hospital hospital) {
-		// TODO Auto-generated method stub
-
+	public void assignHospital(Hospital hospital, Integer machineID) {
+		// TODO ask if its right
+		String sql = "UPDATE machine SET hospital=? WHERE id=?";
+		PreparedStatement prep;
+		try {
+			prep = c.prepareStatement(sql);
+			prep.setObject(machineID, hospital);
+			prep.executeUpdate();
+			System.out.println("Update finished.");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
