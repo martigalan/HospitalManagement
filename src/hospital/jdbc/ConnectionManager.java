@@ -1,6 +1,7 @@
 package hospital.jdbc;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,6 +11,10 @@ import hospital.db.ifaces.HospitalManager;
 import hospital.db.ifaces.IllnessManager;
 import hospital.db.ifaces.MachineManager;
 import hospital.db.ifaces.PatientManager;
+import hospital.db.pojos.Doctor;
+import hospital.db.pojos.Hospital;
+import hospital.db.pojos.Illness;
+import hospital.db.pojos.Machine;
 import hospital.jpa.JPADoctorManager;
 import hospital.jpa.JPAPatientManager;
 
@@ -48,21 +53,84 @@ public class ConnectionManager {
 					+ " location TEXT NOT NULL);";
 			s.executeUpdate(table);
 			
+			Hospital mainH = new Hospital(1, "main", "main");
+			Hospital hosp2 = new Hospital("Hospital Universitario Fundacion Jimenez Diaz",
+					"Av. Reyes Catolicos 2, Madrid");
+			Hospital hosp3 = new Hospital("Centro Medico Teknon",
+					"Calle Vilana 12, Barcelona");
+			Hospital hosp4 = new Hospital("HM Universitario Sanchinarro",
+					"Calle Oña 10, Madrid");
+			Hospital hosp5 = new Hospital("Hospital Universitari i Politecnic la Fe",
+					"Av. de Fernando Abril Martorell 106, Valencia");
+			Hospital hosp6 = new Hospital("Hospital Infantil Universitario Nino Jesus",
+					"Av. Menendez Pelayo 65, Madrid");
+			hospitalM.insertHospital(mainH);
+			hospitalM.insertHospital(hosp2);
+			hospitalM.insertHospital(hosp3);
+			hospitalM.insertHospital(hosp4);
+			hospitalM.insertHospital(hosp5);
+			hospitalM.insertHospital(hosp6);
+			
 			String table2 = "CREATE TABLE doctor (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL," 
 					+ " surname TEXT NOT NULL," + " dob DATE NOT NULL," + " speciality TEXT NOT NULL," 
 					+ " hospitalId INTEGER NOT NULL REFERENCES hospital(id));";
 			s.executeUpdate(table2);
+			
+			Doctor doc1 = new Doctor("John", "Beckett", new Date(1975-06-05), 
+					"Endocrininologist", 55000.00, hosp4); 
+			Doctor doc2 = new Doctor("Adele", "Brown", new Date(1975-06-05), 
+					"Nephrologist", 55000.00, hosp3); 
+			Doctor doc3 = new Doctor("Agnes", "Simpson", new Date(1975-06-05), 
+					"Neurologist", 55000.00, hosp6); 
+			Doctor doc4 = new Doctor("Michael", "Howland", new Date(1975-06-05), 
+					"Endocrininologist", 55000.00, hosp5); 
+			Doctor doc5 = new Doctor("Luke", "Donaldson", new Date(1975-06-05), 
+					"Neurologist", 55000.00, hosp2); 
+			Doctor doc6 = new Doctor("Samantha", "Wilson", new Date(1975-06-05), 
+					"Haematologist", 55000.00, hosp4); 
+			doctorM.insertDoctor(doc1);
+			doctorM.insertDoctor(doc2);
+			doctorM.insertDoctor(doc3);
+			doctorM.insertDoctor(doc4);
+			doctorM.insertDoctor(doc5);
+			doctorM.insertDoctor(doc6);
+			
 			String table3 = "CREATE TABLE machine (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL,"
 					+ " hospitalId INTEGER NOT NULL REFERENCES hospital(id));";
 			s.executeUpdate(table3);
+			Machine m1 = new Machine("Microsurgery", hosp3);
+			Machine m2 = new Machine("SGL2 Inhibitors/Budesonide", hosp5);
+			Machine m3 = new Machine("Tirzepatide", hosp4);
+			Machine m4 = new Machine("Abecma", hosp6);
+			Machine m5 = new Machine("Enzyme replacement therapy", hosp2);
+			machineM.insertMachine(m1);
+			machineM.insertMachine(m2);
+			machineM.insertMachine(m3);
+			machineM.insertMachine(m4);
+			machineM.insertMachine(m5);
 
 			String table5 = "CREATE TABLE illness (id INTEGER PRIMARY KEY AUTOINCREMENT," + " condition TEXT NOT NULL," 
 					+ " doctorId INTEGER NOT NULL REFERENCES hospital(id));";
 			s.executeUpdate(table5);
+			
+			Illness il1 = new Illness("Acoustic Neuroma");
+			Illness il2 = new Illness("IgA Nephropahy");
+			Illness il3 = new Illness("Wolfram Syndrome");
+			Illness il4 = new Illness("Multiple Myeloma");
+			Illness il5 = new Illness("Sanfilippo Syndrome");
+			illnessM.insertIllness(il1);
+			illnessM.insertIllness(il2);
+			illnessM.insertIllness(il3);
+			illnessM.insertIllness(il4);
+			illnessM.insertIllness(il5);
+			
 			String table6 = "CREATE TABLE patient (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL," 
 					+ " surname TEXT NOT NULL," + " dob DATE NOT NULL," + " hospitalId NOT NULL INTEGER REFERENCES hospital(id),"
 					+ " photo BLOB);";
 			s.executeUpdate(table6);
+			
+			
+			
 			String table7 = "CREATE TABLE treats (machineId INTEGER NOT NULL REFERENCES machine(id), " + "illnessId INTEGER NOT NULL REFERENCES illness(id), " 
 			        + "successRate TEXT NOT NULL, " + "PRIMARY KEY (machineId, illnessId));";
 			s.executeUpdate(table7);
