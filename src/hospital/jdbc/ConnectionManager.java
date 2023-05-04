@@ -134,12 +134,15 @@ public class ConnectionManager {
 			String table7 = "CREATE TABLE treats (machineId INTEGER NOT NULL REFERENCES machine(id), " + "illnessId INTEGER NOT NULL REFERENCES illness(id), " 
 			        + "successRate TEXT NOT NULL, " + "PRIMARY KEY (machineId, illnessId));";
 			s.executeUpdate(table7);
+			
 			String table8 = "CREATE TABLE hasIllness (illnessId INTEGER NOT NULL REFERENCES illness(id), " + "patientId INTEGER NOT NULL REFERENCES patient(id), " 
 			        + "severity TEXT NOT NULL, " + "PRIMARY KEY (illnessId, patientId));";
 			s.executeUpdate(table8);
+			
 			String table9 = "CREATE TABLE doctorTreats (illnessId INTEGER NOT NULL REFERENCES illness(id), " + "doctorId INTEGER NOT NULL REFERENCES doctor(id)," +
 			        "PRIMARY KEY (illnessId, doctorId));";
 			s.executeUpdate(table9);
+			
 			s.close();
 		} catch (SQLException e) {
 			// Check if the exception is because the tables already exist
