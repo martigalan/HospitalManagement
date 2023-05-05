@@ -1,6 +1,7 @@
 package hospital.db.pojos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -38,18 +39,27 @@ public class Hospital implements Serializable{
 	}
 	public Hospital() { //default hospital
 		super();
+		this.patients = new ArrayList<Patient>();
+		this.doctors = new ArrayList<Doctor>();
+		this.machines = new ArrayList<Machine>();
 		this.id=0;
 		this.name = "main";
 		this.location = "main";
 	}
 	public Hospital(String name, String location) {
 		super();
+		this.patients = new ArrayList<Patient>();
+		this.doctors = new ArrayList<Doctor>();
+		this.machines = new ArrayList<Machine>();
 		this.name = name;
 		this.location = location;
 	}
 
 	public Hospital(int id, String name, String location) {
 		super();
+		this.patients = new ArrayList<Patient>();
+		this.doctors = new ArrayList<Doctor>();
+		this.machines = new ArrayList<Machine>();
 		this.id = id;
 		this.name = name;
 		this.location = location;

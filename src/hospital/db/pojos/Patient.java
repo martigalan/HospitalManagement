@@ -2,6 +2,7 @@ package hospital.db.pojos;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -54,6 +55,7 @@ public class Patient implements Serializable{
 	
 	public Patient() {
 		super();
+		this.illness = new ArrayList<Has>();
 		// TODO Auto-generated constructor stub
 	}
 
