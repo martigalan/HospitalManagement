@@ -147,11 +147,7 @@ public class ConnectionManager {
 			illnessM.insertIllness(il5);
 			
 			patientM = new JPAPatientManager();
-			
-			String table7 = "CREATE TABLE treats (machineId INTEGER NOT NULL REFERENCES machine(id), " + "illnessId INTEGER NOT NULL REFERENCES illness(id), " 
-			        + "successRate TEXT NOT NULL, " + "PRIMARY KEY (machineId, illnessId));";
-			s.executeUpdate(table7);
-			
+						
 			String insertTable71 = "INSERT INTO treats (machine_id, illness_id, success_rate) VALUES (1, 1, 98%)";
 			s.executeUpdate(insertTable71);
 			String insertTable72 = "INSERT INTO treats (machine_id, illness_id, success_rate) VALUES (2, 2, 100%)";
@@ -162,14 +158,6 @@ public class ConnectionManager {
 			s.executeUpdate(insertTable74);
 			String insertTable75 = "INSERT INTO treats (machine_id, illness_id, success_rate) VALUES (5, 5, 100%)";
 			s.executeUpdate(insertTable75);
-	
-			String table8 = "CREATE TABLE hasIllness (illnessId INTEGER NOT NULL REFERENCES illness(id), " + "patientId INTEGER NOT NULL REFERENCES patient(id), " 
-			        + "severity TEXT NOT NULL, " + "PRIMARY KEY (illnessId, patientId));";
-			s.executeUpdate(table8);
-						
-			String table9 = "CREATE TABLE doctorTreats (illnessId INTEGER NOT NULL REFERENCES illness(id), " + "doctorId INTEGER NOT NULL REFERENCES doctor(id)," +
-			        "PRIMARY KEY (illnessId, doctorId));";
-			s.executeUpdate(table9);
 			
 			String insertTable91 = "INSERT INTO doctorTreats (illness_id, doctor_id) VALUES (1, 3)";
 			s.executeUpdate(insertTable91);
