@@ -1,5 +1,6 @@
 package hospital.db.pojos;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -57,6 +58,7 @@ public class Machine implements Serializable {
 		this.id = id;
 		this.name = name;
 		this.hospital = hospital;
+		this.treats = new ArrayList();
 	}
 
 	public Integer getId() {

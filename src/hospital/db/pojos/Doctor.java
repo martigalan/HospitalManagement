@@ -2,6 +2,7 @@ package hospital.db.pojos;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -63,6 +64,7 @@ public class Doctor implements Serializable {
 		this.speciality = speciality;
 		this.salary = salary;
 		this.hospital = hospital;
+		this.treatsIllness = new ArrayList();
 	}
 	
 	public Doctor() {
