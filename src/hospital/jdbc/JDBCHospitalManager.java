@@ -30,6 +30,12 @@ public class JDBCHospitalManager implements HospitalManager {
 			p.setString(2, h.getLocation());
 			p.executeUpdate();
 			p.close();
+			String query = "SELECT last_insert_rowid() AS lastId";
+			PreparedStatement p2 = c.prepareStatement(query);
+			ResultSet rs = p2.executeQuery();
+			Integer lastId = rs.getInt("lastId");
+			h.setId(lastId);
+			p2.close();
 		} catch (SQLException e) {
 			System.out.println("Database error.");
 			e.printStackTrace();

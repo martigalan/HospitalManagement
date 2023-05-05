@@ -58,7 +58,7 @@ public class JPADoctorManager implements DoctorManager {
 	@Override
 	public void insertDoctor(Doctor doctor) {
 		em.getTransaction().begin();
-		em.persist(doctor);
+		em.merge(doctor);
 		em.getTransaction().commit();
 	}
 
