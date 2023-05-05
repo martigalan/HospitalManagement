@@ -15,7 +15,6 @@ import hospital.db.pojos.Doctor;
 import hospital.db.pojos.Hospital;
 import hospital.db.pojos.Illness;
 import hospital.db.pojos.Machine;
-import hospital.db.pojos.Treats;
 import hospital.jpa.JPADoctorManager;
 import hospital.jpa.JPAPatientManager;
 
@@ -46,14 +45,36 @@ public class ConnectionManager {
 			
 			
 			Statement s = c.createStatement();
+			
 			String table = "CREATE TABLE hospital (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL,"
 					+ " location TEXT NOT NULL);";
 			s.executeUpdate(table);
+			String table2 = "CREATE TABLE doctor (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL," 
+					+ " surname TEXT NOT NULL," + " dob DATE NOT NULL," + " speciality TEXT NOT NULL," + " salary INTEGER, password TEXT, username TEXT,"
+					+ " hospitalId INTEGER NOT NULL REFERENCES hospital(id));";
+			s.executeUpdate(table2);
+			String table3 = "CREATE TABLE machine (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL,"
+					+ " hospitalId INTEGER NOT NULL REFERENCES hospital(id));";
+			s.executeUpdate(table3);
+			String table5 = "CREATE TABLE illness (id INTEGER PRIMARY KEY AUTOINCREMENT," + " condition TEXT NOT NULL);";
+			s.executeUpdate(table5);
+			String table6 = "CREATE TABLE patient (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL," 
+					+ " surname TEXT NOT NULL," + " dob DATE NOT NULL," + " hospitalId INTEGER NOT NULL REFERENCES hospital(id),"
+					+ " photo BLOB);";
+			s.executeUpdate(table6);
+			String table7 = "CREATE TABLE treats (machineId INTEGER NOT NULL REFERENCES machine(id), " + "illnessId INTEGER NOT NULL REFERENCES illness(id), " 
+			        + "successRate TEXT NOT NULL, " + "PRIMARY KEY (machineId, illnessId));";
+			s.executeUpdate(table7);
+			String table8 = "CREATE TABLE hasIllness (illnessId INTEGER NOT NULL REFERENCES illness(id), " + "patientId INTEGER NOT NULL REFERENCES patient(id), " 
+			        + "severity TEXT NOT NULL, " + "PRIMARY KEY (illnessId, patientId));";
+			s.executeUpdate(table8);
+			String table9 = "CREATE TABLE doctorTreats (illnessId INTEGER NOT NULL REFERENCES illness(id), " + "doctorId INTEGER NOT NULL REFERENCES doctor(id)," +
+			        "PRIMARY KEY (illnessId, doctorId));";
+			s.executeUpdate(table9);
 			
 			hospitalM = new JDBCHospitalManager(this.getConnection());
 
 			
-			Hospital mainH = new Hospital(1, "main", "main");
 			Hospital hosp2 = new Hospital("Hospital Universitario Fundacion Jimenez Diaz",
 					"Av. Reyes Catolicos 2, Madrid");
 			Hospital hosp3 = new Hospital("Centro Medico Teknon",
@@ -64,17 +85,16 @@ public class ConnectionManager {
 					"Av. de Fernando Abril Martorell 106, Valencia");
 			Hospital hosp6 = new Hospital("Hospital Infantil Universitario Nino Jesus",
 					"Av. Menendez Pelayo 65, Madrid");
-			hospitalM.insertHospital(mainH);
+			
 			hospitalM.insertHospital(hosp2);
 			hospitalM.insertHospital(hosp3);
 			hospitalM.insertHospital(hosp4);
 			hospitalM.insertHospital(hosp5);
 			hospitalM.insertHospital(hosp6);
 			
-			String table2 = "CREATE TABLE doctor (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL," 
-					+ " surname TEXT NOT NULL," + " dob DATE NOT NULL," + " speciality TEXT NOT NULL," + " salary INTEGER, password TEXT, username TEXT,"
-					+ " hospitalId INTEGER NOT NULL REFERENCES hospital(id));";
-			s.executeUpdate(table2);
+			
+			
+			doctorM = new JPADoctorManager();
 			
 			Doctor doc1 = new Doctor("John", "Beckett", new Date(1975-06-05), 
 					"Endocrininologist", 55000.00, hosp4); 
@@ -89,8 +109,6 @@ public class ConnectionManager {
 			Doctor doc6 = new Doctor("Samantha", "Wilson", new Date(1975-06-05), 
 					"Haematologist", 55000.00, hosp4); 
 			
-			doctorM = new JPADoctorManager();
-			
 			doctorM.insertDoctor(doc1);
 			doctorM.insertDoctor(doc2);
 			doctorM.insertDoctor(doc3);
@@ -98,9 +116,8 @@ public class ConnectionManager {
 			doctorM.insertDoctor(doc5);
 			doctorM.insertDoctor(doc6);
 			
-			String table3 = "CREATE TABLE machine (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL,"
-					+ " hospitalId INTEGER NOT NULL REFERENCES hospital(id));";
-			s.executeUpdate(table3);
+			
+			machineM = new JDBCMachineManager(this.getConnection());
 			
 			Machine m1 = new Machine("Microsurgery", hosp3);
 			Machine m2 = new Machine("SGL2 Inhibitors/Budesonide", hosp5);
@@ -108,17 +125,14 @@ public class ConnectionManager {
 			Machine m4 = new Machine("Abecma", hosp6);
 			Machine m5 = new Machine("Enzyme replacement therapy", hosp2);
 			
-			machineM = new JDBCMachineManager(this.getConnection());
-			
 			machineM.insertMachine(m1);
 			machineM.insertMachine(m2);
 			machineM.insertMachine(m3);
 			machineM.insertMachine(m4);
 			machineM.insertMachine(m5);
 
-			String table5 = "CREATE TABLE illness (id INTEGER PRIMARY KEY AUTOINCREMENT," + " condition TEXT NOT NULL," 
-					+ " doctorId INTEGER NOT NULL REFERENCES hospital(id));";
-			s.executeUpdate(table5);
+			
+			illnessM = new JDBCIllnessManager(this.getConnection());
 			
 			Illness il1 = new Illness("Acoustic Neuroma");
 			Illness il2 = new Illness("IgA Nephropahy");
@@ -126,18 +140,12 @@ public class ConnectionManager {
 			Illness il4 = new Illness("Multiple Myeloma");
 			Illness il5 = new Illness("Sanfilippo Syndrome");
 			
-			illnessM = new JDBCIllnessManager(this.getConnection());
-			
 			illnessM.insertIllness(il1);
 			illnessM.insertIllness(il2);
 			illnessM.insertIllness(il3);
 			illnessM.insertIllness(il4);
 			illnessM.insertIllness(il5);
 			
-			String table6 = "CREATE TABLE patient (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL," 
-					+ " surname TEXT NOT NULL," + " dob DATE NOT NULL," + " hospitalId NOT NULL INTEGER REFERENCES hospital(id),"
-					+ " photo BLOB);";
-			s.executeUpdate(table6);
 			patientM = new JPAPatientManager();
 			
 			String table7 = "CREATE TABLE treats (machineId INTEGER NOT NULL REFERENCES machine(id), " + "illnessId INTEGER NOT NULL REFERENCES illness(id), " 
@@ -178,6 +186,7 @@ public class ConnectionManager {
 		} catch (SQLException e) {
 			// Check if the exception is because the tables already exist
 			if (e.getMessage().contains("already exist")) {
+				System.out.println("Tables already created.");
 				return;
 			}
 			System.out.println("Database error.");

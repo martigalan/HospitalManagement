@@ -3,6 +3,7 @@ package hospital.jpa;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
@@ -27,13 +28,18 @@ EntityManager em;
 	
 	@Override
 	public Has getHas(int pId, int iId){
-		Has h = null;
-		em.getTransaction().begin();
-		Query q = em.createNativeQuery("SELECT * FROM hasIllness WHERE patientId = ? AND illnessId = ?", Has.class);
-		q.setParameter(1, pId);
-		q.setParameter(2, iId);
-		h = (Has) q.getResultList();
-		return h;
+		try {
+			Has h = null;
+			em.getTransaction().begin();
+			Query q = em.createNativeQuery("SELECT * FROM hasIllness WHERE patientId = ? AND illnessId = ?", Has.class);
+			q.setParameter(1, pId);
+			q.setParameter(2, iId);
+			h = (Has) q.getSingleResult();
+			return h;
+		}catch(NoResultException e) {
+			return null;
+		}
+
 	}
 	
 	@Override
