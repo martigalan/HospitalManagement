@@ -9,8 +9,10 @@ import java.util.Scanner;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.sql.Date;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.sql.Blob;
 import java.io.IOException;
 import java.io.InputStream;
@@ -99,10 +101,17 @@ public class Menu {
 		String name = sc.nextLine();
 		System.out.println("Surname:");
 		String surname = sc.nextLine();
-		System.out.println("Date of birth (yyyy-MM-dd):");
-		String dob = sc.nextLine();
-		LocalDate dobLocalDate = LocalDate.parse(dob); // java.time.LocalDate
-		Date dobDate = Date.valueOf(dobLocalDate);
+		try {
+			System.out.println("Date of birth (yyyy-MM-dd):");
+			String dob = sc.nextLine();
+			LocalDate dobLocalDate = LocalDate.parse(dob); // java.time.LocalDate
+			Date dobDate = Date.valueOf(dobLocalDate);
+		} catch (DateTimeParseException d) {
+			System.out.println("Put the date of birth in the correct format: (yyyy-MM-dd)");
+			String dob = sc.nextLine();
+			LocalDate dobLocalDate = LocalDate.parse(dob); // java.time.LocalDate
+			Date dobDate = Date.valueOf(dobLocalDate);
+		}
 		// System.out.println("Photo:");
 		// byte[] photo = sc.nextByte();
 		System.out.print("Type the file name as it appears in folder /photos, including extension: ");
