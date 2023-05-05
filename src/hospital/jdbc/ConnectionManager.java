@@ -15,6 +15,7 @@ import hospital.db.pojos.Doctor;
 import hospital.db.pojos.Hospital;
 import hospital.db.pojos.Illness;
 import hospital.db.pojos.Machine;
+import hospital.db.pojos.Treats;
 import hospital.jpa.JPADoctorManager;
 import hospital.jpa.JPAPatientManager;
 
@@ -143,13 +144,36 @@ public class ConnectionManager {
 			        + "successRate TEXT NOT NULL, " + "PRIMARY KEY (machineId, illnessId));";
 			s.executeUpdate(table7);
 			
+			String insertTable71 = "INSERT INTO treats (machine_id, illness_id, success_rate) VALUES (1, 1, 98%)";
+			s.executeUpdate(insertTable71);
+			String insertTable72 = "INSERT INTO treats (machine_id, illness_id, success_rate) VALUES (2, 2, 100%)";
+			s.executeUpdate(insertTable72);
+			String insertTable73 = "INSERT INTO treats (machine_id, illness_id, success_rate) VALUES (3, 3, 90%)";
+			s.executeUpdate(insertTable73);
+			String insertTable74 = "INSERT INTO treats (machine_id, illness_id, success_rate) VALUES (4, 4, 99%)";
+			s.executeUpdate(insertTable74);
+			String insertTable75 = "INSERT INTO treats (machine_id, illness_id, success_rate) VALUES (5, 5, 100%)";
+			s.executeUpdate(insertTable75);
+	
 			String table8 = "CREATE TABLE hasIllness (illnessId INTEGER NOT NULL REFERENCES illness(id), " + "patientId INTEGER NOT NULL REFERENCES patient(id), " 
 			        + "severity TEXT NOT NULL, " + "PRIMARY KEY (illnessId, patientId));";
 			s.executeUpdate(table8);
-			
+						
 			String table9 = "CREATE TABLE doctorTreats (illnessId INTEGER NOT NULL REFERENCES illness(id), " + "doctorId INTEGER NOT NULL REFERENCES doctor(id)," +
 			        "PRIMARY KEY (illnessId, doctorId));";
 			s.executeUpdate(table9);
+			
+			String insertTable91 = "INSERT INTO doctorTreats (illness_id, doctor_id) VALUES (1, 3)";
+			s.executeUpdate(insertTable91);
+			String insertTable92 = "INSERT INTO doctorTreats (illness_id, doctor_id) VALUES (3, 3)";
+			s.executeUpdate(insertTable92);
+			String insertTable93 = "INSERT INTO doctorTreats (illness_id, doctor_id) VALUES (2, 2)";
+			s.executeUpdate(insertTable93);
+			String insertTable94 = "INSERT INTO doctorTreats (illness_id, doctor_id) VALUES (4, 6)";
+			s.executeUpdate(insertTable94);
+			String insertTable95 = "INSERT INTO doctorTreats (illness_id, doctor_id) VALUES (5, 4)";
+			s.executeUpdate(insertTable95);
+									
 			s.close();
 		} catch (SQLException e) {
 			// Check if the exception is because the tables already exist
