@@ -4,6 +4,11 @@ import java.io.File;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import hospital.db.ifaces.XMLManager;
 import hospital.db.pojos.Patient;
@@ -25,16 +30,23 @@ public class XMLManagerImp implements XMLManager {
 			e.printStackTrace();
 		}
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public Patient xml2Patient(File xml) {
-		// TODO Auto-generated method stub
-		
-		
-
-		return null;
+		Patient patient = null;
+		try {
+			JAXBContext jaxbContext = JAXBContext.newInstance(Patient.class);
+			// Get the unmarshaller
+			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+	
+			// Use the Unmarshaller to unmarshal the XML document from a file
+			File file = new File("./xmls/External-Report.xml");
+			patient = (Patient) unmarshaller.unmarshal(file);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return patient;
 	}
 
 	@Override
@@ -42,6 +54,17 @@ public class XMLManagerImp implements XMLManager {
 		// TODO Auto-generated method stub
 		
 
+	}
+	
+	//xml2html
+	public void simpleTransform(String sourcePath, String xsltPath,String resultDir) {
+		TransformerFactory tFactory = TransformerFactory.newInstance();
+		try {
+			Transformer transformer = tFactory.newTransformer(new StreamSource(new File(xsltPath)));
+			transformer.transform(new StreamSource(new File(sourcePath)),new StreamResult(new File(resultDir)));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -9,8 +9,10 @@ import java.util.Scanner;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.sql.Date;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.sql.Blob;
 import java.io.IOException;
 import java.io.InputStream;
@@ -99,19 +101,27 @@ public class Menu {
 		String name = sc.nextLine();
 		System.out.println("Surname:");
 		String surname = sc.nextLine();
-		System.out.println("Date of birth (yyyy-MM-dd):");
-		String dob = sc.nextLine();
-		LocalDate dobLocalDate = LocalDate.parse(dob); // java.time.LocalDate
-		Date dobDate = Date.valueOf(dobLocalDate);
+		Date dobDate = null;
+		try {
+			System.out.println("Date of birth (yyyy-MM-dd):");
+			String dob = sc.nextLine();
+			LocalDate dobLocalDate = LocalDate.parse(dob); // java.time.LocalDate
+			dobDate = Date.valueOf(dobLocalDate);
+		} catch (DateTimeParseException d) {
+			System.out.println("Put the date of birth in the correct format: (yyyy-MM-dd)");
+			String dob = sc.nextLine();
+			LocalDate dobLocalDate = LocalDate.parse(dob); // java.time.LocalDate
+			dobDate = Date.valueOf(dobLocalDate);
+		}
 		// System.out.println("Photo:");
 		// byte[] photo = sc.nextByte();
-		System.out.print("Type the file name as it appears in folder /photos, including extension: ");
+		/*System.out.print("Type the file name as it appears in folder /photos, including extension: ");
 		String fileName = sc.nextLine();
 		File photos = new File("./photos/" + fileName);
 		InputStream streamBlob = new FileInputStream(photos);
 		byte[] photo = new byte[streamBlob.available()];
 		streamBlob.readAllBytes();
-		streamBlob.close();
+		streamBlob.close();*/
 		// TODO add photo in SQLinsert
 		/*List<Hospital> possibleH = hospitalM.searchByName("Hospital Universitario Fundación Jimenez Díaz");
 		Integer hospId = null;
@@ -122,7 +132,7 @@ public class Menu {
 		Hospital mainHospital = hospitalM.getHospital(hospId);*/
 		
 		Hospital mainHospital = hospitalM.search1ByName("Hospital Universitario Fundación Jimenez Díaz");
-		
+		byte[] photo = null;
 
 		Patient p = new Patient(name, surname, dobDate, mainHospital, photo);
 		patientM.insertPatient(p);
