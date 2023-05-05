@@ -61,7 +61,7 @@ public class JDBCHospitalManager implements HospitalManager {
 		try {
 			String sql = "SELECT * FROM hospital WHERE name = ?";
 			PreparedStatement p = c.prepareStatement(sql);
-			p.setString(0, "%" + name + "%");
+			p.setString(1, "%" + name + "%");
 			ResultSet rs = p.executeQuery();
 
 			while (rs.next()) {
@@ -77,6 +77,32 @@ public class JDBCHospitalManager implements HospitalManager {
 		}
 
 		return list;
+	}
+	
+	@Override
+	public Hospital search1ByName(String name) {
+
+		Hospital h = new Hospital();
+		try {
+			String sql = "SELECT * FROM hospital WHERE name = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setString(1, "%" + name + "%");
+			ResultSet rs = p.executeQuery();
+
+			while (rs.next()) {
+				Integer id = rs.getInt("id");
+				String name_hosp = rs.getString("name");
+				String location = rs.getString("location");
+				h.setId(id);
+				h.setName(name_hosp);
+				h.setLocation(location);
+			}
+		} catch (SQLException e) {
+			System.out.println("Database error");
+			e.printStackTrace();
+		}
+
+		return h;
 	}
 
 	@Override

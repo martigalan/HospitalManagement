@@ -20,8 +20,8 @@ import hospital.jpa.JPAPatientManager;
 
 public class ConnectionManager {
 	
-	Connection c;
-	private static PatientManager patientM; // es la interfaz q queda por añadir, hay q importarla una vez creada
+	private Connection c;
+	private static PatientManager patientM;
 	private static DoctorManager doctorM;
 	private static HospitalManager hospitalM;
 	private static IllnessManager illnessM;
@@ -72,7 +72,7 @@ public class ConnectionManager {
 			hospitalM.insertHospital(hosp6);
 			
 			String table2 = "CREATE TABLE doctor (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL," 
-					+ " surname TEXT NOT NULL," + " dob DATE NOT NULL," + " speciality TEXT NOT NULL," 
+					+ " surname TEXT NOT NULL," + " dob DATE NOT NULL," + " speciality TEXT NOT NULL," + " salary INTEGER, password TEXT, username TEXT,"
 					+ " hospitalId INTEGER NOT NULL REFERENCES hospital(id));";
 			s.executeUpdate(table2);
 			
@@ -98,6 +98,7 @@ public class ConnectionManager {
 			String table3 = "CREATE TABLE machine (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL,"
 					+ " hospitalId INTEGER NOT NULL REFERENCES hospital(id));";
 			s.executeUpdate(table3);
+			
 			Machine m1 = new Machine("Microsurgery", hosp3);
 			Machine m2 = new Machine("SGL2 Inhibitors/Budesonide", hosp5);
 			Machine m3 = new Machine("Tirzepatide", hosp4);
@@ -134,9 +135,11 @@ public class ConnectionManager {
 			String table7 = "CREATE TABLE treats (machineId INTEGER NOT NULL REFERENCES machine(id), " + "illnessId INTEGER NOT NULL REFERENCES illness(id), " 
 			        + "successRate TEXT NOT NULL, " + "PRIMARY KEY (machineId, illnessId));";
 			s.executeUpdate(table7);
+			
 			String table8 = "CREATE TABLE hasIllness (illnessId INTEGER NOT NULL REFERENCES illness(id), " + "patientId INTEGER NOT NULL REFERENCES patient(id), " 
 			        + "severity TEXT NOT NULL, " + "PRIMARY KEY (illnessId, patientId));";
 			s.executeUpdate(table8);
+			
 			String table9 = "CREATE TABLE doctorTreats (illnessId INTEGER NOT NULL REFERENCES illness(id), " + "doctorId INTEGER NOT NULL REFERENCES doctor(id)," +
 			        "PRIMARY KEY (illnessId, doctorId));";
 			s.executeUpdate(table9);

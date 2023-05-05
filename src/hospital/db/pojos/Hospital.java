@@ -27,7 +27,15 @@ public class Hospital implements Serializable{
 	private List<Patient> patients;	
 	@OneToMany(mappedBy= "hospital")
 	private List<Doctor> doctors;
+	@OneToMany (mappedBy="hospital")
+	private List<Machine> machines;
 	
+	public List<Machine> getMachines() {
+		return machines;
+	}
+	public void setMachines(List<Machine> machines) {
+		this.machines = machines;
+	}
 	public Hospital() { //default hospital
 		super();
 		this.id=0;

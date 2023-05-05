@@ -27,7 +27,7 @@ public class Menu {
 
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-	private static PatientManager patientM; // es la interfaz q queda por añadir, hay q importarla una vez creada
+	private static PatientManager patientM;
 	private static DoctorManager doctorM;
 	private static HospitalManager hospitalM;
 	private static ConnectionManager connectionManager;
@@ -113,12 +113,16 @@ public class Menu {
 		streamBlob.readAllBytes();
 		streamBlob.close();
 		// TODO add photo in SQLinsert
-		List<Hospital> possibleH = hospitalM.searchByName("Hospital Universitario Fundación Jimenez Díaz");
+		/*List<Hospital> possibleH = hospitalM.searchByName("Hospital Universitario Fundación Jimenez Díaz");
 		Integer hospId = null;
-		for(Hospital hospital :possibleH) {
+		for(Hospital hospital : possibleH) {
 			hospId = hospital.getId();
+			break;
 		}
-		Hospital mainHospital = hospitalM.getHospital(hospId);
+		Hospital mainHospital = hospitalM.getHospital(hospId);*/
+		
+		Hospital mainHospital = hospitalM.search1ByName("Hospital Universitario Fundación Jimenez Díaz");
+		
 
 		Patient p = new Patient(name, surname, dobDate, mainHospital, photo);
 		patientM.insertPatient(p);

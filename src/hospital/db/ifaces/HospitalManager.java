@@ -9,4 +9,5 @@ public interface HospitalManager {
 	public List<Hospital> searchByName(String name);
 	public Hospital getHospital(Integer hospitalId);
 	public List<Hospital> getHospitals();
+	public Hospital search1ByName(String name);
 }
