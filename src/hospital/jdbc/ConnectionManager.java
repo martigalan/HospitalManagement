@@ -42,16 +42,15 @@ public class ConnectionManager {
 	
 	private void createTables() {
 		try {
-			patientM = new JPAPatientManager();
-			doctorM = new JPADoctorManager();
-			hospitalM = new JDBCHospitalManager(this.getConnection());
-			illnessM = new JDBCIllnessManager(this.getConnection());
-			machineM = new JDBCMachineManager(this.getConnection());
+			
 			
 			Statement s = c.createStatement();
 			String table = "CREATE TABLE hospital (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL,"
 					+ " location TEXT NOT NULL);";
 			s.executeUpdate(table);
+			
+			hospitalM = new JDBCHospitalManager(this.getConnection());
+
 			
 			Hospital mainH = new Hospital(1, "main", "main");
 			Hospital hosp2 = new Hospital("Hospital Universitario Fundacion Jimenez Diaz",
@@ -88,6 +87,9 @@ public class ConnectionManager {
 					"Neurologist", 55000.00, hosp2); 
 			Doctor doc6 = new Doctor("Samantha", "Wilson", new Date(1975-06-05), 
 					"Haematologist", 55000.00, hosp4); 
+			
+			doctorM = new JPADoctorManager();
+			
 			doctorM.insertDoctor(doc1);
 			doctorM.insertDoctor(doc2);
 			doctorM.insertDoctor(doc3);
@@ -104,6 +106,9 @@ public class ConnectionManager {
 			Machine m3 = new Machine("Tirzepatide", hosp4);
 			Machine m4 = new Machine("Abecma", hosp6);
 			Machine m5 = new Machine("Enzyme replacement therapy", hosp2);
+			
+			machineM = new JDBCMachineManager(this.getConnection());
+			
 			machineM.insertMachine(m1);
 			machineM.insertMachine(m2);
 			machineM.insertMachine(m3);
@@ -119,6 +124,9 @@ public class ConnectionManager {
 			Illness il3 = new Illness("Wolfram Syndrome");
 			Illness il4 = new Illness("Multiple Myeloma");
 			Illness il5 = new Illness("Sanfilippo Syndrome");
+			
+			illnessM = new JDBCIllnessManager(this.getConnection());
+			
 			illnessM.insertIllness(il1);
 			illnessM.insertIllness(il2);
 			illnessM.insertIllness(il3);
@@ -129,8 +137,7 @@ public class ConnectionManager {
 					+ " surname TEXT NOT NULL," + " dob DATE NOT NULL," + " hospitalId NOT NULL INTEGER REFERENCES hospital(id),"
 					+ " photo BLOB);";
 			s.executeUpdate(table6);
-			
-			
+			patientM = new JPAPatientManager();
 			
 			String table7 = "CREATE TABLE treats (machineId INTEGER NOT NULL REFERENCES machine(id), " + "illnessId INTEGER NOT NULL REFERENCES illness(id), " 
 			        + "successRate TEXT NOT NULL, " + "PRIMARY KEY (machineId, illnessId));";

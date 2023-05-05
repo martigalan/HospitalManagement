@@ -39,11 +39,11 @@ public class Menu {
 	public static void main(String[] args) {
 		try {
 			connectionManager = new ConnectionManager();
-			patientM = new JPAPatientManager();
-			doctorM = new JPADoctorManager();
 			hospitalM = new JDBCHospitalManager(connectionManager.getConnection());
 			illnessM = new JDBCIllnessManager(connectionManager.getConnection());
 			machineM = new JDBCMachineManager(connectionManager.getConnection());
+			patientM = new JPAPatientManager();
+			doctorM = new JPADoctorManager();
 			hasM = new JPAHas();
 			// TODO Auto-generated method stub
 
