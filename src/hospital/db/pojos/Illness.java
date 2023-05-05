@@ -1,5 +1,6 @@
 package hospital.db.pojos;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -35,18 +36,18 @@ public class Illness implements Serializable {
 	public Illness(String condition) {
 		super();
 		this.condition = condition;
-		//this.machines = new ArrayList();
-		//this.dosctors = new ArrayList();
-		//this.machines = new ArrayList();
+		this.machines = new ArrayList();
+		this.doctors = new ArrayList();
+		this.machines = new ArrayList();
 	}
 	
 	public Illness(Integer id, String condition) {
 		super();
 		this.id = id;
 		this.condition = condition;
-		//this.machines = new ArrayList();
-		//this.dosctors = new ArrayList();
-		//this.machines = new ArrayList();
+		this.machines = new ArrayList();
+		this.doctors = new ArrayList();
+		this.machines = new ArrayList();
 	}
 
 	public Integer getId() {
