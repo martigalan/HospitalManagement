@@ -22,10 +22,6 @@ public class JDBCMachineManager implements MachineManager {
 
 	public JDBCMachineManager(Connection c) {
 		this.c = c;
-		if (this.getMachines().isEmpty()) {
-			//Machine m1 = new Machine("") set parameters and repeat with each machine
-			//connections between tables (hospital)
-		}
 	}
 
 	@Override

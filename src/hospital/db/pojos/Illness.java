@@ -25,6 +25,9 @@ public class Illness implements Serializable {
 	@ManyToMany(mappedBy = "treatsIllness")
 	private List<Doctor> doctors;
 	
+	@ManyToMany(mappedBy = "treats")
+	private List<Machine> machines;
+	
 	public Illness() {
 		super();
 	}

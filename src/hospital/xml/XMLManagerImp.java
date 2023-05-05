@@ -31,12 +31,16 @@ public class XMLManagerImp implements XMLManager {
 	@Override
 	public Patient xml2Patient(File xml) {
 		// TODO Auto-generated method stub
+		
+		
+
 		return null;
 	}
 
 	@Override
 	public void patient2Html(Patient p) {
 		// TODO Auto-generated method stub
+		
 
 	}
 
