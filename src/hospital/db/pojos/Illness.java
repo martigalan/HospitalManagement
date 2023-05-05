@@ -39,6 +39,7 @@ public class Illness implements Serializable {
 	
 	public Illness(Integer id, String condition) {
 		super();
+		this.id = id;
 		this.condition = condition;
 	}
 
