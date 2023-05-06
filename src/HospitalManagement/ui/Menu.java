@@ -47,49 +47,57 @@ public class Menu {
 			patientM = new JPAPatientManager();
 			doctorM = new JPADoctorManager();
 			hasM = new JPAHas();
-			// TODO Auto-generated method stub
 
-			System.out.println("HI");
-			System.out.println("Choose an option, please:");
-			System.out.println("-1. Register a new Patient");
-			System.out.println("-2. Select a patient data"); ////////////////
-			System.out.println("-3. Select doctor data"); /////////
-			System.out.println("-4. Search for a hospital"); // TODO ONLY GIVES INFO ABOUT HOSPITALS
-			System.out.println("-0. Exit");
+			boolean control = true;
+			while (control = true) {
+				System.out.println("HI");
+				System.out.println("Choose an option, please:");
+				System.out.println("-1. Register a new Patient");
+				System.out.println("-2. Select a patient data"); ////////////////
+				System.out.println("-3. Select doctor data"); /////////
+				System.out.println("-4. Search for a hospital"); // TODO ONLY GIVES INFO ABOUT HOSPITALS
+				System.out.println("-0. Exit");
 
-			Scanner sc = new Scanner(System.in);
-			int choice = sc.nextInt();
-			switch (choice) {
-			case 1: {
-				registerPatient();
-				break;
-			}
-			case 2: {
-				selectPatient();
-				break;
-			}
-			case 3: {
-				selectDoctor();
-				break;
-			}
+				Scanner sc = new Scanner(System.in);
+				int choice = sc.nextInt();
+				switch (choice) {
+				case 1: {
+					registerPatient();
+					break;
+				}
+				case 2: {
+					selectPatient();
+					break;
+				}
+				case 3: {
+					selectDoctor();
+					break;
+				}
 
-			case 4: {
-				// searchHospital();
-				break;
-			}
-			case 0: {
-				return;
-			}
-			default:
-				throw new IllegalArgumentException("Unexpected value: " + choice);
+				case 4: {
+					showHospitals();
+					break;
+				}
+				case 0: {
+					control = false;
+				}
+				default:
+					throw new IllegalArgumentException("Unexpected value: " + choice);
+				}
 			}
 
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+
+	}
+
+	private static void showHospitals() {
+		List<Hospital> allHospitals = hospitalM.getHospitals();
+		for (Hospital h : allHospitals) {
+			System.out.println(h);
 		}
 
 	}
@@ -115,30 +123,24 @@ public class Menu {
 		}
 		// System.out.println("Photo:");
 		// byte[] photo = sc.nextByte();
-		/*System.out.print("Type the file name as it appears in folder /photos, including extension: ");
-		String fileName = sc.nextLine();
-		File photos = new File("./photos/" + fileName);
-		InputStream streamBlob = new FileInputStream(photos);
-		byte[] photo = new byte[streamBlob.available()];
-		streamBlob.readAllBytes();
-		streamBlob.close();*/
+		/*
+		 * System.out.
+		 * print("Type the file name as it appears in folder /photos, including extension: "
+		 * ); String fileName = sc.nextLine(); File photos = new File("./photos/" +
+		 * fileName); InputStream streamBlob = new FileInputStream(photos); byte[] photo
+		 * = new byte[streamBlob.available()]; streamBlob.readAllBytes();
+		 * streamBlob.close();
+		 */
 		// TODO add photo in SQLinsert
-		/*List<Hospital> possibleH = hospitalM.searchByName("Hospital Universitario Fundación Jimenez Díaz");
-		Integer hospId = null;
-		for(Hospital hospital : possibleH) {
-			hospId = hospital.getId();
-			break;
-		}
-		Hospital mainHospital = hospitalM.getHospital(hospId);*/
-		
+
 		Hospital mainHospital = hospitalM.search1ByName("Hospital Universitario Fundación Jimenez Díaz");
 		byte[] photo = null;
 
 		Patient p = new Patient(name, surname, dobDate, mainHospital, photo);
 		patientM.insertPatient(p);
-		
+
 		lookForIllness(p.getId());
-		
+
 	}
 
 	public static void selectDoctor() throws IOException {
@@ -148,9 +150,8 @@ public class Menu {
 		System.out.println("Introduce the surname:");
 		String snDoc = sc.nextLine();
 		List<Doctor> doctorList = doctorM.searchByName(nameDoc, snDoc);
-		Iterator it = doctorList.iterator();
-		while (it.hasNext()) {
-			System.out.println(((Doctor) it.next()).shortInfo());
+		for (Doctor d : doctorList) {
+			System.out.println(d.shortInfo());
 		}
 		System.out.println("Please choose a doctor, type its Id:");
 		Integer id = sc.nextInt();
@@ -217,7 +218,7 @@ public class Menu {
 	}
 
 	private static void updateIllnessSeverity(Integer id) {
-		//look for Has that has the p and the i needed and only setSeverity()
+		// look for Has that has the p and the i needed and only setSeverity()
 		Scanner sc = new Scanner(System.in);
 		Patient p = patientM.getPatient(id);
 		System.out.println("This patient has the following illnesses: ");
@@ -234,11 +235,11 @@ public class Menu {
 	}
 
 	private static void lookForIllness(Integer id) {
-		//this method shows a list of illnesses and the patient chooses
+		// this method shows a list of illnesses and the patient chooses
 		List<Illness> possibleIllnesses = illnessM.getIllnesses();
 		Patient p = patientM.getPatient(id);
 		System.out.println("Please, choose the ID of the illness the patient has: ");
-		for(Illness i : possibleIllnesses) {
+		for (Illness i : possibleIllnesses) {
 			System.out.println(i);
 		}
 		Scanner sc = new Scanner(System.in);
@@ -360,6 +361,7 @@ public class Menu {
 				}
 				case 3: {
 					removeDoctor(id);
+					break;
 				}
 				case 0: {
 					return;
@@ -386,13 +388,11 @@ public class Menu {
 		if (!name.equals("")) {
 			p.setName(name);
 		}
-		System.out.println("Surame (" + p.getSurname() + "):");
+		System.out.println("Surname (" + p.getSurname() + "):");
 		String surname = sc.nextLine();
 		if (!surname.equals("")) {
 			p.setSurname(surname);
 		}
-
-		// TODO update photo patient
 		doctorM.updateDoctor(p);
 	}
 

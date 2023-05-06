@@ -24,6 +24,30 @@ public class Has implements Serializable{
 
 
 
+	public Integer getPatientId() {
+		return patientId;
+	}
+
+
+
+	public void setPatientId(Integer patientId) {
+		this.patientId = patientId;
+	}
+
+
+
+	public Integer getIllnessId() {
+		return illnessId;
+	}
+
+
+
+	public void setIllnessId(Integer illnessId) {
+		this.illnessId = illnessId;
+	}
+
+
+
 	@ManyToOne
 	@PrimaryKeyJoinColumn(name = "patientId", referencedColumnName = "id")
 	private Patient patient;

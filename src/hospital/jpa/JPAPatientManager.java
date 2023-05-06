@@ -70,12 +70,14 @@ public class JPAPatientManager implements PatientManager {
 		else {
 		    em.getTransaction().begin();
 		    Has has = new Has();
-		    em.persist(has);
 		    has.setIllness(i);
+		    has.setIllnessId(i.getId());
 		    has.setPatient(p);
+		    has.setPatientId(p.getId());
 		    has.setSeverity(severity);
 		    p.getIllness().add(has);
 		    i.getPatients().add(has);
+		    em.persist(has);
 		    em.getTransaction().commit();
 		}
 	}

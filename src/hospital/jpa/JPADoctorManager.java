@@ -46,12 +46,11 @@ public class JPADoctorManager implements DoctorManager {
 
 	@Override
 	public List<Doctor> searchByName(String name, String surname) {
-		List<Doctor> doctors;
+		List<Doctor> doctors = new ArrayList<Doctor>();
 		Query q1 = em.createNativeQuery("SELECT * FROM doctor WHERE name = ? AND surname = ?", Doctor.class);
 		q1.setParameter(1, name);
 		q1.setParameter(2, surname);
 		doctors = (List<Doctor>) q1.getResultList();
-		// Esto está bien? o debo separarlo en 2 queries
 		return doctors;
 	}
 

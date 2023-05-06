@@ -39,6 +39,7 @@ public class Illness implements Serializable {
 		this.machines = new ArrayList();
 		this.doctors = new ArrayList();
 		this.machines = new ArrayList();
+		this.patients = new ArrayList();
 	}
 	
 	public Illness(Integer id, String condition) {
@@ -48,6 +49,7 @@ public class Illness implements Serializable {
 		this.machines = new ArrayList();
 		this.doctors = new ArrayList();
 		this.machines = new ArrayList();
+		this.patients = new ArrayList();
 	}
 
 	public Integer getId() {

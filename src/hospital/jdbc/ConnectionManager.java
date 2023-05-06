@@ -148,26 +148,26 @@ public class ConnectionManager {
 			
 			patientM = new JPAPatientManager();
 						
-			String insertTable71 = "INSERT INTO treats (machine_id, illness_id, success_rate) VALUES (1, 1, 98%);";
+			String insertTable71 = "INSERT INTO treats (machineId, illnessId, successRate) VALUES (1, 1, '98%');";
 			s.executeUpdate(insertTable71);
-			String insertTable72 = "INSERT INTO treats (machine_id, illness_id, success_rate) VALUES (2, 2, 100%);";
+			String insertTable72 = "INSERT INTO treats (machineId, illnessId, successRate) VALUES (2, 2, '100%');";
 			s.executeUpdate(insertTable72);
-			String insertTable73 = "INSERT INTO treats (machine_id, illness_id, success_rate) VALUES (3, 3, 90%);";
+			String insertTable73 = "INSERT INTO treats (machineId, illnessId, successRate) VALUES (3, 3, '90%');";
 			s.executeUpdate(insertTable73);
-			String insertTable74 = "INSERT INTO treats (machine_id, illness_id, success_rate) VALUES (4, 4, 99%);";
+			String insertTable74 = "INSERT INTO treats (machineId, illnessId, successRate) VALUES (4, 4, '99%');";
 			s.executeUpdate(insertTable74);
-			String insertTable75 = "INSERT INTO treats (machine_id, illness_id, success_rate) VALUES (5, 5, 100%);";
+			String insertTable75 = "INSERT INTO treats (machineId, illnessId, successRate) VALUES (5, 5, '100%');";
 			s.executeUpdate(insertTable75);
 			
-			String insertTable91 = "INSERT INTO doctorTreats (illness_id, doctor_id) VALUES (1, 3);";
+			String insertTable91 = "INSERT INTO doctorTreats (illnessId, doctorId) VALUES (1, 3);";
 			s.executeUpdate(insertTable91);
-			String insertTable92 = "INSERT INTO doctorTreats (illness_id, doctor_id) VALUES (3, 3);";
+			String insertTable92 = "INSERT INTO doctorTreats (illnessId, doctorId) VALUES (3, 3);";
 			s.executeUpdate(insertTable92);
-			String insertTable93 = "INSERT INTO doctorTreats (illness_id, doctor_id) VALUES (2, 2);";
+			String insertTable93 = "INSERT INTO doctorTreats (illnessId, doctorId) VALUES (2, 2);";
 			s.executeUpdate(insertTable93);
-			String insertTable94 = "INSERT INTO doctorTreats (illness_id, doctor_id) VALUES (4, 6);";
+			String insertTable94 = "INSERT INTO doctorTreats (illnessId, doctorId) VALUES (4, 6);";
 			s.executeUpdate(insertTable94);
-			String insertTable95 = "INSERT INTO doctorTreats (illness_id, doctor_id) VALUES (5, 4);";
+			String insertTable95 = "INSERT INTO doctorTreats (illnessId, doctorId) VALUES (5, 4);";
 			s.executeUpdate(insertTable95);
 									
 			s.close();
