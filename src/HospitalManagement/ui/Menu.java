@@ -198,9 +198,11 @@ public class Menu {
 				}
 				case 3: {
 					searchHospital(id);
+					break;
 				}
 				case 4: {
 					lookForIllness(id);
+					break;
 				}
 				case 0: {
 					main(null);
