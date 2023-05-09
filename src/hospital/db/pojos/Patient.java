@@ -65,6 +65,8 @@ public class Patient implements Serializable{
 		this.surname = surname;
 		this.dob = dob;
 		this.photo = photo;
+		this.illness = new ArrayList<Has>();
+
 	}
 	
 	public Patient(Integer id, String name, String surname, Date dob, byte[] photo) {
@@ -74,6 +76,8 @@ public class Patient implements Serializable{
 		this.surname = surname;
 		this.dob = dob;
 		this.photo = photo;
+		this.illness = new ArrayList<Has>();
+
 	}
 
 	public Patient(String name, String surname, Date dob, Hospital hospital, byte[] photo) {
@@ -83,6 +87,8 @@ public class Patient implements Serializable{
 		this.dob = dob;
 		this.hospital = hospital;
 		this.photo = photo;
+		this.illness = new ArrayList<Has>();
+
 	}
 	
 	public Integer getId() {

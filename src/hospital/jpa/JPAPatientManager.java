@@ -16,11 +16,6 @@ public class JPAPatientManager implements PatientManager {
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 		em.getTransaction().commit();
-		/*if (this.getPatient.getHospital().isNull()) {
-			Hospital h = new Hospital();
-			this.getPatient().createHospital();
-		}*/
-		//TODO insert info
 	}
 
 	public void close() {
@@ -62,13 +57,12 @@ public class JPAPatientManager implements PatientManager {
 	public void assignIllness(Patient p, Illness i, String severity) {
 		JPAHas hM = new JPAHas();
 		Has h= hM.getHas(p.getId(), i.getId());
+		em.getTransaction().begin();
+		em.flush();
 		if (h != null) {
-			em.getTransaction().begin();
 			h.setSeverity(severity);
-			em.getTransaction().commit();
 		}
 		else {
-		    em.getTransaction().begin();
 		    Has has = new Has();
 		    has.setIllness(i);
 		    has.setIllnessId(i.getId());
@@ -78,8 +72,8 @@ public class JPAPatientManager implements PatientManager {
 		    p.getIllness().add(has);
 		    i.getPatients().add(has);
 		    em.persist(has);
-		    em.getTransaction().commit();
 		}
+		em.getTransaction().commit();
 	}
 
 	@Override

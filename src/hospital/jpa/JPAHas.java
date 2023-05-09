@@ -16,7 +16,7 @@ public class JPAHas implements hasManager{
 EntityManager em;
 	
 	public JPAHas() {
-		em  = Persistence.createEntityManagerFactory("hospital-provider").createEntityManager();
+		em = Persistence.createEntityManagerFactory("hospital-provider").createEntityManager();
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 		em.getTransaction().commit();
@@ -30,7 +30,6 @@ EntityManager em;
 	public Has getHas(int pId, int iId){
 		try {
 			Has h = null;
-			em.getTransaction().begin();
 			Query q = em.createNativeQuery("SELECT * FROM hasIllness WHERE patientId = ? AND illnessId = ?", Has.class);
 			q.setParameter(1, pId);
 			q.setParameter(2, iId);

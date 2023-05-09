@@ -221,19 +221,19 @@ public class Menu {
 
 	private static void updateIllnessSeverity(Integer id) {
 		// look for Has that has the p and the i needed and only setSeverity()
-		Scanner sc = new Scanner(System.in);
-		Patient p = patientM.getPatient(id);
-		System.out.println("This patient has the following illnesses: ");
-		List<Has> illnessesPHas = hasM.getHas(id);
-		for (Has hIllness : illnessesPHas) {
-			System.out.println(hIllness.infoIllness());
-		}
-		System.out.println("Enter the illness that need to be updated: ");
-		Integer illnessId = sc.nextInt();
-		Has hasIllness = hasM.getHas(id, illnessId);
-		System.out.println("Enter the new severity: ");
-		String sev = sc.nextLine();
-		hasIllness.setSeverity(sev);
+//		Scanner sc = new Scanner(System.in);
+//		Patient p = patientM.getPatient(id);
+//		System.out.println("This patient has the following illnesses: ");
+//		List<Has> illnessesPHas = hasM.getHas(id);
+//		for (Has hIllness : illnessesPHas) {
+//			System.out.println(hIllness.infoIllness());
+//		}
+//		System.out.println("Enter the illness that need to be updated: ");
+//		Integer illnessId = sc.nextInt();
+//		Has hasIllness = hasM.getHas(id, illnessId);
+//		System.out.println("Enter the new severity: ");
+//		String sev = sc.nextLine();
+//		hasIllness.setSeverity(sev);
 	}
 
 	private static void lookForIllness(Integer id) {

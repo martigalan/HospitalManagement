@@ -19,10 +19,6 @@ public class JPADoctorManager implements DoctorManager {
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate(); // activate the FK
 		em.getTransaction().commit();
-		if(this.getDoctors().isEmpty()){
-			//Doctor d1 = new Doctor () set parameters and repeat with every doctor
-			//connections between tables (hospital and treats
-		}
 	}
 
 	public void close() {
@@ -80,7 +76,6 @@ public class JPADoctorManager implements DoctorManager {
 		JPADoctorManager dM = new JPADoctorManager();
 		em.getTransaction().begin();
 		h.getDoctors().add(dM.getDoctor(h.getId()));
-		// TODO dudo mucho de que esto esté bien, ask
 		em.getTransaction().commit();
 	}
 
@@ -89,7 +84,6 @@ public class JPADoctorManager implements DoctorManager {
 		em.getTransaction().begin();
 		i.getDoctors().add(d);
 		d.getTreatsIllness().add(i);
-		// TODO ask if this is correct
 		em.getTransaction().commit();
 	}
 
