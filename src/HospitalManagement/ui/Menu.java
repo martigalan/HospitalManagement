@@ -95,6 +95,7 @@ public class Menu {
 				}
 				case 0: {
 					control = false;
+					break;
 				}
 				default:
 					throw new IllegalArgumentException("Unexpected value: " + choice);
@@ -260,7 +261,7 @@ public class Menu {
 			System.out.println(i);
 		}
 		Scanner sc = new Scanner(System.in);
-		Integer iId = sc.nextInt();
+		Integer iId = Integer.parseInt(sc.nextLine());
 		Illness illness = illnessM.getIllness(iId);
 		System.out.println("Please, enter the severity of the illness: ");
 		String severity = sc.nextLine();
