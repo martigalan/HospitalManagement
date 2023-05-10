@@ -43,6 +43,7 @@ public class Doctor implements Serializable {
 	@JoinTable(name = "DoctorTreats",
 	        joinColumns={@JoinColumn(name="doctorId", referencedColumnName="id")},
 	   		inverseJoinColumns={@JoinColumn(name="illnessId", referencedColumnName="id")})
+	
 	private List<Illness> treatsIllness;
 
 	public Doctor(String name, String surname, Date dob, String speciality, Double salary, Hospital hospital) {
