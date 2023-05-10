@@ -29,7 +29,6 @@ public class XMLManagerImp implements XMLManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -50,14 +49,13 @@ public class XMLManagerImp implements XMLManager {
 	}
 
 	@Override
-	public void patient2Html(Patient p) {
-		// TODO Auto-generated method stub
-		
-
+	public void patient2Html() {
+		xml2Html("./xmls/External-Report.xml", "./xmls/Report-Style.xslt", "./xmls/External-Report.html");
+		// TODO method to create xml file
 	}
 	
-	//xml2html
-	public void simpleTransform(String sourcePath, String xsltPath,String resultDir) {
+	@Override
+	public void xml2Html(String sourcePath, String xsltPath,String resultDir) {
 		TransformerFactory tFactory = TransformerFactory.newInstance();
 		try {
 			Transformer transformer = tFactory.newTransformer(new StreamSource(new File(xsltPath)));
