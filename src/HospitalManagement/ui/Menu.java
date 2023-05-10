@@ -39,17 +39,6 @@ public class Menu {
 	private static hasManager hasM;
 	private static boolean showImage = true;
 	
-	public static boolean logIn() {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Input the user name:");
-		String username = sc.nextLine();
-		System.out.println("Input the password:");
-		String password = sc.nextLine();
-		boolean d = sortingMedicM.searchUser(username, password);
-		return d;
-			
-	}
-	
 		
 	public static boolean logIn() {
 		Scanner sc = new Scanner(System.in);
@@ -73,11 +62,7 @@ public class Menu {
 			patientM = new JPAPatientManager();
 			doctorM = new JPADoctorManager();
 			hasM = new JPAHas();
-			boolean log = true;
-			while (log = true) {
-				log= logIn();
-			}
-			control = true;
+			
 			while (control) {
 			boolean log = true;
 			while (log = true) {
@@ -121,7 +106,8 @@ public class Menu {
 				}
 			}
 
-		} catch (NumberFormatException e) {
+		} 
+		}catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
