@@ -50,21 +50,7 @@ public class JPADoctorManager implements DoctorManager {
 		return doctors;
 	}
 	
-	@Override
-	public boolean searchUser(String username, String password){
-		boolean log = false;
-		try {
-			em.getTransaction().begin();	
-			Query q1 = em.createNativeQuery("SELECT * FROM doctor WHERE username = ? AND password = ?", Doctor.class);
-			q1.setParameter(1, username);
-			q1.setParameter(2, password);
-			Doctor doctor = (Doctor) q1.getSingleResult();	
-			em.getTransaction().commit();
-		}catch (Exception e){
-			return log=true;
-		} 
-		return log;
-	}
+	
 
 	@Override
 	public void insertDoctor(Doctor doctor) {

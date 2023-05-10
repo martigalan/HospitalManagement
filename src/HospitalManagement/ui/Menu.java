@@ -61,7 +61,7 @@ public class Menu {
 			hasM = new JPAHas();
 			boolean log = true;
 			while (log = true) {
-				log= logIn(log);
+				log= logIn();
 			}
 			boolean control = true;
 			while (control = true) {

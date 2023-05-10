@@ -8,7 +8,6 @@ public interface DoctorManager {
 
 		public void updateDoctor(Doctor doctor);
 		public List<Doctor> searchByName(String name, String surname);
-		public boolean searchUser(String username, String password);
 		public void insertDoctor(Doctor doctor);
 		public void deleteDoctor(Doctor doctor);
 		public void assignHospital(Hospital h);
