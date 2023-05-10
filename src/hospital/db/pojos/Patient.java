@@ -56,7 +56,6 @@ public class Patient implements Serializable{
 	public Patient() {
 		super();
 		this.illness = new ArrayList<Has>();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Patient(String name, String surname, Date dob, byte[] photo) {

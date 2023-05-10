@@ -38,6 +38,8 @@ public class Menu {
 	private static hasManager hasM;
 	private static boolean showImage = true;
 
+	
+	private static boolean control;
 	public static void main(String[] args) {
 		try {
 			connectionManager = new ConnectionManager();
@@ -48,18 +50,17 @@ public class Menu {
 			doctorM = new JPADoctorManager();
 			hasM = new JPAHas();
 
-			boolean control = true;
-			while (control = true) {
-				System.out.println("HI");
+			control = true;
+			while (control) {
 				System.out.println("Choose an option, please:");
 				System.out.println("-1. Register a new Patient");
-				System.out.println("-2. Select a patient data"); ////////////////
-				System.out.println("-3. Select doctor data"); /////////
-				System.out.println("-4. Search for a hospital"); // TODO ONLY GIVES INFO ABOUT HOSPITALS
+				System.out.println("-2. Select a patient data");
+				System.out.println("-3. Select doctor data");
+				System.out.println("-4. Search for a hospital"); //ONLY GIVES INFO ABOUT HOSPITALS
 				System.out.println("-0. Exit");
 
 				Scanner sc = new Scanner(System.in);
-				int choice = sc.nextInt();
+				Integer choice = Integer.parseInt(sc.nextLine());
 				switch (choice) {
 				case 1: {
 					registerPatient();
@@ -122,20 +123,17 @@ public class Menu {
 			LocalDate dobLocalDate = LocalDate.parse(dob); // java.time.LocalDate
 			dobDate = Date.valueOf(dobLocalDate);
 		}
-		// System.out.println("Photo:");
-		// byte[] photo = sc.nextByte();
-		/*
-		 * System.out.
-		 * print("Type the file name as it appears in folder /photos, including extension: "
-		 * ); String fileName = sc.nextLine(); File photos = new File("./photos/" +
-		 * fileName); InputStream streamBlob = new FileInputStream(photos); byte[] photo
-		 * = new byte[streamBlob.available()]; streamBlob.readAllBytes();
-		 * streamBlob.close();
-		 */
-		// TODO add photo in SQLinsert
+		System.out.println("Photo:");
 
-		Hospital mainHospital = hospitalM.search1ByName("Hospital Universitario Fundación Jimenez Díaz");
-		byte[] photo = null;
+		System.out.print("Type the file name as it appears in folder /photos, including extension: ");
+		String fileName = sc.nextLine();
+		File photos = new File("./photos/" + fileName);
+		InputStream streamBlob = new FileInputStream(photos);
+		byte[] photo = new byte[streamBlob.available()];
+		streamBlob.read(photo);
+		streamBlob.close();
+
+		Hospital mainHospital = hospitalM.search1ByName("Fundación Jimenez Diaz");
 
 		Patient p = new Patient(name, surname, dobDate, mainHospital, photo);
 		patientM.insertPatient(p);
@@ -220,21 +218,21 @@ public class Menu {
 		}
 	}
 
-	private static void updateIllnessSeverity(Integer idd) {
+	private static void updateIllnessSeverity(Integer id) {
 		// look for Has that has the p and the i needed and only setSeverity()
-//		Scanner sc = new Scanner(System.in);
-//		Patient p = patientM.getPatient(id);
-//		System.out.println("This patient has the following illnesses: ");
-//		List<Has> illnessesPHas = hasM.getHas(id);
-//		for (Has hIllness : illnessesPHas) {
-//			System.out.println(hIllness.infoIllness());
-//		}
-//		System.out.println("Enter the illness that need to be updated: ");
-//		Integer illnessId = sc.nextInt();
-//		Has hasIllness = hasM.getHas(id, illnessId);
-//		System.out.println("Enter the new severity: ");
-//		String sev = sc.nextLine();
-//		hasIllness.setSeverity(sev);
+		Scanner sc = new Scanner(System.in);
+		Patient p = patientM.getPatient(id);
+		System.out.println("This patient has the following illnesses: ");
+		List<Has> illnessesPHas = hasM.getHas(id);
+		for (Has hIllness : illnessesPHas) {
+			System.out.println(hIllness.infoIllness());
+		}
+		System.out.println("Enter the illness that need to be updated: ");
+		Integer illnessId = sc.nextInt();
+		Has hasIllness = hasM.getHas(id, illnessId);
+		System.out.println("Enter the new severity: ");
+		String sev = sc.nextLine();
+		hasIllness.setSeverity(sev);
 	}
 
 	private static void lookForIllness(Integer id) {
@@ -313,7 +311,17 @@ public class Menu {
 			p.setSurname(surname);
 		}
 
-		// TODO update photo patient
+		System.out.print("Type the file name as it appears in folder /photos, including extension: ");
+		String fileName = sc.nextLine();
+		if (!fileName.equals("")) {
+			File photos = new File("./photos/" + fileName);
+			InputStream streamBlob = new FileInputStream(photos);
+			byte[] photo = new byte[streamBlob.available()];
+			streamBlob.read(photo);
+			streamBlob.close();
+			
+			p.setPhoto(photo);
+		}
 		patientM.updatePatient(p);
 	}
 
