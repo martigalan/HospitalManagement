@@ -219,7 +219,7 @@ public class Menu {
 		}
 	}
 
-	private static void updateIllnessSeverity(Integer id) {
+	private static void updateIllnessSeverity(Integer idd) {
 		// look for Has that has the p and the i needed and only setSeverity()
 //		Scanner sc = new Scanner(System.in);
 //		Patient p = patientM.getPatient(id);
