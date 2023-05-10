@@ -49,6 +49,8 @@ public class JPADoctorManager implements DoctorManager {
 		doctors = (List<Doctor>) q1.getResultList();
 		return doctors;
 	}
+	
+	
 
 	@Override
 	public void insertDoctor(Doctor doctor) {
@@ -110,5 +112,7 @@ public class JPADoctorManager implements DoctorManager {
 		}
 		return docList;
 	}
+	
+	
 
 }

@@ -35,9 +35,33 @@ public class Menu {
 	private static ConnectionManager connectionManager;
 	private static IllnessManager illnessM;
 	private static MachineManager machineM;
+	private static SortingMedicManager sortingMedicM;
 	private static hasManager hasM;
 	private static boolean showImage = true;
-
+	
+	public static boolean logIn() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Input the user name:");
+		String username = sc.nextLine();
+		System.out.println("Input the password:");
+		String password = sc.nextLine();
+		boolean d = sortingMedicM.searchUser(username, password);
+		return d;
+			
+	}
+	
+		
+	public static boolean logIn() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Input the user name:");
+		String username = sc.nextLine();
+		System.out.println("Input the password:");
+		String password = sc.nextLine();
+		boolean d = sortingMedicM.searchUser(username, password);
+		return d;
+			
+	}
+	
 	
 	private static boolean control;
 	public static void main(String[] args) {
@@ -49,9 +73,18 @@ public class Menu {
 			patientM = new JPAPatientManager();
 			doctorM = new JPADoctorManager();
 			hasM = new JPAHas();
-
+			boolean log = true;
+			while (log = true) {
+				log= logIn();
+			}
 			control = true;
 			while (control) {
+			boolean log = true;
+			while (log = true) {
+				log= logIn();
+			}
+			boolean control = true;
+			while (control = true) {
 				System.out.println("Choose an option, please:");
 				System.out.println("-1. Register a new Patient");
 				System.out.println("-2. Select a patient data");

@@ -30,10 +30,6 @@ public class Doctor implements Serializable {
 	private String speciality;
 	@Column(name = "salary")
 	private Double salary;
-	@Column(name = "username")
-	private String username;
-	@Column(name = "password")
-	private String password;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "hospitalId")
@@ -43,6 +39,7 @@ public class Doctor implements Serializable {
 	@JoinTable(name = "DoctorTreats",
 	        joinColumns={@JoinColumn(name="doctorId", referencedColumnName="id")},
 	   		inverseJoinColumns={@JoinColumn(name="illnessId", referencedColumnName="id")})
+	
 	private List<Illness> treatsIllness;
 
 	public Doctor(String name, String surname, Date dob, String speciality, Double salary, Hospital hospital) {
@@ -132,18 +129,6 @@ public class Doctor implements Serializable {
 
 	public void setTreatsIllness(List<Illness> treatsIllness) {
 		this.treatsIllness = treatsIllness;
-	}
-	
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
 	}
 	
 	@Override
