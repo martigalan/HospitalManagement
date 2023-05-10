@@ -35,9 +35,21 @@ public class Menu {
 	private static ConnectionManager connectionManager;
 	private static IllnessManager illnessM;
 	private static MachineManager machineM;
+	private static SortingMedicManager sortingMedicM;
 	private static hasManager hasM;
 	private static boolean showImage = true;
-
+	
+	public static boolean logIn() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Input the user name:");
+		String username = sc.nextLine();
+		System.out.println("Input the password:");
+		String password = sc.nextLine();
+		boolean d = sortingMedicM.searchUser(username, password);
+		return d;
+			
+	}
+	
 	public static void main(String[] args) {
 		try {
 			connectionManager = new ConnectionManager();
@@ -47,7 +59,10 @@ public class Menu {
 			patientM = new JPAPatientManager();
 			doctorM = new JPADoctorManager();
 			hasM = new JPAHas();
-
+			boolean log = true;
+			while (log = true) {
+				log= logIn(log);
+			}
 			boolean control = true;
 			while (control = true) {
 				System.out.println("HI");
@@ -219,7 +234,7 @@ public class Menu {
 		}
 	}
 
-	private static void updateIllnessSeverity(Integer idd) {
+	private static void updateIllnessSeverity(Integer id) {
 		// look for Has that has the p and the i needed and only setSeverity()
 //		Scanner sc = new Scanner(System.in);
 //		Patient p = patientM.getPatient(id);
