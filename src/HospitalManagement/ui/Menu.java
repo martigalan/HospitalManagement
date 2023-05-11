@@ -33,6 +33,7 @@ public class Menu {
 	private static PatientManager patientM;
 	private static DoctorManager doctorM;
 	private static HospitalManager hospitalM;
+	private static HospitalManager hospitalMJPA;
 	private static ConnectionManager connectionManager;
 	private static IllnessManager illnessM;
 	private static MachineManager machineM;
@@ -57,12 +58,14 @@ public class Menu {
 	public static void main(String[] args) {
 		try {
 			connectionManager = new ConnectionManager();
+			JPAEMManager emMan = new JPAEMManager();
 			hospitalM = new JDBCHospitalManager(connectionManager.getConnection());
 			illnessM = new JDBCIllnessManager(connectionManager.getConnection());
 			machineM = new JDBCMachineManager(connectionManager.getConnection());
-			patientM = new JPAPatientManager();
-			doctorM = new JPADoctorManager();
-			hasM = new JPAHas();
+			patientM = new JPAPatientManager(emMan.getEm());
+			doctorM = new JPADoctorManager(emMan.getEm());
+			hasM = new JPAHas(emMan.getEm());
+			hospitalMJPA = new JPAHospitalManager(emMan.getEm());
 			/*
 			 * while (control) { boolean log = true; while (log = true) { log= logIn(); }
 			 */
@@ -156,7 +159,7 @@ public class Menu {
 		streamBlob.read(photo);
 		streamBlob.close();
 
-		Hospital mainHospital = hospitalM.search1ByName("Fundación Jimenez Diaz");
+		Hospital mainHospital = hospitalMJPA.search1ByName("Fundacion Jimenez Diaz");
 
 		Patient p = new Patient(name, surname, dobDate, mainHospital, photo);
 		patientM.insertPatient(p);
@@ -261,6 +264,7 @@ public class Menu {
 		String sev = sc.nextLine();
 		hasIllness.setSeverity(sev);		
 		String severity = hasIllness.getSeverity();
+		patientM.updatePatient(p);
 	}
 
 	private static void lookForIllness(Integer id) {

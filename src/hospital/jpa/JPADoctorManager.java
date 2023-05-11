@@ -21,6 +21,11 @@ public class JPADoctorManager implements DoctorManager {
 		em.getTransaction().commit();
 	}
 
+	public JPADoctorManager(EntityManager em) {
+		super();
+		this.em = em;
+	}
+
 	public void close() {
 		em.close();
 	}
