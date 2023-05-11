@@ -42,10 +42,6 @@ public class Menu {
 	private static boolean showImage = true;
 	private static Scanner sc;
 	private static XMLManagerImp xmlMI = new XMLManagerImp();
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/martigalan/HospitalManagement
 	
 	public static boolean logIn() {
 		Scanner sc = new Scanner(System.in);
