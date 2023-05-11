@@ -342,6 +342,7 @@ public class Menu {
 			p.setPhoto(photo);
 		}
 		patientM.updatePatient(p);
+		sc.close();
 	}
 
 	public static void showPatient(int id) throws IOException {
