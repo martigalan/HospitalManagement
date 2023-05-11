@@ -32,22 +32,8 @@ public class XMLManagerImp implements XMLManager {
 			e.printStackTrace();
 		}
 	}
-	
-	public void generateXml() {
-		File fileXML = new File("./xmls/Patient.xml");
-		try {
-			if(fileXML.createNewFile()) {
-				System.out.println("The XML was created successfully");
-			}
-			else {
-				System.out.println("The XML already exists");
-			}
-		} catch (IOException e) {
-			System.out.println("There has been an error");
-		}
-	}
 
-	
+	@Override
 	public void generateXml() {
 		File fileXML = new File("./xmls/Patient.xml");
 		try {
