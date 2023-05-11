@@ -40,8 +40,12 @@ public class Menu {
 	private static SortingMedicManager sortingMedicM;
 	private static hasManager hasM;
 	private static boolean showImage = true;
+<<<<<<< HEAD
 	private static XMLManagerImp xmlMI;
 	private static Scanner sc;
+=======
+	private static XMLManagerImp xmlMI = new XMLManagerImp();
+>>>>>>> branch 'master' of https://github.com/martigalan/HospitalManagement
 	
 	public static boolean logIn() {
 		Scanner sc = new Scanner(System.in);
@@ -101,6 +105,10 @@ public class Menu {
 					showHospitals();
 					break;
 				}
+				case 5: {
+					createXML();
+					break;
+				}
 				case 0: {
 					control = false;
 					break;
@@ -129,7 +137,7 @@ public class Menu {
 	}
 
 	public static void createXML() {
-		//TODO call method to generate 
+		xmlMI.generateXml();
 	}
 	
 	public static void registerPatient() throws IOException {
