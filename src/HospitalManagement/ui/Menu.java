@@ -38,8 +38,7 @@ public class Menu {
 	private static SortingMedicManager sortingMedicM;
 	private static hasManager hasM;
 	private static boolean showImage = true;
-	
-		
+
 	public static boolean logIn() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Input the user name:");
@@ -48,11 +47,11 @@ public class Menu {
 		String password = sc.nextLine();
 		boolean d = sortingMedicM.searchUser(username, password);
 		return d;
-			
+
 	}
-	
-	
+
 	private static boolean control;
+
 	public static void main(String[] args) {
 		try {
 			connectionManager = new ConnectionManager();
@@ -62,19 +61,16 @@ public class Menu {
 			patientM = new JPAPatientManager();
 			doctorM = new JPADoctorManager();
 			hasM = new JPAHas();
-			
-			while (control) {
-			boolean log = true;
-			while (log = true) {
-				log= logIn();
-			}
+			/*
+			 * while (control) { boolean log = true; while (log = true) { log= logIn(); }
+			 */
 			boolean control = true;
 			while (control = true) {
 				System.out.println("Choose an option, please:");
 				System.out.println("-1. Register a new Patient");
 				System.out.println("-2. Select a patient data");
 				System.out.println("-3. Select doctor data");
-				System.out.println("-4. Search for a hospital"); //ONLY GIVES INFO ABOUT HOSPITALS
+				System.out.println("-4. Search for a hospital"); // ONLY GIVES INFO ABOUT HOSPITALS
 				System.out.println("-0. Exit");
 
 				Scanner sc = new Scanner(System.in);
@@ -106,8 +102,8 @@ public class Menu {
 				}
 			}
 
-		} 
-		}catch (NumberFormatException e) {
+			// }
+		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -242,16 +238,18 @@ public class Menu {
 		Scanner sc = new Scanner(System.in);
 		Patient p = patientM.getPatient(id);
 		System.out.println("This patient has the following illnesses: ");
-		List<Has> illnessesPHas = hasM.getHas(id);
+		List<Has> illnessesPHas = hasM.getListHas(id);
 		for (Has hIllness : illnessesPHas) {
 			System.out.println(hIllness.infoIllness());
 		}
 		System.out.println("Enter the illness that need to be updated: ");
-		Integer illnessId = sc.nextInt();
+		Integer illnessId = Integer.parseInt(sc.nextLine());
 		Has hasIllness = hasM.getHas(id, illnessId);
 		System.out.println("Enter the new severity: ");
 		String sev = sc.nextLine();
 		hasIllness.setSeverity(sev);
+		
+		String severity = hasIllness.getSeverity();
 	}
 
 	private static void lookForIllness(Integer id) {
@@ -290,28 +288,18 @@ public class Menu {
 		// I'm going to go through the machineList seeing if there's a doctor that works
 		// at that hospital, if there's a doctor AND the hospital
 		// is available then i choose that hospital
-		while (p.getHospital() == null) {
-			for (Machine m : machineList) {
-				Hospital hMachine = m.getHospital();
-				for (Doctor d : docList) {
-					Hospital hDoctor = d.getHospital();
-					if ((hMachine.equals(hDoctor)) & (hMachine.getPatients().size() <= hMachine.getAv())) {
-						patientM.assignHospital(hMachine, p);
-						break;
-					}
-				}
-				if (p.getHospital() != null) {
+		for (Machine m : machineList) {
+			Hospital hMachine = m.getHospital();
+			for (Doctor d : docList) {
+				Hospital hDoctor = d.getHospital();
+				if ((hMachine.equals(hDoctor)) & (hMachine.getPatients().size() <= hMachine.getAv())) {
+					patientM.assignHospital(hMachine, p);
 					break;
 				}
-			}
-			if (p.getHospital() != null) {
-				System.out.println("Se le ha asignado este hospital: ");
-				System.out.println(p.getHospital());
-			} else {
-				System.out.println("Lo sentimos, no podemos tratarle en nuestros hospitales en este momento");
+				System.out.println("Lo sentimos, no le podemos tratar en estos momentos");
 			}
 		}
-
+		System.out.println("Se le ha asignado: " + p.getHospital());
 	}
 
 	public static void updatePatient(int id) throws IOException {
@@ -338,7 +326,7 @@ public class Menu {
 			byte[] photo = new byte[streamBlob.available()];
 			streamBlob.read(photo);
 			streamBlob.close();
-			
+
 			p.setPhoto(photo);
 		}
 		patientM.updatePatient(p);
