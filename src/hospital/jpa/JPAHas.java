@@ -23,6 +23,11 @@ EntityManager em;
 		em.getTransaction().commit();
 	}
 
+	public JPAHas(EntityManager em) {
+		super();
+		this.em = em;
+	}
+
 	public void close() {
 		em.close();
 	}
@@ -45,7 +50,6 @@ EntityManager em;
 	@Override
 	public List<Has> getListHas(int pId){
 		List<Has> h = new ArrayList<Has>();
-		em.getTransaction().begin();
 		Query q = em.createNativeQuery("SELECT * FROM hasIllness WHERE patientId = ?", Has.class);
 		q.setParameter(1, pId);
 		h = (List<Has>) q.getResultList();

@@ -33,6 +33,7 @@ public class Menu {
 	private static PatientManager patientM;
 	private static DoctorManager doctorM;
 	private static HospitalManager hospitalM;
+	private static HospitalManager hospitalMJPA;
 	private static ConnectionManager connectionManager;
 	private static IllnessManager illnessM;
 	private static MachineManager machineM;
@@ -57,17 +58,19 @@ public class Menu {
 	public static void main(String[] args) {
 		try {
 			connectionManager = new ConnectionManager();
+			JPAEMManager emMan = new JPAEMManager();
 			hospitalM = new JDBCHospitalManager(connectionManager.getConnection());
 			illnessM = new JDBCIllnessManager(connectionManager.getConnection());
 			machineM = new JDBCMachineManager(connectionManager.getConnection());
-			patientM = new JPAPatientManager();
-			doctorM = new JPADoctorManager();
-			hasM = new JPAHas();
+			patientM = new JPAPatientManager(emMan.getEm());
+			doctorM = new JPADoctorManager(emMan.getEm());
+			hasM = new JPAHas(emMan.getEm());
+			hospitalMJPA = new JPAHospitalManager(emMan.getEm());
 			/*
 			 * while (control) { boolean log = true; while (log = true) { log= logIn(); }
 			 */
 			boolean control = true;
-			while (control = true) {
+			while (control) {
 				System.out.println("Choose an option, please:");
 				System.out.println("-1. Register a new Patient");
 				System.out.println("-2. Select a patient data"); ////////////////
@@ -107,6 +110,7 @@ public class Menu {
 				default:
 					throw new IllegalArgumentException("Unexpected value: " + choice);
 				}
+				
 			}
 
 			// }
@@ -159,7 +163,7 @@ public class Menu {
 		streamBlob.read(photo);
 		streamBlob.close();
 
-		Hospital mainHospital = hospitalM.search1ByName("Fundación Jimenez Diaz");
+		Hospital mainHospital = hospitalMJPA.search1ByName("Fundacion Jimenez Diaz");
 
 		Patient p = new Patient(name, surname, dobDate, mainHospital, photo);
 		patientM.insertPatient(p);
@@ -207,6 +211,7 @@ public class Menu {
 				System.out.println("2. Show data");
 				System.out.println("3. Search hospital");
 				System.out.println("4. Assign illness");
+				System.out.println("5. Update state of an illness");
 				System.out.println("0. Back to  principal menu");
 
 				int choice = Integer.parseInt(r.readLine());
@@ -228,6 +233,9 @@ public class Menu {
 				case 4: {
 					lookForIllness(id);
 					break;
+				}
+				case 5: {
+					updateIllnessSeverity(id);
 				}
 				case 0: {
 					main(null);
@@ -258,9 +266,9 @@ public class Menu {
 		Has hasIllness = hasM.getHas(id, illnessId);
 		System.out.println("Enter the new severity: ");
 		String sev = sc.nextLine();
-		hasIllness.setSeverity(sev);
-		
+		hasIllness.setSeverity(sev);		
 		String severity = hasIllness.getSeverity();
+		patientM.updatePatient(p);
 	}
 
 	private static void lookForIllness(Integer id) {
@@ -341,6 +349,7 @@ public class Menu {
 			p.setPhoto(photo);
 		}
 		patientM.updatePatient(p);
+		sc.close();
 	}
 
 	public static void showPatient(int id) throws IOException {
