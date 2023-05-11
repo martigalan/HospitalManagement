@@ -74,7 +74,7 @@ public class ConnectionManager {
 			String table9 = "CREATE TABLE doctorTreats (illnessId INTEGER NOT NULL REFERENCES illness(id), " + "doctorId INTEGER NOT NULL REFERENCES doctor(id)," +
 			        "PRIMARY KEY (illnessId, doctorId));";
 			s.executeUpdate(table9);
-			String table10 = "CREATE TABLE sortingMedic (username TEXT, " + "password TEXT);";
+			String table10 = "CREATE TABLE sortingMedic (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, " + "password TEXT);";
 			s.executeUpdate(table10);
 			
 			hospitalM = new JDBCHospitalManager(this.getConnection());
