@@ -28,7 +28,8 @@ public class JPAPatientManager implements PatientManager {
 	}
 	
 	@Override
-	public void updatePatient(Patient patient) {
+	// TODO change to update()
+	public void update(Patient patient) {
 		em.getTransaction().begin();
 		em.flush();
 		em.getTransaction().commit();
