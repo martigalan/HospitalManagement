@@ -42,7 +42,11 @@ public class Menu {
 	private static boolean showImage = true;
 	private static Scanner sc = new Scanner(System.in);
 	private static XMLManagerImp xmlMI = new XMLManagerImp();
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> branch 'master' of https://github.com/martigalan/HospitalManagement
 	public static boolean logIn() {
 		System.out.println("Input the user name:");
 		String username = sc.nextLine();
