@@ -40,10 +40,6 @@ public class Menu {
 	private static SortingMedicManager sortingMedicM;
 	private static hasManager hasM;
 	private static boolean showImage = true;
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/martigalan/HospitalManagement
 	private static Scanner sc;
 	private static XMLManagerImp xmlMI = new XMLManagerImp();
 <<<<<<< HEAD
