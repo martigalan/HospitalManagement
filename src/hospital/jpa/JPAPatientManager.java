@@ -18,6 +18,11 @@ public class JPAPatientManager implements PatientManager {
 		em.getTransaction().commit();
 	}
 
+	public JPAPatientManager(EntityManager em) {
+		super();
+		this.em = em;
+	}
+
 	public void close() {
 		em.close();
 	}
@@ -25,8 +30,7 @@ public class JPAPatientManager implements PatientManager {
 	@Override
 	public void updatePatient(Patient patient) {
 		em.getTransaction().begin();
-		patient.setName(patient.getName());
-		patient.setSurname(patient.getSurname());
+		em.flush();
 		em.getTransaction().commit();
 	}
 

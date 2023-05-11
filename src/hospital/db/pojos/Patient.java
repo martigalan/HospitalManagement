@@ -159,7 +159,7 @@ public class Patient implements Serializable{
 	@Override
 	public String toString() {
 		return "Patient [id=" + id + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", hospital="
-				+ hospital + ", photo=" + Arrays.toString(photo) + "]";
+				+ hospital;
 	}
 	
 	public String shortInfo() {

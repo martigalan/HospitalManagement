@@ -19,6 +19,11 @@ public class JPASortingMedicManager implements SortingMedicManager {
 		
 	}
 
+	public JPASortingMedicManager(EntityManager em) {
+		super();
+		this.em = em;
+	}
+
 	public void close() {
 		em.close();
 	}
