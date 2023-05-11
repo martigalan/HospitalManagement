@@ -40,9 +40,16 @@ public class Menu {
 	private static SortingMedicManager sortingMedicM;
 	private static hasManager hasM;
 	private static boolean showImage = true;
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/martigalan/HospitalManagement
 	private static Scanner sc;
 	private static XMLManagerImp xmlMI = new XMLManagerImp();
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/martigalan/HospitalManagement
 	
 	public static boolean logIn() {
 		Scanner sc = new Scanner(System.in);
@@ -279,7 +286,7 @@ public class Menu {
 		String sev = sc.nextLine();
 		hasIllness.setSeverity(sev);		
 		String severity = hasIllness.getSeverity();
-		patientM.update(p);
+		//patientM.update(p);
 	}
 
 	private static void lookForIllness(Integer id) {
@@ -356,7 +363,7 @@ public class Menu {
 
 			p.setPhoto(photo);
 		}
-		patientM.update(p);
+		//patientM.update(p);
 		sc.close();
 	}
 
