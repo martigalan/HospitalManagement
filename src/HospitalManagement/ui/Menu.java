@@ -40,9 +40,12 @@ public class Menu {
 	private static SortingMedicManager sortingMedicM;
 	private static hasManager hasM;
 	private static boolean showImage = true;
-	private static XMLManagerImp xmlMI = new XMLManagerImp();
 	private static Scanner sc;
+	private static XMLManagerImp xmlMI = new XMLManagerImp();
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/martigalan/HospitalManagement
 	
 	public static boolean logIn() {
 		Scanner sc = new Scanner(System.in);
@@ -183,10 +186,16 @@ public class Menu {
 		for (Doctor d : doctorList) {
 			System.out.println(d.shortInfo());
 		}
-		System.out.println("Please choose a doctor, type its Id:");
-		Integer id = sc.nextInt();
-		// Go to the Doctor's menu
-		DoctorMenu(id);
+		if(doctorList.isEmpty()) {
+			System.out.println("No existe nadie con ese nombre");
+			
+		}
+		else{
+			System.out.println("Please choose a doctor, type its Id:");
+			Integer id = sc.nextInt();
+			// Go to the Doctor's menu
+			DoctorMenu(id);
+			}
 	}
 
 	public static void selectPatient() throws IOException {
@@ -197,10 +206,16 @@ public class Menu {
 		while (it.hasNext()) {
 			System.out.println(((Patient) it.next()).shortInfo());
 		}
-		System.out.println("Please choose a patient, type its Id:");
-		Integer id = sc.nextInt();
-		// Go to the Patient's menu
-		PatientMenu(id);
+		if(patientlist.isEmpty()) {
+			System.out.println("No existe nadie con ese nombre");			
+		}
+		else{
+			System.out.println("Please choose a patient, type its Id:");
+			Integer id = sc.nextInt();
+			// Go to the Patient's menu
+			PatientMenu(id);
+			}
+		
 	}
 
 	public static void PatientMenu(int id) {
