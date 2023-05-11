@@ -65,7 +65,7 @@ public class Menu {
 			 * while (control) { boolean log = true; while (log = true) { log= logIn(); }
 			 */
 			boolean control = true;
-			while (control = true) {
+			while (control) {
 				System.out.println("Choose an option, please:");
 				System.out.println("-1. Register a new Patient");
 				System.out.println("-2. Select a patient data");
@@ -100,6 +100,7 @@ public class Menu {
 				default:
 					throw new IllegalArgumentException("Unexpected value: " + choice);
 				}
+				
 			}
 
 			// }

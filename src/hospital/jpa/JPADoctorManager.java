@@ -64,7 +64,7 @@ public class JPADoctorManager implements DoctorManager {
 		Query q2 = em.createNativeQuery("SELECT * FROM doctor WHERE id = ?", Doctor.class);
 		q2.setParameter(1, doctor.getId());
 		Doctor doctorDeleted = (Doctor) q2.getSingleResult();
-
+		
 		// Begin transaction
 		em.getTransaction().begin();
 		// Remove the object
@@ -72,7 +72,7 @@ public class JPADoctorManager implements DoctorManager {
 		// End transaction
 		em.getTransaction().commit();
 	}
-
+	
 	@Override
 	public void assignHospital(Hospital h) {
 		JPADoctorManager dM = new JPADoctorManager();
@@ -80,7 +80,7 @@ public class JPADoctorManager implements DoctorManager {
 		h.getDoctors().add(dM.getDoctor(h.getId()));
 		em.getTransaction().commit();
 	}
-
+	
 	@Override
 	public void assignIllness(Doctor d, Illness i) {
 		em.getTransaction().begin();
@@ -88,7 +88,7 @@ public class JPADoctorManager implements DoctorManager {
 		d.getTreatsIllness().add(i);
 		em.getTransaction().commit();
 	}
-
+	
 	@Override
 	public Doctor getDoctor(int id) {
 		Query q1 = em.createNativeQuery("SELECT * FROM doctor WHERE id = ?", Doctor.class);
@@ -114,5 +114,5 @@ public class JPADoctorManager implements DoctorManager {
 	}
 	
 	
-
+	
 }
