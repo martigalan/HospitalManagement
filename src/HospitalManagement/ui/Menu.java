@@ -178,10 +178,16 @@ public class Menu {
 		for (Doctor d : doctorList) {
 			System.out.println(d.shortInfo());
 		}
-		System.out.println("Please choose a doctor, type its Id:");
-		Integer id = sc.nextInt();
-		// Go to the Doctor's menu
-		DoctorMenu(id);
+		if(doctorList.isEmpty()) {
+			System.out.println("No existe nadie con ese nombre");
+			
+		}
+		else{
+			System.out.println("Please choose a doctor, type its Id:");
+			Integer id = sc.nextInt();
+			// Go to the Doctor's menu
+			DoctorMenu(id);
+			}
 	}
 
 	public static void selectPatient() throws IOException {
@@ -193,10 +199,16 @@ public class Menu {
 		while (it.hasNext()) {
 			System.out.println(((Patient) it.next()).shortInfo());
 		}
-		System.out.println("Please choose a patient, type its Id:");
-		Integer id = sc.nextInt();
-		// Go to the Patient's menu
-		PatientMenu(id);
+		if(patientlist.isEmpty()) {
+			System.out.println("No existe nadie con ese nombre");			
+		}
+		else{
+			System.out.println("Please choose a patient, type its Id:");
+			Integer id = sc.nextInt();
+			// Go to the Patient's menu
+			PatientMenu(id);
+			}
+		
 	}
 
 	public static void PatientMenu(int id) {

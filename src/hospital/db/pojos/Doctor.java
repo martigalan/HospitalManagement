@@ -156,7 +156,7 @@ public class Doctor implements Serializable {
 	}
 	
 	public String shortInfo() {
-		return "Patient [id=" + id + ", name=" + name + ", surname=" + surname + "]";
+		return "Doctor [id=" + id + ", name=" + name + ", surname=" + surname + "]";
 	}
 
 }
