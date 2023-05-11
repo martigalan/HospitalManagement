@@ -43,7 +43,7 @@ public class XMLManagerImp implements XMLManager {
 				System.out.println("The XML already exists");
 			}
 		} catch (IOException e) {
-			System.out.println("There has been an error");
+			System.out.println("There XML could not be generated");
 		}
 	}
 
