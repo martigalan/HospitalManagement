@@ -204,6 +204,7 @@ public class Menu {
 				System.out.println("2. Show data");
 				System.out.println("3. Search hospital");
 				System.out.println("4. Assign illness");
+				System.out.println("5. Update state of an illness");
 				System.out.println("0. Back to  principal menu");
 
 				int choice = Integer.parseInt(r.readLine());
@@ -225,6 +226,9 @@ public class Menu {
 				case 4: {
 					lookForIllness(id);
 					break;
+				}
+				case 5: {
+					updateIllnessSeverity(id);
 				}
 				case 0: {
 					main(null);
@@ -255,8 +259,7 @@ public class Menu {
 		Has hasIllness = hasM.getHas(id, illnessId);
 		System.out.println("Enter the new severity: ");
 		String sev = sc.nextLine();
-		hasIllness.setSeverity(sev);
-		
+		hasIllness.setSeverity(sev);		
 		String severity = hasIllness.getSeverity();
 	}
 
