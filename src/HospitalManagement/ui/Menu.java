@@ -41,6 +41,7 @@ public class Menu {
 	private static hasManager hasM;
 	private static boolean showImage = true;
 	private static XMLManagerImp xmlMI;
+	private static Scanner sc;
 	
 	public static boolean logIn() {
 		Scanner sc = new Scanner(System.in);
@@ -66,6 +67,7 @@ public class Menu {
 			doctorM = new JPADoctorManager(emMan.getEm());
 			hasM = new JPAHas(emMan.getEm());
 			hospitalMJPA = new JPAHospitalManager(emMan.getEm());
+			sc = new Scanner(System.in);
 			/*
 			 * while (control) { boolean log = true; while (log = true) { log= logIn(); }
 			 */
@@ -131,7 +133,6 @@ public class Menu {
 	}
 	
 	public static void registerPatient() throws IOException {
-		Scanner sc = new Scanner(System.in);
 		System.out.println("Input the patient data");
 		System.out.println("Name:");
 		String name = sc.nextLine();
@@ -169,7 +170,6 @@ public class Menu {
 	}
 
 	public static void selectDoctor() throws IOException {
-		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduce the name:");
 		String nameDoc = sc.nextLine();
 		System.out.println("Introduce the surname:");
@@ -185,7 +185,6 @@ public class Menu {
 	}
 
 	public static void selectPatient() throws IOException {
-		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduce the name:");
 		String name = sc.nextLine();
 		List<Patient> patientlist = patientM.searchByName(name);
@@ -250,7 +249,6 @@ public class Menu {
 
 	private static void updateIllnessSeverity(Integer id) {
 		// look for Has that has the p and the i needed and only setSeverity()
-		Scanner sc = new Scanner(System.in);
 		Patient p = patientM.getPatient(id);
 		System.out.println("This patient has the following illnesses: ");
 		List<Has> illnessesPHas = hasM.getListHas(id);
@@ -264,7 +262,7 @@ public class Menu {
 		String sev = sc.nextLine();
 		hasIllness.setSeverity(sev);		
 		String severity = hasIllness.getSeverity();
-		patientM.updatePatient(p);
+		patientM.update(p);
 	}
 
 	private static void lookForIllness(Integer id) {
@@ -284,7 +282,6 @@ public class Menu {
 	}
 
 	private static void searchHospital(int id) {
-		Scanner sc = new Scanner(System.in);
 		Patient p = patientM.getPatient(id);
 		List<Has> illnesses = p.getIllness();
 		for (Has hI : illnesses) {
@@ -318,9 +315,7 @@ public class Menu {
 	}
 
 	public static void updatePatient(int id) throws IOException {
-		Scanner sc = new Scanner(System.in);
 		Patient p = patientM.getPatient(id);
-		// TODO get patient
 		System.out.println("Type the new data, or press enter to keep actual data");
 		System.out.println("Name (" + p.getName() + "):");
 		String name = sc.nextLine();
@@ -344,7 +339,7 @@ public class Menu {
 
 			p.setPhoto(photo);
 		}
-		patientM.updatePatient(p);
+		patientM.update(p);
 		sc.close();
 	}
 
@@ -413,9 +408,7 @@ public class Menu {
 	}
 
 	public static void updateDoctor(int id) throws IOException {
-		Scanner sc = new Scanner(System.in);
 		Doctor p = doctorM.getDoctor(id);
-		// TODO get patient
 		System.out.println("Type the new data, or press enter to keep actual data");
 		System.out.println("Name (" + p.getName() + "):");
 		String name = sc.nextLine();
