@@ -39,12 +39,8 @@ public class Menu {
 	private static SortingMedicManager sortingMedicM;
 	private static hasManager hasM;
 	private static boolean showImage = true;
-<<<<<<< HEAD
 	private static XMLManagerImp xmlMI;
 	
-=======
-
->>>>>>> branch 'master' of https://github.com/martigalan/HospitalManagement
 	public static boolean logIn() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Input the user name:");
@@ -74,16 +70,10 @@ public class Menu {
 			while (control = true) {
 				System.out.println("Choose an option, please:");
 				System.out.println("-1. Register a new Patient");
-<<<<<<< HEAD
 				System.out.println("-2. Select a patient data"); ////////////////
 				System.out.println("-3. Select doctor data"); /////////
 				System.out.println("-4. Search for a hospital"); // TODO ONLY GIVES INFO ABOUT HOSPITALS
 				System.out.println("-5. Create XML");
-=======
-				System.out.println("-2. Select a patient data");
-				System.out.println("-3. Select doctor data");
-				System.out.println("-4. Search for a hospital"); // ONLY GIVES INFO ABOUT HOSPITALS
->>>>>>> branch 'master' of https://github.com/martigalan/HospitalManagement
 				System.out.println("-0. Exit");
 
 				Scanner sc = new Scanner(System.in);
@@ -104,10 +94,6 @@ public class Menu {
 
 				case 4: {
 					showHospitals();
-					break;
-				}
-				case 5: {
-					//createXML();
 					break;
 				}
 				case 0: {
