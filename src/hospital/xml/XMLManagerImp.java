@@ -33,7 +33,7 @@ public class XMLManagerImp implements XMLManager {
 		}
 	}
 	
-	public void generatXml() {
+	public void generateXml() {
 		File fileXML = new File("./xmls/Patient.xml");
 		try {
 			if(fileXML.createNewFile()) {
