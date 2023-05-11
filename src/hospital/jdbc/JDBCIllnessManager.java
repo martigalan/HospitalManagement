@@ -31,7 +31,7 @@ public class JDBCIllnessManager implements IllnessManager {
 			p.setString(1, i.getCondition());
 			p.executeUpdate();
 			p.close();
-			String query = "SELECT last_insert_rowid() AS lastId";
+			String query = "SELECT last_insert_rowid() AS lastId"; //comprobar último ID de esa tabla
 			PreparedStatement p2 = c.prepareStatement(query);
 			ResultSet rs = p2.executeQuery();
 			Integer lastId = rs.getInt("lastId");
@@ -41,7 +41,7 @@ public class JDBCIllnessManager implements IllnessManager {
 			System.out.println("Database error");
 			e.printStackTrace();
 		}
-	}
+	} 
 	
 	@Override
 	public Illness getIllness(int id) {
