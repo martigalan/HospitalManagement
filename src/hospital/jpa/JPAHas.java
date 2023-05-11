@@ -1,5 +1,6 @@
 package hospital.jpa;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -42,10 +43,10 @@ EntityManager em;
 	}
 	
 	@Override
-	public List<Has> getHas(int pId){
-		List<Has> h = null;
+	public List<Has> getListHas(int pId){
+		List<Has> h = new ArrayList<Has>();
 		em.getTransaction().begin();
-		Query q = em.createNativeQuery("SELECT * FROM hasIllness WHERE patientId = ? AND illnessId = ?", Has.class);
+		Query q = em.createNativeQuery("SELECT * FROM hasIllness WHERE patientId = ?", Has.class);
 		q.setParameter(1, pId);
 		h = (List<Has>) q.getResultList();
 		return h;

@@ -16,10 +16,6 @@ public class JDBCHospitalManager implements HospitalManager {
 
 	public JDBCHospitalManager(Connection c) {
 		this.c = c;
-		if(this.getHospitals().isEmpty()) {
-			
-		}
-		// TODO insert info
 	}
 
 	public void insertHospital(Hospital h) {
@@ -57,7 +53,6 @@ public class JDBCHospitalManager implements HospitalManager {
 			System.out.println("Database error.");
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
@@ -90,11 +85,10 @@ public class JDBCHospitalManager implements HospitalManager {
 
 		Hospital h = new Hospital();
 		try {
-			String sql = "SELECT * FROM hospital WHERE name = ?";
+			String sql = "SELECT * FROM hospital WHERE name LIKE ?";
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setString(1, "%" + name + "%");
 			ResultSet rs = p.executeQuery();
-
 			while (rs.next()) {
 				Integer id = rs.getInt("id");
 				String name_hosp = rs.getString("name");
@@ -107,7 +101,6 @@ public class JDBCHospitalManager implements HospitalManager {
 			System.out.println("Database error");
 			e.printStackTrace();
 		}
-
 		return h;
 	}
 
