@@ -1,6 +1,7 @@
 package hospital.xml;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -16,6 +17,7 @@ import hospital.db.pojos.Patient;
 public class XMLManagerImp implements XMLManager {
 
 	@Override
+	//Needs a patient
 	public void patient2Xml(Patient p) {
 		try {
 			// Create the JAXBContext
@@ -28,6 +30,21 @@ public class XMLManagerImp implements XMLManager {
 			marshaller.marshal(p, file);
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void generateXml() {
+		File fileXML = new File("./xmls/Patient.xml");
+		try {
+			if(fileXML.createNewFile()) {
+				System.out.println("The XML was created successfully");
+			}
+			else {
+				System.out.println("The XML already exists");
+			}
+		} catch (IOException e) {
+			System.out.println("There XML could not be generated");
 		}
 	}
 
