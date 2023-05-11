@@ -17,7 +17,6 @@ import hospital.db.pojos.Patient;
 public class XMLManagerImp implements XMLManager {
 
 	@Override
-	//Needs a patient
 	public void patient2Xml(Patient p) {
 		try {
 			// Create the JAXBContext
@@ -32,6 +31,7 @@ public class XMLManagerImp implements XMLManager {
 			e.printStackTrace();
 		}
 	}
+
 	
 	public void generateXml() {
 		File fileXML = new File("./xmls/Patient.xml");

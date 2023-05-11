@@ -11,12 +11,14 @@ import hospital.db.ifaces.HospitalManager;
 import hospital.db.ifaces.IllnessManager;
 import hospital.db.ifaces.MachineManager;
 import hospital.db.ifaces.PatientManager;
+import hospital.db.ifaces.SortingMedicManager;
 import hospital.db.pojos.Doctor;
 import hospital.db.pojos.Hospital;
 import hospital.db.pojos.Illness;
 import hospital.db.pojos.Machine;
 import hospital.jpa.JPADoctorManager;
 import hospital.jpa.JPAPatientManager;
+import hospital.jpa.JPASortingMedicManager;
 
 public class ConnectionManager {
 	
@@ -26,6 +28,7 @@ public class ConnectionManager {
 	private static HospitalManager hospitalM;
 	private static IllnessManager illnessM;
 	private static MachineManager machineM;
+	private static SortingMedicManager sortingMedicM;
 	
 	public ConnectionManager() {
 		try {
@@ -71,7 +74,7 @@ public class ConnectionManager {
 			String table9 = "CREATE TABLE doctorTreats (illnessId INTEGER NOT NULL REFERENCES illness(id), " + "doctorId INTEGER NOT NULL REFERENCES doctor(id)," +
 			        "PRIMARY KEY (illnessId, doctorId));";
 			s.executeUpdate(table9);
-			String table10 = "CREATE TABLE sortinMedic (username TEXT, " + "password TEXT);";
+			String table10 = "CREATE TABLE sortingMedic (username TEXT, " + "password TEXT);";
 			s.executeUpdate(table10);
 			
 			hospitalM = new JDBCHospitalManager(this.getConnection());
@@ -171,6 +174,15 @@ public class ConnectionManager {
 			s.executeUpdate(insertTable94);
 			String insertTable95 = "INSERT INTO doctorTreats (illnessId, doctorId) VALUES (5, 4);";
 			s.executeUpdate(insertTable95);
+			
+			sortingMedicM = new JPASortingMedicManager();
+			
+			String insertTable101 = "INSERT INTO sortingMedic (username, password) VALUES ('johnny', 'hobbit73');";
+			s.executeUpdate(insertTable101);
+			String insertTable102 = "INSERT INTO sortingMedic (username, password) VALUES ('ade', 'spiderman32');";
+			s.executeUpdate(insertTable102);
+			String insertTable103 = "INSERT INTO sortingMedic (username, password) VALUES ('agnessy', 'theLordofRings47');";
+			s.executeUpdate(insertTable103);
 									
 			s.close();
 		} catch (SQLException e) {
