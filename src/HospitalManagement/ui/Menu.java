@@ -23,6 +23,7 @@ import hospital.db.ifaces.*;
 import hospital.db.pojos.*;
 import hospital.jdbc.*;
 import hospital.jpa.*;
+import hospital.xml.XMLManagerImp;
 import hospital.db.graphics.ImageWindow;
 
 public class Menu {
@@ -38,6 +39,7 @@ public class Menu {
 	private static SortingMedicManager sortingMedicM;
 	private static hasManager hasM;
 	private static boolean showImage = true;
+	private static XMLManagerImp xmlMI;
 	
 	public static boolean logIn() {
 		Scanner sc = new Scanner(System.in);
@@ -71,6 +73,7 @@ public class Menu {
 				System.out.println("-2. Select a patient data"); ////////////////
 				System.out.println("-3. Select doctor data"); /////////
 				System.out.println("-4. Search for a hospital"); // TODO ONLY GIVES INFO ABOUT HOSPITALS
+				System.out.println("-5. Create XML");
 				System.out.println("-0. Exit");
 
 				Scanner sc = new Scanner(System.in);
@@ -91,6 +94,10 @@ public class Menu {
 
 				case 4: {
 					showHospitals();
+					break;
+				}
+				case 5: {
+					//createXML();
 					break;
 				}
 				case 0: {
@@ -118,6 +125,10 @@ public class Menu {
 
 	}
 
+	public static void createXML() {
+		//TODO call method to generate 
+	}
+	
 	public static void registerPatient() throws IOException {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Input the patient data");
