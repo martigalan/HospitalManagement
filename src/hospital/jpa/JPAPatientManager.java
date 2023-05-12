@@ -28,7 +28,6 @@ public class JPAPatientManager implements PatientManager {
 	}
 	
 	@Override
-	// TODO change to update()
 	public void update(Patient patient) {
 		em.getTransaction().begin();
 		em.flush();
@@ -82,7 +81,7 @@ public class JPAPatientManager implements PatientManager {
 	}
 
 	@Override
-	public Patient getPatient(int patientId) {
+	public Patient getPatient(Integer patientId) {
 		Patient patient;
 		Query q = em.createNativeQuery("SELECT * FROM patient WHERE id = ?",Patient.class);
 		q.setParameter(1, patientId);

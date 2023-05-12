@@ -55,8 +55,6 @@ public class JPADoctorManager implements DoctorManager {
 		return doctors;
 	}
 	
-	
-
 	@Override
 	public void insertDoctor(Doctor doctor) {
 		em.getTransaction().begin();

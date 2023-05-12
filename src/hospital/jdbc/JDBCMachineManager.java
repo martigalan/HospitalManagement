@@ -114,7 +114,6 @@ public class JDBCMachineManager implements MachineManager {
 	}
 
 	@Override
-	//TODO ask if this is right
 	public List<Machine> machineTreatsIllness(Illness i) {
 		List<Machine> machines = new ArrayList();
 		try {
