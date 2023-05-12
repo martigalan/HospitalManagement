@@ -4,21 +4,13 @@
 <xsl:template match="/">
    <html>
    <p><b><xsl:value-of select="//name" /></b></p>
-   <p><b>Contents: </b><xsl:value-of select="//content" /></p>
-   <p><b>Paid authors:</b></p>
+   <p><b><xsl:value-of select="//surname" /></b></p>
+   <p><b>Patients:</b></p>
    <table border="1">
-      <th>Author</th>
+      <th>Patient</th>
       <th>Date of Birth</th>
-      <th>Address</th>
+      <th>Hospital</th>
       <xsl:for-each select="Patient/Hospital">
-      <xsl:sort select="@name" />
-         <xsl:if test="salary &gt; 0">
-            <tr>
-            <td><i><xsl:value-of select="@name" /></i></td>
-            <td><xsl:value-of select="dob" /></td>
-            <td><xsl:value-of select="address" /></td>
-            </tr>
-         </xsl:if>
       </xsl:for-each>
    </table>
    </html>

@@ -3,16 +3,11 @@ The type of the attribute "id" of Employee needs
 to be CDATA instead of ID, since DTD doesn't allow
 IDs that start with a number
 -->
-<!DOCTYPE Report [
-   <!ELEMENT Report (dob, Hospital)>
-   <!ELEMENT name (#PCDATA)>
-   <!ELEMENT content (#PCDATA)>
-   <!ELEMENT date (#PCDATA)>
-   <!ELEMENT Authors (Employee+)>
-   <!ELEMENT Employee (dob, address, salary)>
-   <!ATTLIST Employee name CDATA #REQUIRED
-                  	  id CDATA #REQUIRED>
+<!DOCTYPE Patient [
+   <!ATTLIST Patient name CDATA #REQUIRED
+                  	 surname CDATA #REQUIRED>
+   <!ELEMENT Patient (dob, Hospital)>
    <!ELEMENT dob (#PCDATA)>
-   <!ELEMENT address (#PCDATA)>
-   <!ELEMENT salary (#PCDATA)>
+   <!ELEMENT Hospital (#PCDATA)>
+   <!ELEMENT Authors (#PCDATA)>
 ]>
