@@ -82,7 +82,8 @@ public class Menu {
 				System.out.println("-2. Select a patient data");
 				System.out.println("-3. Select doctor data");
 				System.out.println("-4. Search for a hospital");
-				System.out.println("-5. Create XML");
+				System.out.println("-5. Create patient XML");
+				System.out.println("-6. Create hospital XML");
 				System.out.println("-0. Exit");
 
 				Scanner sc = new Scanner(System.in);
@@ -106,7 +107,11 @@ public class Menu {
 					break;
 				}
 				case 5: {
-					createXML();
+					createPatientXML();
+					break;
+				}
+				case 6: {
+					createHospitalXML();
 					break;
 				}
 				case 0: {
@@ -137,8 +142,12 @@ public class Menu {
 
 	}
 
-	public static void createXML() {
-		xmlMI.generateXml();
+	public static void createPatientXML() {
+		xmlMI.generatePatientXml();
+	}
+	
+	public static void createHospitalXML() {
+		xmlMI.generateHospitalXml();
 	}
 
 	public static void registerPatient() throws IOException {
