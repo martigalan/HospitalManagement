@@ -15,11 +15,17 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 
 @Entity
 @Table(name = "machine")
+@XmlAccessorType(XmlAccessType.FIELD)
+
 public class Machine implements Serializable {
 
 	private static final long serialVersionUID = -8134369376393308505L;
@@ -29,18 +35,21 @@ public class Machine implements Serializable {
 	@TableGenerator(name="machine", table="sqlite_sequence",
 	   	pkColumnName="name", valueColumnName="seq",
 	   	pkColumnValue="machine")
+	@XmlTransient
 	private Integer id;
+	@XmlAttribute
 	private String name;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "hospitalId")
-	@XmlElement
+	@XmlTransient
 	private Hospital hospital;
 	
 	@ManyToMany 
 	@JoinTable(name = "treats",
 	        joinColumns={@JoinColumn(name="machineId", referencedColumnName="id")},
 	   		inverseJoinColumns={@JoinColumn(name="illnessId", referencedColumnName="id")})
+	@XmlTransient
 	private List<Illness> treats;
 	
 	public Machine(String name, Hospital hospital) {

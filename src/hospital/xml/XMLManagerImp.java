@@ -12,6 +12,7 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import hospital.db.ifaces.XMLManager;
+import hospital.db.pojos.Hospital;
 import hospital.db.pojos.Patient;
 
 public class XMLManagerImp implements XMLManager {
@@ -34,8 +35,23 @@ public class XMLManagerImp implements XMLManager {
 	}
 
 	@Override
-	public void generateXml() {
+	public void generatePatientXml() {
 		File fileXML = new File("./xmls/Patient.xml");
+		try {
+			if(fileXML.createNewFile()) {
+				System.out.println("The XML was created successfully");
+			}
+			else {
+				System.out.println("The XML already exists");
+			}
+		} catch (IOException e) {
+			System.out.println("There XML could not be generated");
+		}
+	}
+	
+	@Override
+	public void generateHospitalXml() {
+		File fileXML = new File("./xmls/Hospital.xml");
 		try {
 			if(fileXML.createNewFile()) {
 				System.out.println("The XML was created successfully");
@@ -67,6 +83,29 @@ public class XMLManagerImp implements XMLManager {
 
 	@Override
 	public void patient2Html() {
+		xml2Html("./xmls/External-Report.xml", "./xmls/Report-Style.xslt", "./xmls/External-Report.html");
+		// TODO method to create xml file
+	}
+	
+	@Override
+	public Hospital xml2Hospital(File xml) {
+		Hospital hospital = null;
+		try {
+			JAXBContext jaxbContext = JAXBContext.newInstance(Patient.class);
+			// Get the unmarshaller
+			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+	
+			// Use the Unmarshaller to unmarshal the XML document from a file
+			File file = new File("./xmls/External-Report.xml");
+			hospital = (Hospital) unmarshaller.unmarshal(file);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return hospital;
+	}
+
+	@Override
+	public void hospital2Html() {
 		xml2Html("./xmls/External-Report.xml", "./xmls/Report-Style.xslt", "./xmls/External-Report.html");
 		// TODO method to create xml file
 	}

@@ -6,10 +6,19 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 
 @Entity
 @Table(name = "hospital")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = { "location", "machines"})
 public class Hospital implements Serializable{
 
 	private static final long serialVersionUID = 6590616788083928968L;
@@ -19,18 +28,27 @@ public class Hospital implements Serializable{
 	@TableGenerator(name="hospital", table="sqlite_sequence",
 	   	pkColumnName="name", valueColumnName="seq",
 	   	pkColumnValue="hospital")
+	@XmlTransient
 	private Integer id;
+	@XmlAttribute
 	private String name;
+	@XmlElement
 	private String location;
+	@XmlTransient
 	private static final Integer AV = 10;
 
 	@OneToMany(mappedBy = "hospital")
+	@XmlTransient
 	private List<Patient> patients;	
 	@OneToMany(mappedBy= "hospital")
+	@XmlTransient
 	private List<Doctor> doctors;
-	@OneToMany (mappedBy="hospital")
-	private List<Machine> machines;
 	
+	@OneToMany (mappedBy="hospital")
+	@XmlElement (name = "Machine")
+	@XmlElementWrapper(name = "Machines")
+	private List<Machine> machines;
+
 	public List<Machine> getMachines() {
 		return machines;
 	}
