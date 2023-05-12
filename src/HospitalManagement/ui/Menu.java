@@ -42,12 +42,9 @@ public class Menu {
 	private static boolean showImage = true;
 	private static Scanner sc = new Scanner(System.in);
 	private static XMLManagerImp xmlMI = new XMLManagerImp();
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> branch 'master' of https://github.com/martigalan/HospitalManagement
 	public static boolean logIn() {
+		Scanner sc = new Scanner(System.in);
 		System.out.println("Input the user name:");
 		String username = sc.nextLine();
 		System.out.println("Input the password:");
@@ -126,6 +123,8 @@ public class Menu {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			sc.close();
 		}
 
 	}
@@ -234,8 +233,15 @@ public class Menu {
 				switch (choice) {
 				case 1: {
 					updatePatient(id);
-					updateIllnessSeverity(id);
-					break;
+					System.out.println("Do you want to update an illness severity? Y/N");
+					String answer = sc.nextLine();
+					if (answer.equals("Y")) {
+						updateIllnessSeverity(id);
+						break;
+					}
+					else {
+						break;
+					}
 				}
 				case 2: {
 					showPatient(id);
@@ -251,9 +257,10 @@ public class Menu {
 				}
 				case 5: {
 					updateIllnessSeverity(id);
+					break;
 				}
 				case 0: {
-					main(null);
+					return;
 				}
 				}
 
@@ -359,8 +366,6 @@ public class Menu {
 
 			p.setPhoto(photo);
 		}
-		// patientM.update(p);
-		sc.close();
 	}
 
 	public static void showPatient(int id) throws IOException {
