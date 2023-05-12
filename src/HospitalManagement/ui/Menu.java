@@ -67,7 +67,6 @@ public class Menu {
 			doctorM = new JPADoctorManager(emMan.getEm());
 			hasM = new JPAHas(emMan.getEm());
 			hospitalMJPA = new JPAHospitalManager(emMan.getEm());
-			
 			sortingMedicM = new JPASortingMedicManager(emMan.getEm());
 
 			boolean log = true;
@@ -216,7 +215,7 @@ public class Menu {
 			System.out.println(((Patient) it.next()).shortInfo());
 		}
 		if (patientlist.isEmpty()) {
-			System.out.println("No existe nadie con ese nombre");
+			System.out.println("There is no one with that name.");
 		} else {
 			System.out.println("Please choose a patient, type its Id:");
 			Integer id = sc.nextInt();
@@ -344,10 +343,10 @@ public class Menu {
 					patientM.assignHospital(hMachine, p);
 					break;
 				}
-				System.out.println("Lo sentimos, no le podemos tratar en estos momentos");
+				System.out.println("Sorry, we can't attend you at this moment.");
 			}
 		}
-		System.out.println("Se le ha asignado: " + p.getHospital());
+		System.out.println("You have assign: " + p.getHospital());
 	}
 
 	public static void updatePatient(int id) throws IOException {
@@ -358,7 +357,7 @@ public class Menu {
 		if (!name.equals("")) {
 			p.setName(name);
 		}
-		System.out.println("Surame (" + p.getSurname() + "):");
+		System.out.println("Surname (" + p.getSurname() + "):");
 		String surname = sc.nextLine();
 		if (!surname.equals("")) {
 			p.setSurname(surname);
@@ -419,7 +418,7 @@ public class Menu {
 					break;
 				}
 				case 2: {
-					showDoctor(id); // showInformationDoctor
+					showDoctor(id); 
 					break;
 				}
 				case 3: {
