@@ -4,7 +4,7 @@ to be CDATA instead of ID, since DTD doesn't allow
 IDs that start with a number
 -->
 <!DOCTYPE Report [
-   <!ELEMENT Report (name, content, date, Authors)>
+   <!ELEMENT Report (dob, Hospital)>
    <!ELEMENT name (#PCDATA)>
    <!ELEMENT content (#PCDATA)>
    <!ELEMENT date (#PCDATA)>

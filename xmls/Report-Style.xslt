@@ -10,7 +10,7 @@
       <th>Author</th>
       <th>Date of Birth</th>
       <th>Address</th>
-      <xsl:for-each select="Report/Authors/Employee">
+      <xsl:for-each select="Patient/Hospital">
       <xsl:sort select="@name" />
          <xsl:if test="salary &gt; 0">
             <tr>
