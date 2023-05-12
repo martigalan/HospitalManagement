@@ -4,17 +4,25 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 
+@Entity
+@Table(name = "sortingMedic")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class SortingMedic implements Serializable{
 
 	private static final long serialVersionUID = 4995516544007640498L;
 	@Id
-	@GeneratedValue(generator = "users")
-	@TableGenerator(name = "users", table = "sqlite_sequence",
-		pkColumnName = "name", valueColumnName = "seq", pkColumnValue = "users")
+	@GeneratedValue(generator = "sortingMedic")
+	@TableGenerator(name = "sortingMedic", table = "sqlite_sequence",
+		pkColumnName = "name", valueColumnName = "seq", pkColumnValue = "sortingMedic")
 	private Integer id;
 	@Column(unique = true, name = "username")
 	private String username;

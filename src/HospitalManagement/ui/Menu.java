@@ -40,13 +40,9 @@ public class Menu {
 	private static SortingMedicManager sortingMedicM;
 	private static hasManager hasM;
 	private static boolean showImage = true;
-	private static Scanner sc;
+	private static Scanner sc = new Scanner(System.in);
 	private static XMLManagerImp xmlMI = new XMLManagerImp();
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'master' of https://github.com/martigalan/HospitalManagement
-	
 	public static boolean logIn() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Input the user name:");
@@ -71,17 +67,21 @@ public class Menu {
 			doctorM = new JPADoctorManager(emMan.getEm());
 			hasM = new JPAHas(emMan.getEm());
 			hospitalMJPA = new JPAHospitalManager(emMan.getEm());
-			sc = new Scanner(System.in);
-			/*
-			 * while (control) { boolean log = true; while (log = true) { log= logIn(); }
-			 */
+			
+			sortingMedicM = new JPASortingMedicManager(emMan.getEm());
+
+			boolean log = true;
+			while (log) {
+				log = logIn();
+			}
+
 			boolean control = true;
 			while (control) {
 				System.out.println("Choose an option, please:");
 				System.out.println("-1. Register a new Patient");
-				System.out.println("-2. Select a patient data"); ////////////////
-				System.out.println("-3. Select doctor data"); /////////
-				System.out.println("-4. Search for a hospital"); // TODO ONLY GIVES INFO ABOUT HOSPITALS
+				System.out.println("-2. Select a patient data");
+				System.out.println("-3. Select doctor data");
+				System.out.println("-4. Search for a hospital");
 				System.out.println("-5. Create XML");
 				System.out.println("-0. Exit");
 
@@ -116,14 +116,15 @@ public class Menu {
 				default:
 					throw new IllegalArgumentException("Unexpected value: " + choice);
 				}
-				
+
 			}
 
-			// }
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			sc.close();
 		}
 
 	}
@@ -139,7 +140,7 @@ public class Menu {
 	public static void createXML() {
 		xmlMI.generateXml();
 	}
-	
+
 	public static void registerPatient() throws IOException {
 		System.out.println("Input the patient data");
 		System.out.println("Name:");
@@ -186,16 +187,15 @@ public class Menu {
 		for (Doctor d : doctorList) {
 			System.out.println(d.shortInfo());
 		}
-		if(doctorList.isEmpty()) {
+		if (doctorList.isEmpty()) {
 			System.out.println("No existe nadie con ese nombre");
-			
-		}
-		else{
+
+		} else {
 			System.out.println("Please choose a doctor, type its Id:");
 			Integer id = sc.nextInt();
 			// Go to the Doctor's menu
 			DoctorMenu(id);
-			}
+		}
 	}
 
 	public static void selectPatient() throws IOException {
@@ -206,16 +206,15 @@ public class Menu {
 		while (it.hasNext()) {
 			System.out.println(((Patient) it.next()).shortInfo());
 		}
-		if(patientlist.isEmpty()) {
-			System.out.println("No existe nadie con ese nombre");			
-		}
-		else{
+		if (patientlist.isEmpty()) {
+			System.out.println("No existe nadie con ese nombre");
+		} else {
 			System.out.println("Please choose a patient, type its Id:");
 			Integer id = sc.nextInt();
 			// Go to the Patient's menu
 			PatientMenu(id);
-			}
-		
+		}
+
 	}
 
 	public static void PatientMenu(int id) {
@@ -234,8 +233,15 @@ public class Menu {
 				switch (choice) {
 				case 1: {
 					updatePatient(id);
-					updateIllnessSeverity(id);
-					break;
+					System.out.println("Do you want to update an illness severity? Y/N");
+					String answer = sc.nextLine();
+					if (answer.equals("Y")) {
+						updateIllnessSeverity(id);
+						break;
+					}
+					else {
+						break;
+					}
 				}
 				case 2: {
 					showPatient(id);
@@ -251,9 +257,10 @@ public class Menu {
 				}
 				case 5: {
 					updateIllnessSeverity(id);
+					break;
 				}
 				case 0: {
-					main(null);
+					return;
 				}
 				}
 
@@ -280,9 +287,9 @@ public class Menu {
 		Has hasIllness = hasM.getHas(id, illnessId);
 		System.out.println("Enter the new severity: ");
 		String sev = sc.nextLine();
-		hasIllness.setSeverity(sev);		
+		hasIllness.setSeverity(sev);
 		String severity = hasIllness.getSeverity();
-		//patientM.update(p);
+		// patientM.update(p);
 	}
 
 	private static void lookForIllness(Integer id) {
@@ -359,8 +366,6 @@ public class Menu {
 
 			p.setPhoto(photo);
 		}
-		//patientM.update(p);
-		sc.close();
 	}
 
 	public static void showPatient(int id) throws IOException {
