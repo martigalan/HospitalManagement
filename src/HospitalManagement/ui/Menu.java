@@ -27,8 +27,7 @@ import hospital.xml.XMLManagerImp;
 import hospital.db.graphics.ImageWindow;
 
 public class Menu {
-
-	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+	
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	private static PatientManager patientM;
 	private static DoctorManager doctorM;
@@ -42,7 +41,8 @@ public class Menu {
 	private static boolean showImage = true;
 	private static Scanner sc = new Scanner(System.in);
 	private static XMLManagerImp xmlMI = new XMLManagerImp();
-
+	private static boolean control;
+	
 	public static boolean logIn() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Input the user name:");
@@ -53,8 +53,6 @@ public class Menu {
 		return d;
 
 	}
-
-	private static boolean control;
 
 	public static void main(String[] args) {
 		try {
@@ -236,7 +234,7 @@ public class Menu {
 				System.out.println("5. Update state of an illness");
 				System.out.println("0. Back to  principal menu");
 
-				int choice = Integer.parseInt(r.readLine());
+				int choice = Integer.parseInt(sc.nextLine());
 
 				switch (choice) {
 				case 1: {
@@ -410,7 +408,7 @@ public class Menu {
 				System.out.println("3. Delete doctor");
 				System.out.println("0. Back to  principal menu");
 
-				int choice = Integer.parseInt(r.readLine());
+				int choice = Integer.parseInt(sc.nextLine());
 
 				switch (choice) {
 				case 1: {
