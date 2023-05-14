@@ -26,31 +26,26 @@ public class JPAHospitalManager implements HospitalManager {
 
 	@Override
 	public void insertHospital(Hospital h) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void updateHospital(Hospital hospital) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public List<Hospital> searchByName(String name) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Hospital getHospital(Integer hospitalId) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<Hospital> getHospitals() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

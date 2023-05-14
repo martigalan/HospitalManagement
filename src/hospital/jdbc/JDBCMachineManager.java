@@ -52,7 +52,6 @@ public class JDBCMachineManager implements MachineManager {
 
 	@Override
 	public void assignHospital(Hospital hospital, Integer machineID) {
-		// TODO Hospital id not 
 		String sql = "UPDATE machine SET hospital=? WHERE id=?";
 		PreparedStatement prep;
 		try {

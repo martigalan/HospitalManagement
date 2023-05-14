@@ -139,7 +139,8 @@ public class Patient implements Serializable{
 		hasManager hM;
 		JPAEMManager emMan = new JPAEMManager();
 		hM = new JPAHas(emMan.getEm());
-		this.illness = hM.getListHas(this.getId());
+		illness = hM.getListHas(this.getId());
+		setIllness(illness);
 		return illness;
 	}
 
@@ -166,7 +167,7 @@ public class Patient implements Serializable{
 	@Override
 	public String toString() {
 		return "\n id: " + id + "\n name: " + name + "\n surname: " + surname + "\n dob: " + dob + "\n hospital: "
-				+ hospital + "\n ";
+				+ hospital + " treats: " + this.getIllness() + "\n ";
 	}
 	
 	public String shortInfo() {
