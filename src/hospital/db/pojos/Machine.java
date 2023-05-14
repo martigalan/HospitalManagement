@@ -113,7 +113,7 @@ public class Machine implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Machine [id=" + id + ", name=" + name + ", hospital=" + hospital + "]";
+		return "\n id: " + id + "\n name: " + name + "\n hospital: " + hospital + "\n";
 	}
 	
 	

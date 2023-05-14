@@ -16,6 +16,9 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import hospital.db.ifaces.hasManager;
+import hospital.jpa.JPAEMManager;
+import hospital.jpa.JPAHas;
 import hospital.xml.SQLDateAdapter;
 
 @Entity
@@ -132,7 +135,11 @@ public class Patient implements Serializable{
 		this.hospital = hospital;
 	}
 
-	public List<Has> getIllness() {
+	public List<Has> getIllness() { //TODO correct this to show in toString
+		hasManager hM;
+		JPAEMManager emMan = new JPAEMManager();
+		hM = new JPAHas(emMan.getEm());
+		this.illness = hM.getListHas(this.getId());
 		return illness;
 	}
 
@@ -158,11 +165,11 @@ public class Patient implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Patient [id=" + id + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", hospital="
-				+ hospital;
+		return "\n id: " + id + "\n name: " + name + "\n surname: " + surname + "\n dob: " + dob + "\n hospital: "
+				+ hospital + "\n ";
 	}
 	
 	public String shortInfo() {
-		return "Patient [id=" + id + ", name=" + name + ", surname=" + surname + "]";
+		return "\n id: " + id + "\n name: " + name + "\n surname: " + surname + "\n";
 	}
 }

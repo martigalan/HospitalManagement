@@ -60,7 +60,7 @@ public class Treats implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Treats [machine=" + machine + ", illness=" + illness + ", success_rate=" + success_rate + "]";
+		return "\n machine: " + machine + "\n illness: " + illness + " success rate: " + success_rate + "\n";
 	}
 	
 	

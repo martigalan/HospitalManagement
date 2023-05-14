@@ -115,11 +115,11 @@ public class Has implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Has [patient=" + patient + ", illness=" + illness + ", severity=" + severity + "]";
+		return "\n patient: " + patient + " illness: " + illness + "\n severity: " + severity + "\n";
 	}
 	
 	public String infoIllness() {
-		return "[illness=" + illness + ", illnessId=" + illness.getId() + ", severity=" + severity + "]";
+		return "\n illness: " + illness  + " severity: " + severity + "\n";
 	}
 	
 	

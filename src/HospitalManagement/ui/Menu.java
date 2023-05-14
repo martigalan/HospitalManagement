@@ -234,7 +234,7 @@ public class Menu {
 				System.out.println("5. Update state of an illness");
 				System.out.println("0. Back to  principal menu");
 
-				int choice = Integer.parseInt(sc.nextLine());
+				int choice = Integer.parseInt(sc.nextLine()); //TODO q pasa?
 
 				switch (choice) {
 				case 1: {

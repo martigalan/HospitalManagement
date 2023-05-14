@@ -16,13 +16,8 @@ public class JDBCIllnessManager implements IllnessManager {
 
 	public JDBCIllnessManager(Connection c) {
 		this.c = c;
-		if (this.getIllnesses().isEmpty()){
-			//Illness i1 = new Illness(); set parameters and repeat with each illness
-			//connections between tables (patient and doctor)
-		}
 	}
 
-	// This is used in the constructor to insert pre-made info in db
 	@Override
 	public void insertIllness(Illness i) {
 		try {
@@ -62,6 +57,29 @@ public class JDBCIllnessManager implements IllnessManager {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	@Override
+	public List<Illness> relationDoctorIllness(int id) {
+		List<Illness> list = new ArrayList<Illness>();
+		try {
+			String sql = "SELECT * FROM doctorTreats WHERE doctorId = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, id);
+			ResultSet rs = p.executeQuery();
+			while(rs.next()) {
+				Integer iId = rs.getInt("illnessId");
+				Illness i = new Illness(iId);
+				list.add(i);
+			}
+			rs.close();
+			p.close();
+			return list;
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 	@Override

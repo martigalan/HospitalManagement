@@ -8,6 +8,10 @@ import java.util.Objects;
 
 import javax.persistence.*;
 
+import hospital.db.ifaces.IllnessManager;
+import hospital.jdbc.ConnectionManager;
+import hospital.jdbc.JDBCIllnessManager;
+
 @Entity
 @Table(name = "doctor")
 public class Doctor implements Serializable {
@@ -50,6 +54,7 @@ public class Doctor implements Serializable {
 		this.speciality = speciality;
 		this.salary = salary;
 		this.hospital = hospital;
+		this.treatsIllness = new ArrayList();
 	}
 	
 	public Doctor(Integer id, String name, String surname, Date dob, String speciality, Double salary, Hospital hospital) {
@@ -124,6 +129,10 @@ public class Doctor implements Serializable {
 	}
 
 	public List<Illness> getTreatsIllness() {
+		IllnessManager iM;
+		ConnectionManager c =new ConnectionManager();
+		iM = new JDBCIllnessManager(c.getConnection());
+		treatsIllness = iM.relationDoctorIllness(this.getId());
 		return treatsIllness;
 	}
 
@@ -150,13 +159,13 @@ public class Doctor implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Doctor [id=" + id + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", speciality="
-				+ speciality + ", salary=" + salary + ", hospital=" + hospital
-				+ ", treatsIllness=" + treatsIllness + "]";
+		return "\n id: " + id + "\n name: " + name + "\n surname: " + surname + "\n dob: " + dob + "\n speciality: "
+		+ speciality + "\n salary: " + salary + "\n hospital: " + hospital
+		+ " treats " + this.getTreatsIllness() + "\n";
 	}
 	
 	public String shortInfo() {
-		return "Doctor [id=" + id + ", name=" + name + ", surname=" + surname + "]";
+		return "\n id: " + id + "\n name: " + name + "\n surname: " + surname + "\n";
 	}
 
 }

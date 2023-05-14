@@ -8,4 +8,5 @@ public interface IllnessManager {
 	public void insertIllness(Illness i);
 	public Illness getIllness(int id);
 	public List<Illness> getIllnesses();
+	public List<Illness> relationDoctorIllness(int id);
 }

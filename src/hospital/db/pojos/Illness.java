@@ -6,6 +6,10 @@ import java.util.Objects;
 
 import javax.persistence.*;
 
+import hospital.db.ifaces.IllnessManager;
+import hospital.jdbc.ConnectionManager;
+import hospital.jdbc.JDBCIllnessManager;
+
 @Entity
 @Table(name = "illness")
 public class Illness implements Serializable {
@@ -41,6 +45,21 @@ public class Illness implements Serializable {
 		this.machines = new ArrayList();
 		this.patients = new ArrayList();
 	}
+	
+	public Illness(Integer id) {
+		super();
+		IllnessManager iM;
+		ConnectionManager c =new ConnectionManager();
+		iM = new JDBCIllnessManager(c.getConnection());
+		Illness i = iM.getIllness(id);
+		this.id = id;
+		this.condition = i.getCondition();
+		this.machines = new ArrayList();
+		this.doctors = new ArrayList();
+		this.machines = new ArrayList();
+		this.patients = new ArrayList();
+	}
+
 	
 	public Illness(Integer id, String condition) {
 		super();
@@ -103,7 +122,7 @@ public class Illness implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Illness [id=" + id + ", condition=" + condition + "]";
+		return "\n id: " + id + "\n condition: " + condition + "\n";
 	}
 	
 	
