@@ -122,8 +122,11 @@ public class Illness implements Serializable {
 
 	@Override
 	public String toString() {
-		return "\n id: " + id + "\n condition: " + condition + "\n";
+		return "\n id: " + id + ", condition: " + condition + "\n";
 	}
 	
+	public String show4TreatIllness() {
+		return " id: " + id + ", condition: " + condition + ";";
+	}
 	
 }

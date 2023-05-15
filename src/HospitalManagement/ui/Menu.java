@@ -86,39 +86,38 @@ public class Menu {
 				Scanner sc = new Scanner(System.in);
 				Integer choice = Integer.parseInt(sc.nextLine());
 				switch (choice) {
-				case 1: {
-					registerPatient();
-					break;
-				}
-				case 2: {
-					selectPatient();
-					break;
-				}
-				case 3: {
-					selectDoctor();
-					break;
-				}
-
-				case 4: {
-					showHospitals();
-					break;
-				}
-				case 5: {
-					createPatientXML();
-					break;
-				}
-				case 6: {
-					createHospitalXML();
-					break;
-				}
-				case 0: {
-					control = false;
-					break;
-				}
-				default:
-					throw new IllegalArgumentException("Unexpected value: " + choice);
-				}
-
+					case 1: {
+						registerPatient();
+						break;
+					}
+					case 2: {
+						selectPatient();
+						break;
+					}
+					case 3: {
+						selectDoctor();
+						break;
+					}
+	
+					case 4: {
+						showHospitals();
+						break;
+					}
+					case 5: {
+						createPatientXML();
+						break;
+					}
+					case 6: {
+						createHospitalXML();
+						break;
+					}
+					case 0: {
+						control = false;
+						break;
+					}
+					default:
+						throw new IllegalArgumentException("Unexpected value: " + choice);
+					}
 			}
 
 		} catch (NumberFormatException e) {
@@ -194,8 +193,7 @@ public class Menu {
 			System.out.println(d.shortInfo());
 		}
 		if (doctorList.isEmpty()) {
-			System.out.println("No existe nadie con ese nombre");
-
+			System.out.println("There is no one with that name.");
 		} else {
 			System.out.println("Please choose a doctor, type its Id:");
 			Integer id = sc.nextInt();
@@ -233,46 +231,47 @@ public class Menu {
 				System.out.println("4. Assign illness");
 				System.out.println("5. Update state of an illness");
 				System.out.println("0. Back to  principal menu");
-
+				
 				int choice = Integer.parseInt(sc.nextLine()); //TODO q pasa?
 
 				switch (choice) {
-				case 1: {
-					updatePatient(id);
-					System.out.println("Do you want to update an illness severity? Y/N");
-					String answer = sc.nextLine();
-					if (answer.equals("Y")) {
+					case 1: {
+						updatePatient(id);
+						System.out.println("Do you want to update an illness severity? Y/N");
+						String answer = sc.nextLine();
+						if (answer.equals("Y")) {
+							updateIllnessSeverity(id);
+							break;
+						}
+						else {
+							break;
+						}
+					}
+					case 2: {
+						showPatient(id); //da error porque hay un metodo que se esta llamando a si mismo constantemente
+						break;
+					}
+					case 3: {
+						searchHospital(id);
+						break;
+					}
+					case 4: {
+						lookForIllness(id);
+						break;
+					}
+					case 5: {
 						updateIllnessSeverity(id);
 						break;
 					}
-					else {
-						break;
+					case 0: {
+						return;
 					}
-				}
-				case 2: {
-					showPatient(id);
-					break;
-				}
-				case 3: {
-					searchHospital(id);
-					break;
-				}
-				case 4: {
-					lookForIllness(id);
-					break;
-				}
-				case 5: {
-					updateIllnessSeverity(id);
-					break;
-				}
-				case 0: {
-					return;
-				}
 				}
 
 			} catch (NumberFormatException e) {
 				System.out.println("Please select a number");
 				e.printStackTrace();
+				PatientMenu(id);
 			} catch (IOException e) {
 				System.out.println("I/O Exception.");
 				e.printStackTrace();
@@ -295,7 +294,7 @@ public class Menu {
 		String sev = sc.nextLine();
 		hasIllness.setSeverity(sev);
 		String severity = hasIllness.getSeverity();
-		// patientM.update(p);
+		patientM.update(p);
 	}
 
 	private static void lookForIllness(Integer id) {
@@ -376,7 +375,7 @@ public class Menu {
 
 	public static void showPatient(int id) throws IOException {
 		Patient p = patientM.getPatient(id);
-		System.out.println(p);
+		System.out.println(p); //TODO si no imprimes esta linea, funciona
 		// If patient.getPhoto != null
 		// open window and show it
 		if (p.getPhoto() != null) {
@@ -407,25 +406,26 @@ public class Menu {
 				System.out.println("2. Show data");
 				System.out.println("3. Delete doctor");
 				System.out.println("0. Back to  principal menu");
-
+				
+				Scanner sc = new Scanner(System.in);
 				int choice = Integer.parseInt(sc.nextLine());
 
 				switch (choice) {
-				case 1: {
-					updateDoctor(id);
-					break;
-				}
-				case 2: {
-					showDoctor(id); 
-					break;
-				}
-				case 3: {
-					removeDoctor(id);
-					break;
-				}
-				case 0: {
-					return;
-				}
+					case 1: {
+						updateDoctor(id);
+						break;
+					}
+					case 2: {
+						showDoctor(id); 
+						break;
+					}
+					case 3: {
+						removeDoctor(id);
+						break;
+					}
+					case 0: {
+						return;
+					}
 				}
 
 			} catch (NumberFormatException e) {

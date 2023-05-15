@@ -115,7 +115,5 @@ public class JPADoctorManager implements DoctorManager {
 		}
 		return docList;
 	}
-	
-	
-	
+		
 }

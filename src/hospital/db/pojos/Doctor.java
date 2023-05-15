@@ -159,9 +159,9 @@ public class Doctor implements Serializable {
 
 	@Override
 	public String toString() {
-		return "\n id: " + id + "\n name: " + name + "\n surname: " + surname + "\n dob: " + dob + "\n speciality: "
-		+ speciality + "\n salary: " + salary + "\n hospital: " + hospital
-		+ " treats " + this.getTreatsIllness() + "\n";
+		return "\n DOCTOR INFO. \n id: " + id + "\n name: " + name + "\n surname: " + surname + "\n dob: " + dob + "\n speciality: "
+		+ speciality + "\n salary: " + salary + " \n illness that " + name + " treats: " + this.getTreatsIllness() + " \n\n HOSPITAL INFO. "
+		+ hospital + "\n";
 	}
 	
 	public String shortInfo() {

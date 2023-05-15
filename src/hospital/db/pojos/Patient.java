@@ -167,7 +167,7 @@ public class Patient implements Serializable{
 	@Override
 	public String toString() {
 		return "\n id: " + id + "\n name: " + name + "\n surname: " + surname + "\n dob: " + dob + "\n hospital: "
-				+ hospital + " treats: " + this.getIllness() + "\n ";
+				+ hospital + " treats: " + this.getIllness() + " \n ";
 	}
 	
 	public String shortInfo() {
