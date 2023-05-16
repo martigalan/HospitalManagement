@@ -82,8 +82,7 @@ public class Hospital implements Serializable{
 		this.name = name;
 		this.location = location;
 	}
-
-	
+		
 	public Integer getId() {
 		return id;
 	}
