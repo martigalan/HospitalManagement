@@ -52,7 +52,7 @@ EntityManager em;
 		List<Has> h = new ArrayList<Has>();
 		Query q = em.createNativeQuery("SELECT * FROM hasIllness WHERE patientId = ?", Has.class);
 		q.setParameter(1, pId);
-		h = (List<Has>) q.getResultList();
+		h = (List<Has>) q.getResultList(); // TODO el problema del ShowPatient está aquí
 		return h;
 	}
 }
