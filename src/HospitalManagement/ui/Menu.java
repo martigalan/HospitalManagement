@@ -78,7 +78,7 @@ public class Menu {
 				System.out.println("-1. Register a new Patient");
 				System.out.println("-2. Select a patient data");
 				System.out.println("-3. Select doctor data");
-				System.out.println("-4. Search for a hospital");
+				System.out.println("-4. Show hospitals");
 				System.out.println("-5. Create patient XML");
 				System.out.println("-6. Create hospital XML");
 				System.out.println("-0. Exit");
