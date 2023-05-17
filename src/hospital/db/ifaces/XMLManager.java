@@ -12,8 +12,7 @@ public interface XMLManager {
 	public Patient xml2Patient(File xml);
 	public void patient2Html();
 	public void xml2Html(String sourcePath, String xsltPath,String resultDir);
-	public void generatePatientXml();
-	public void generateHospitalXml();
 	public Hospital xml2Hospital(File xml);
 	public void hospital2Html();
+	public void hospital2Xml(Hospital h);
 }

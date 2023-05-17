@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Patient name="" surname="a">
+    <dob>2001-01-01</dob>
+    <hospital name="HM Universitario Sanchinarro">
+        <location>Calle Ona 10, Madrid</location>
+        <Machines>
+            <Machine name="Tirzepatide"/>
+        </Machines>
+    </hospital>
+</Patient>

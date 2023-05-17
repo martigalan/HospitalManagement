@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -24,6 +25,7 @@ import hospital.xml.SQLDateAdapter;
 @Entity
 @Table(name = "patient")
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Patient")
 @XmlType(propOrder = { "dob", "hospital" }) //order of the elements
 public class Patient implements Serializable{
 	
