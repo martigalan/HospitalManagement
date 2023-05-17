@@ -24,7 +24,7 @@ public class Illness implements Serializable {
 	private Integer id;
 	private String condition;
 	
-	@OneToMany(mappedBy = "illness")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "illness")
 	private List<Has> patients;
 	
 	@ManyToMany(mappedBy = "treatsIllness")
