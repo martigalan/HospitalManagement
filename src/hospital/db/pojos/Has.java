@@ -113,7 +113,7 @@ public class Has implements Serializable{
 
 	@Override
 	public String toString() {
-		return "\n  illness: " + illness + "\n severity: " + severity + "\n";
+		return " \n illness: " + illness + ", severity: " + severity;
 	}
 	
 }

@@ -164,8 +164,8 @@ public class Patient implements Serializable{
 
 	@Override
 	public String toString() {
-		return "\n id: " + id + "\n name: " + name + "\n surname: " + surname + "\n dob: " + dob + "\n hospital: "
-				+ hospital + " treats: " + this.getIllness() + " \n "; //TODO metodo q llame al  jpahas q devuelve solo illness
+		return "\n id: " + id + "\n name: " + name + "\n surname: " + surname + "\n dob: " + dob + "\n HOSPITAL INFO. "
+				+ hospital + " WHAT TREATS: " + this.getIllness() + " \n "; //TODO metodo q llame al  jpahas q devuelve solo illness
 	}
 	
 	public String shortInfo() {
