@@ -124,9 +124,5 @@ public class Illness implements Serializable {
 	public String toString() {
 		return "\n id: " + id + ", condition: " + condition + "\n";
 	}
-	
-	public String show4TreatIllness() {
-		return " id: " + id + ", condition: " + condition + ";";
-	}
-	
+
 }
