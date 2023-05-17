@@ -289,7 +289,7 @@ public class Menu {
 		System.out.println("This patient has the following illnesses: ");
 		List<Has> illnessesPHas = hasM.getListHas(id);
 		for (Has hIllness : illnessesPHas) {
-			System.out.println(hIllness.infoIllness());
+			System.out.println(hIllness.toString());
 		}
 		System.out.println("Enter the illness that need to be updated: ");
 		Integer illnessId = Integer.parseInt(sc.nextLine());
@@ -321,7 +321,7 @@ public class Menu {
 		Patient p = patientM.getPatient(id);
 		List<Has> illnesses = p.getIllness();
 		for (Has hI : illnesses) {
-			System.out.println(hI.infoIllness());
+			System.out.println(hI.toString());
 		}
 		System.out.println("What illness do you want to treat?\n Please enter illness id: ");
 		int illnessId = sc.nextInt();

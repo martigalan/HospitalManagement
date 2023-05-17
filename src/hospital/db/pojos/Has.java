@@ -111,8 +111,6 @@ public class Has implements Serializable{
 				&& Objects.equals(severity, other.severity);
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "\n  illness: " + illness + "\n severity: " + severity + "\n";
