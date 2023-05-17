@@ -42,6 +42,8 @@ public class JDBCMachineManager implements MachineManager {
 				Machine m = new Machine(id, name_ma, hosp);
 				list.add(m);
 			}
+			p.close();
+			rs.close();
 		} catch (SQLException e) {
 			System.out.println("Database error");
 			e.printStackTrace();
@@ -59,6 +61,7 @@ public class JDBCMachineManager implements MachineManager {
 			prep.setObject(machineID, hospital);
 			prep.executeUpdate();
 			System.out.println("Update finished.");
+			prep.close();
 		} catch (SQLException e) {
 			System.out.println("Database exception.");
 			e.printStackTrace();
@@ -130,6 +133,8 @@ public class JDBCMachineManager implements MachineManager {
 			for (Integer mId : mIds){
 				machines.add(this.getMachine(mId));
 			}
+			st.close();
+			rs.close();
 		} catch (SQLException e) {
 			System.out.println("Database exception.");
 			e.printStackTrace();
@@ -154,6 +159,8 @@ public class JDBCMachineManager implements MachineManager {
 				Machine m = new Machine(id, name, h);
 				listM.add(m);
 			}
+			p.close();
+			rs.close();
 		}catch(SQLException e){
 			System.out.println("Database error");
 			e.printStackTrace();

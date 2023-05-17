@@ -38,6 +38,7 @@ public class XMLManagerImp implements XMLManager {
 	public void generatePatientXml() {
 		File fileXML = new File("./xmls/Patient.xml");
 		try {
+			
 			if(fileXML.createNewFile()) {
 				System.out.println("The XML was created successfully");
 			}

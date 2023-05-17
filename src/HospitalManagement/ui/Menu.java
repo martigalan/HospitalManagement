@@ -337,8 +337,9 @@ public class Menu {
 			Hospital hMachine = m.getHospital();
 			for (Doctor d : docList) {
 				Hospital hDoctor = d.getHospital();
+				Hospital realh = hospitalMJPA.search1ByName(hMachine.getName());
 				if ((hMachine.equals(hDoctor)) & (hMachine.getPatients().size() <= hMachine.getAv())) {
-					patientM.assignHospital(hMachine, p);
+					patientM.assignHospital(realh, p);
 					break;
 				}
 				System.out.println("Sorry, we can't attend you at this moment.");

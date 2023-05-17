@@ -64,14 +64,10 @@ public class JPADoctorManager implements DoctorManager {
 
 	@Override
 	public void deleteDoctor(Doctor doctor) {
-		Query q2 = em.createNativeQuery("SELECT * FROM doctor WHERE id = ?", Doctor.class);
-		q2.setParameter(1, doctor.getId());
-		Doctor doctorDeleted = (Doctor) q2.getSingleResult();
-		
 		// Begin transaction
 		em.getTransaction().begin();
 		// Remove the object
-		em.remove(doctorDeleted);
+		em.remove(doctor);
 		// End transaction
 		em.getTransaction().commit();
 	}

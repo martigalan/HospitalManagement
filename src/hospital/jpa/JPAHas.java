@@ -55,4 +55,6 @@ EntityManager em;
 		h = (List<Has>) q.getResultList(); // TODO el problema del ShowPatient está aquí
 		return h;
 	}
+	
+	// TODO buscar solo los id de illness y devolver lista de illness
 }

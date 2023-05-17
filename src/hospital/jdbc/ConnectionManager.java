@@ -85,7 +85,7 @@ public class ConnectionManager {
 			Hospital hosp3 = new Hospital("Centro Medico Teknon",
 					"Calle Vilana 12, Barcelona");
 			Hospital hosp4 = new Hospital("HM Universitario Sanchinarro",
-					"Calle Oña 10, Madrid");
+					"Calle Ona 10, Madrid");
 			Hospital hosp5 = new Hospital("Hospital Universitari i Politecnic la Fe",
 					"Av. de Fernando Abril Martorell 106, Valencia");
 			Hospital hosp6 = new Hospital("Hospital Infantil Universitario Nino Jesus",
@@ -106,7 +106,7 @@ public class ConnectionManager {
 			Doctor doc2 = new Doctor("Adele", "Brown", new Date(1975-06-05), 
 					"Nephrologist", 55000.00, hosp3); 
 			Doctor doc3 = new Doctor("Agnes", "Simpson", new Date(1975-06-05), 
-					"Neurologist", 55000.00, hosp6); 
+					"Neurologist", 55000.00, hosp4); 
 			Doctor doc4 = new Doctor("Michael", "Howland", new Date(1975-06-05), 
 					"Endocrininologist", 55000.00, hosp5); 
 			Doctor doc5 = new Doctor("Luke", "Donaldson", new Date(1975-06-05), 

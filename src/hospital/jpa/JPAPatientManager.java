@@ -54,6 +54,7 @@ public class JPAPatientManager implements PatientManager {
 	public void assignHospital(Hospital h, Patient p) {
 		em.getTransaction().begin();
 		p.setHospital(h);
+		h.getPatients().add(p);
 		em.getTransaction().commit();
 	}
 
