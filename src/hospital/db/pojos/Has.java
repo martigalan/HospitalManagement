@@ -118,9 +118,4 @@ public class Has implements Serializable{
 		return "\n  illness: " + illness + "\n severity: " + severity + "\n";
 	}
 	
-	public String infoIllness() {
-		return "\n illness: " + illness  + " severity: " + severity + "\n";
-	}
-	
-	
 }
