@@ -26,7 +26,6 @@ public class JPAHospitalManager implements HospitalManager {
 
 	@Override
 	public void insertHospital(Hospital h) {
-
 	}
 
 	@Override

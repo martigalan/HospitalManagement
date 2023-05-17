@@ -51,7 +51,7 @@ public class Patient implements Serializable{
 	@XmlTransient
 	private byte[] photo;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "patient")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "patient")
 	@XmlTransient
 	private List<Has> illness;
 	
@@ -136,12 +136,7 @@ public class Patient implements Serializable{
 	}
 
 	public List<Has> getIllness() { //TODO correct this to show in toString
-		hasManager hM;
-		JPAEMManager emMan = new JPAEMManager();
-		hM = new JPAHas(emMan.getEm());
-		List<Has> illness = new ArrayList<Has>();
-		illness = hM.getListHas(this.getId());
-		setIllness(illness);
+		
 		return illness;
 	}
 
@@ -168,7 +163,7 @@ public class Patient implements Serializable{
 	@Override
 	public String toString() {
 		return "\n id: " + id + "\n name: " + name + "\n surname: " + surname + "\n dob: " + dob + "\n hospital: "
-				+ hospital + " treats: " + this.getIllness() + " \n ";
+				+ hospital + " treats: " + this.getIllness() + " \n "; //TODO metodo q llame al  jpahas q devuelve solo illness
 	}
 	
 	public String shortInfo() {
