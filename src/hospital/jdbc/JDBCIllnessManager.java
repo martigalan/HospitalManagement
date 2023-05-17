@@ -95,6 +95,8 @@ public class JDBCIllnessManager implements IllnessManager {
 				Illness i = new Illness(id, condition);
 				listIllnesses.add(i);
 			}
+			p.close();
+			rs.close();
 		}catch(SQLException e){
 			System.out.println("Database error");
 			e.printStackTrace();

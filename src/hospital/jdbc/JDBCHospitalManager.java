@@ -72,6 +72,8 @@ public class JDBCHospitalManager implements HospitalManager {
 				Hospital h = new Hospital(id, name_hosp, location);
 				list.add(h);
 			}
+			p.close();
+			rs.close();
 		} catch (SQLException e) {
 			System.out.println("Database error");
 			e.printStackTrace();
@@ -97,6 +99,8 @@ public class JDBCHospitalManager implements HospitalManager {
 				h.setName(name_hosp);
 				h.setLocation(location);
 			}
+			p.close();
+			rs.close();
 		} catch (SQLException e) {
 			System.out.println("Database error");
 			e.printStackTrace();
@@ -117,6 +121,7 @@ public class JDBCHospitalManager implements HospitalManager {
 			String name = result.getString("name");
 			String location = result.getString("location");
 			hosp = new Hospital(id, name, location);
+			statement.close();
 		} catch (SQLException e) {
 			System.out.println("Database error");
 			e.printStackTrace();
@@ -138,6 +143,8 @@ public class JDBCHospitalManager implements HospitalManager {
 				Hospital h = new Hospital(id, name, location);
 				listHospitals.add(h);
 			}
+			p.close();
+			rs.close();
 		}catch(SQLException e){
 			System.out.println("Database error");
 			e.printStackTrace();

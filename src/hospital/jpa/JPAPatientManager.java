@@ -53,10 +53,8 @@ public class JPAPatientManager implements PatientManager {
 	@Override
 	public void assignHospital(Hospital h, Patient p) {
 		em.getTransaction().begin();
-		em.flush(); //TODO check with/without this
 		p.setHospital(h);
 		h.getPatients().add(p);
-		em.merge(p);
 		em.getTransaction().commit();
 	}
 
