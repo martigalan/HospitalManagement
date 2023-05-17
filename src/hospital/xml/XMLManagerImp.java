@@ -33,35 +33,21 @@ public class XMLManagerImp implements XMLManager {
 			e.printStackTrace();
 		}
 	}
-
-	@Override
-	public void generatePatientXml() {
-		File fileXML = new File("./xmls/Patient.xml");
-		try {
-			
-			if(fileXML.createNewFile()) {
-				System.out.println("The XML was created successfully");
-			}
-			else {
-				System.out.println("The XML already exists");
-			}
-		} catch (IOException e) {
-			System.out.println("There XML could not be generated");
-		}
-	}
 	
 	@Override
-	public void generateHospitalXml() {
-		File fileXML = new File("./xmls/Hospital.xml");
+	//Needs a patient
+	public void hospital2Xml(Hospital h) {
 		try {
-			if(fileXML.createNewFile()) {
-				System.out.println("The XML was created successfully");
-			}
-			else {
-				System.out.println("The XML already exists");
-			}
-		} catch (IOException e) {
-			System.out.println("There XML could not be generated");
+			// Create the JAXBContext
+			JAXBContext jaxbContext = JAXBContext.newInstance(Hospital.class);
+			// Get the marshaller
+			Marshaller marshaller = jaxbContext.createMarshaller();
+			// Pretty formatting
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			File file = new File("./xmls/Hospital.xml");
+			marshaller.marshal(h, file);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 

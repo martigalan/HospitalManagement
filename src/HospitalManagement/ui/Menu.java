@@ -79,8 +79,7 @@ public class Menu {
 				System.out.println("-2. Select a patient data");
 				System.out.println("-3. Select doctor data");
 				System.out.println("-4. Show hospitals");
-				System.out.println("-5. Create patient XML");
-				System.out.println("-6. Create hospital XML");
+				System.out.println("-5. Create hospital XML");
 				System.out.println("-0. Exit");
 
 				Scanner sc = new Scanner(System.in);
@@ -104,10 +103,6 @@ public class Menu {
 						break;
 					}
 					case 5: {
-						createPatientXML();
-						break;
-					}
-					case 6: {
 						createHospitalXML();
 						break;
 					}
@@ -137,13 +132,15 @@ public class Menu {
 		}
 
 	}
-
-	public static void createPatientXML() {
-		xmlMI.generatePatientXml();
-	}
 	
 	public static void createHospitalXML() {
-		xmlMI.generateHospitalXml();
+		System.out.println("Which hospital do you want to create an XML out of? \n");
+		List<Hospital> listH = hospitalM.getHospitals();
+		System.out.println(listH);
+		System.out.println("\n Choose an id: ");
+		Integer hId = Integer.parseInt(sc.nextLine());
+		Hospital h = hospitalM.getHospital(hId);
+		xmlMI.hospital2Xml(h);
 	}
 
 	public static void registerPatient() throws IOException {
@@ -230,6 +227,7 @@ public class Menu {
 				System.out.println("3. Search hospital");
 				System.out.println("4. Assign illness");
 				System.out.println("5. Update state of an illness");
+				System.out.println("6. Create patient XML");
 				System.out.println("0. Back to  principal menu");
 				
 				Scanner sc = new Scanner(System.in);
@@ -262,6 +260,11 @@ public class Menu {
 					}
 					case 5: {
 						updateIllnessSeverity(id);
+						break;
+					}
+					case 6: {
+						Patient p = patientM.getPatient(id);
+						xmlMI.patient2Xml(p);
 						break;
 					}
 					case 0: {
