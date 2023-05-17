@@ -67,12 +67,6 @@ public class XMLManagerImp implements XMLManager {
 		}
 		return patient;
 	}
-
-	@Override
-	public void patient2Html() {
-		xml2Html("./xmls/External-Report.xml", "./xmls/Report-Style.xslt", "./xmls/External-Report.html");
-		// TODO method to create xml file
-	}
 	
 	@Override
 	public Hospital xml2Hospital(File xml) {
@@ -89,12 +83,6 @@ public class XMLManagerImp implements XMLManager {
 			e.printStackTrace();
 		}
 		return hospital;
-	}
-
-	@Override
-	public void hospital2Html() {
-		xml2Html("./xmls/External-Report.xml", "./xmls/Report-Style.xslt", "./xmls/External-Report.html");
-		// TODO method to create xml file
 	}
 	
 	@Override
