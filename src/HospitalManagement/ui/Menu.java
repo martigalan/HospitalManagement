@@ -45,9 +45,9 @@ public class Menu {
 	
 	public static boolean logIn() {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Input the user name:");
+		System.out.println("Type the user name:");
 		String username = sc.nextLine();
-		System.out.println("Input the password:");
+		System.out.println("Type the password:");
 		String password = sc.nextLine();
 		boolean d = sortingMedicM.searchUser(username, password);
 		return d;
@@ -144,7 +144,7 @@ public class Menu {
 	}
 
 	public static void registerPatient() throws IOException {
-		System.out.println("Input the patient data");
+		System.out.println("Type the patient data");
 		System.out.println("Name:");
 		String name = sc.nextLine();
 		System.out.println("Surname:");
@@ -181,9 +181,9 @@ public class Menu {
 	}
 
 	public static void selectDoctor() throws IOException {
-		System.out.println("Introduce the name:");
+		System.out.println("Type the name:");
 		String nameDoc = sc.nextLine();
-		System.out.println("Introduce the surname:");
+		System.out.println("Type the surname:");
 		String snDoc = sc.nextLine();
 		List<Doctor> doctorList = doctorM.searchByName(nameDoc, snDoc);
 		for (Doctor d : doctorList) {
@@ -200,7 +200,7 @@ public class Menu {
 	}
 
 	public static void selectPatient() throws IOException {
-		System.out.println("Introduce the name:");
+		System.out.println("Type the name:");
 		String name = sc.nextLine();
 		List<Patient> patientlist = patientM.searchByName(name);
 		Iterator it = patientlist.iterator();
@@ -247,7 +247,7 @@ public class Menu {
 						}
 					}
 					case 2: {
-						showPatient(id); //da error porque hay un metodo que se esta llamando a si mismo constantemente
+						showPatient(id); 
 						break;
 					}
 					case 3: {
@@ -356,12 +356,12 @@ public class Menu {
 		System.out.println("Type the new data, or press enter to keep actual data");
 		System.out.println("Name (" + p.getName() + "):");
 		String name = sc.nextLine();
-		if (!name.equals("")) {
+		if (!name.equals(" ")) {
 			p.setName(name);
 		}
-		System.out.println("Surname (" + p.getSurname() + "):");
+		System.out.println("\nSurname (" + p.getSurname() + "):");
 		String surname = sc.nextLine();
-		if (!surname.equals("")) {
+		if (!surname.equals(" ")) {
 			p.setSurname(surname);
 		}
 
@@ -380,7 +380,7 @@ public class Menu {
 
 	public static void showPatient(int id) throws IOException {
 		Patient p = patientM.getPatient(id);
-		System.out.println(p); //TODO si no imprimes esta linea, funciona
+		System.out.println(p); 
 		// If patient.getPhoto != null
 		// open window and show it
 		if (p.getPhoto() != null) {
