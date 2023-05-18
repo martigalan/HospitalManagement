@@ -53,7 +53,7 @@ public class Patient implements Serializable{
 	@XmlTransient
 	private byte[] photo;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "patient")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "patient", cascade = CascadeType.PERSIST)
 	@XmlTransient
 	private List<Has> illness;
 	
@@ -165,7 +165,7 @@ public class Patient implements Serializable{
 	@Override
 	public String toString() {
 		return "\n id: " + id + "\n name: " + name + "\n surname: " + surname + "\n dob: " + dob + "\n HOSPITAL INFO. "
-				+ hospital + " WHAT TREATS: " + this.getIllness() + " \n "; //TODO metodo q llame al  jpahas q devuelve solo illness
+				+ hospital + " TREATED FOR: " + this.getIllness() + " \n ";
 	}
 	
 	public String shortInfo() {

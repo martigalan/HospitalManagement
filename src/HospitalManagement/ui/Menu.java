@@ -104,7 +104,15 @@ public class Menu {
 					}
 					case 5: {
 						createHospitalXML();
-						break;
+						System.out.println("Do you want to create and HTML? Y/N");
+						String answer = sc.nextLine();
+						if (answer.equals("Y")) {
+							xmlMI.xml2Html("./xmls/Hospital.xml", "./xmls/Hospital-Style.xslt", "./xmls/Hospital.html");
+							break;
+						}
+						else {
+							break;
+						}
 					}
 					case 0: {
 						control = false;
@@ -193,7 +201,7 @@ public class Menu {
 			System.out.println("There is no one with that name.");
 		} else {
 			System.out.println("Please choose a doctor, type its Id:");
-			Integer id = sc.nextInt();
+			Integer id = Integer.parseInt(sc.nextLine());
 			// Go to the Doctor's menu
 			DoctorMenu(id);
 		}
@@ -211,7 +219,7 @@ public class Menu {
 			System.out.println("There is no one with that name.");
 		} else {
 			System.out.println("Please choose a patient, type its Id:");
-			Integer id = sc.nextInt();
+			Integer id = Integer.parseInt(sc.nextLine());
 			// Go to the Patient's menu
 			PatientMenu(id);
 		}
@@ -265,7 +273,15 @@ public class Menu {
 					case 6: {
 						Patient p = patientM.getPatient(id);
 						xmlMI.patient2Xml(p);
-						break;
+						System.out.println("Do you want to create and HTML? Y/N");
+						String answer = sc.nextLine();
+						if (answer.equals("Y")) {
+							xmlMI.xml2Html("./xmls/Patient.xml", "./xmls/Patient-Style.xslt", "./xmls/Patient.html");
+							break;
+						}
+						else {
+							break;
+						}
 					}
 					case 0: {
 						return;
@@ -348,7 +364,7 @@ public class Menu {
 				System.out.println("Sorry, we can't attend you at this moment.");
 			}
 		}
-		System.out.println("You have assign: " + p.getHospital());
+		System.out.println("You have been assigned to : " + p.getHospital());
 	}
 
 	public static void updatePatient(int id) throws IOException {
@@ -426,7 +442,7 @@ public class Menu {
 					}
 					case 3: {
 						removeDoctor(id);
-						break;
+						return;
 					}
 					case 0: {
 						return;

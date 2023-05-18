@@ -9,7 +9,4 @@ IDs that start with a number
    <!ELEMENT location (#PCDATA)>
    <!ELEMENT Machines (Machine+)>
    <!ATTLIST Machine name CDATA #REQUIRED>
-
-                  	 
-
 ]>
