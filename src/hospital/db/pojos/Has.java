@@ -93,7 +93,7 @@ public class Has implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(illness, patient, severity);
+		return Objects.hash(illness, patient);
 	}
 
 
@@ -107,8 +107,7 @@ public class Has implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Has other = (Has) obj;
-		return Objects.equals(illness, other.illness) && Objects.equals(patient, other.patient)
-				&& Objects.equals(severity, other.severity);
+		return Objects.equals(illness, other.illness) && Objects.equals(patient, other.patient);
 	}
 
 	@Override

@@ -16,11 +16,14 @@ public class JPAPatientManager implements PatientManager {
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 		em.getTransaction().commit();
+		
 	}
 
 	public JPAPatientManager(EntityManager em) {
 		super();
 		this.em = em;
+		em.setFlushMode(FlushModeType.COMMIT);
+
 	}
 
 	public void close() {
@@ -61,24 +64,32 @@ public class JPAPatientManager implements PatientManager {
 	@Override
 	public void assignIllness(Patient p, Illness i, String severity) {
 		JPAHas hM = new JPAHas();
-		Has h= hM.getHas(p.getId(), i.getId());
-		em.getTransaction().begin();
-		em.flush();
-		if (h != null) {
-			h.setSeverity(severity);
+		Has has= hM.getHas(p.getId(), i.getId());
+		if (has != null) {
+			em.getTransaction().begin();
+			has.setSeverity(severity);
+			em.getTransaction().commit();
 		}
 		else {
-		    Has has = new Has();
-		    has.setIllness(i);
+			em.getTransaction().begin();
+			em.refresh(p);
+			em.merge(i);
+			em.flush();
+			em.getTransaction().commit();
+			em.getTransaction().begin();
+		    has = new Has();
 		    has.setIllnessId(i.getId());
-		    has.setPatient(p);
 		    has.setPatientId(p.getId());
 		    has.setSeverity(severity);
-		    p.getIllness().add(has);
-		    i.getPatients().add(has);
-		    em.persist(has);
+		    has.setIllness(i);
+		    List l1 = p.getIllness();
+		    l1.add(has);
+			List l2 = i.getPatients();
+		    l2.add(has);
+		    has.setPatient(p);
+			em.persist(has);
+		    em.getTransaction().commit();
 		}
-		em.getTransaction().commit();
 	}
 
 	@Override
