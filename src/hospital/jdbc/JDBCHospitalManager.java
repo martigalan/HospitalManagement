@@ -123,8 +123,7 @@ public class JDBCHospitalManager implements HospitalManager {
 			hosp = new Hospital(id, name, location);
 			statement.close();
 		} catch (SQLException e) {
-			System.out.println("Database error");
-			e.printStackTrace();
+			System.out.println("  NO HOSPITAL WITH THAT ID\n");
 		}
 		return hosp;
 	}

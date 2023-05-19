@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Hospital name="Hospital Universitario Fundacion Jimenez Diaz">
-    <location>Av. Reyes Catolicos 2, Madrid</location>
+<Hospital name="Hospital Infantil Universitario Nino Jesus">
+    <location>Av. Menendez Pelayo 65, Madrid</location>
     <Machines/>
 </Hospital>

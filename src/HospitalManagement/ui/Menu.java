@@ -4,11 +4,16 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.Scanner;
+
+import javax.persistence.NoResultException;
+
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -119,12 +124,13 @@ public class Menu {
 						break;
 					}
 					default:
-						throw new IllegalArgumentException("Unexpected value: " + choice);
+						System.out.println("  NOT AN OPTION \n");
+						break;
 					}
 			}
 
 		} catch (NumberFormatException e) {
-			e.printStackTrace();
+			System.out.println("  NOT A NUMBER \n");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -148,6 +154,11 @@ public class Menu {
 		System.out.println("\n Choose an id: ");
 		Integer hId = Integer.parseInt(sc.nextLine());
 		Hospital h = hospitalM.getHospital(hId);
+		while(h == null) {
+			System.out.println("\n Choose an id: ");
+			hId = Integer.parseInt(sc.nextLine());
+			h = hospitalM.getHospital(hId);
+		}
 		xmlMI.hospital2Xml(h);
 	}
 
@@ -171,13 +182,19 @@ public class Menu {
 		}
 		System.out.println("Photo:");
 
-		System.out.print("Type the file name as it appears in folder /photos, including extension: ");
-		String fileName = sc.nextLine();
-		File photos = new File("./photos/" + fileName);
-		InputStream streamBlob = new FileInputStream(photos);
-		byte[] photo = new byte[streamBlob.available()];
-		streamBlob.read(photo);
-		streamBlob.close();
+		byte[] photo;
+		try {
+			System.out.print("Type the file name as it appears in folder /photos, including extension: ");
+			String fileName = sc.nextLine();
+			File photos = new File("./photos/" + fileName);
+			InputStream streamBlob = new FileInputStream(photos);
+			photo = new byte[streamBlob.available()];
+			streamBlob.read(photo);
+			streamBlob.close();
+		}catch(FileNotFoundException ex) {
+			System.out.println("   Sorry, the file wasn't found. NO PHOTO ASSIGNED\n");
+			photo = null;
+		}
 
 		Hospital mainHospital = hospitalMJPA.search1ByName("Fundacion Jimenez Diaz");
 
@@ -189,6 +206,7 @@ public class Menu {
 	}
 
 	public static void selectDoctor() throws IOException {
+		try {
 		System.out.println("Type the name:");
 		String nameDoc = sc.nextLine();
 		System.out.println("Type the surname:");
@@ -200,14 +218,24 @@ public class Menu {
 		if (doctorList.isEmpty()) {
 			System.out.println("There is no one with that name.");
 		} else {
-			System.out.println("Please choose a doctor, type its Id:");
+			System.out.println("Please choose a doctor, type the Id:");
 			Integer id = Integer.parseInt(sc.nextLine());
+			Doctor d = doctorM.getDoctor(id);
+			while(d.getName() != nameDoc) {
+				System.out.println("Not an option, type the Id:");
+				id = Integer.parseInt(sc.nextLine());
+				d = doctorM.getDoctor(id);
+			}
 			// Go to the Doctor's menu
 			DoctorMenu(id);
+		}
+		}catch(NoResultException ex) {
+			System.out.println("  NO DOCTOR WITH THAT ID\n");
 		}
 	}
 
 	public static void selectPatient() throws IOException {
+		try {
 		System.out.println("Type the name:");
 		String name = sc.nextLine();
 		List<Patient> patientlist = patientM.searchByName(name);
@@ -218,10 +246,19 @@ public class Menu {
 		if (patientlist.isEmpty()) {
 			System.out.println("There is no one with that name.");
 		} else {
-			System.out.println("Please choose a patient, type its Id:");
+			System.out.println("Please choose a patient, type the Id:");
 			Integer id = Integer.parseInt(sc.nextLine());
+			Patient p = patientM.getPatient(id);
+			while(p.getName() != name) {
+				System.out.println("Not an option, type the Id:");
+				id = Integer.parseInt(sc.nextLine());
+				p = patientM.getPatient(id);
+			}
 			// Go to the Patient's menu
 			PatientMenu(id);
+		}
+		}catch(NoResultException ex) {
+			System.out.println("  NO PATIENT WITH THAT ID\n");
 		}
 
 	}
@@ -328,6 +365,9 @@ public class Menu {
 		Scanner sc = new Scanner(System.in);
 		Integer iId = Integer.parseInt(sc.nextLine());
 		Illness illness = illnessM.getIllness(iId);
+		if (illness == null) {
+			PatientMenu(id);
+		}
 		System.out.println("Please, enter the severity of the illness: ");
 		String severity = sc.nextLine();
 		patientM.assignIllness(p, illness, severity);

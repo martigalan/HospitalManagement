@@ -53,8 +53,7 @@ public class JDBCIllnessManager implements IllnessManager {
 			p.close();
 			return i;
 		} catch (SQLException e) {
-			System.out.println("Database error.");
-			e.printStackTrace();
+			System.out.println("   NO ILLNESS FOUND WITH THAT ID\n");
 		}
 		return null;
 	}
