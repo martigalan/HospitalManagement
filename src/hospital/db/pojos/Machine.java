@@ -41,12 +41,17 @@ public class Machine implements Serializable {
 	   	pkColumnValue="machine")
 	@XmlTransient
 	private Integer id;
-	@XmlAttribute
+	@XmlElement
 	private String name;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+<<<<<<< HEAD
 	@JoinColumn(name = "hospitalId")
 	@XmlElement
+=======
+	@JoinColumn(name = "hospital")
+	@XmlTransient
+>>>>>>> branch 'master' of https://github.com/martigalan/HospitalManagement
 	private Hospital hospital;
 	
 	@ManyToMany 
