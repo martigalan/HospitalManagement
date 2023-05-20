@@ -84,7 +84,7 @@ public class Menu {
 				System.out.println("-2. Select a patient data");
 				System.out.println("-3. Select doctor data");
 				System.out.println("-4. Show hospitals");
-				System.out.println("-5. Create hospital XML");
+				System.out.println("-5. Create XMLs");
 				System.out.println("-0. Exit");
 
 				Scanner sc = new Scanner(System.in);
@@ -108,16 +108,7 @@ public class Menu {
 						break;
 					}
 					case 5: {
-						createHospitalXML();
-						System.out.println("Do you want to create and HTML? Y/N");
-						String answer = sc.nextLine();
-						if (answer.equals("Y")) {
-							xmlMI.xml2Html("./xmls/Hospital.xml", "./xmls/Hospital-Style.xslt", "./xmls/Hospital.html");
-							break;
-						}
-						else {
-							break;
-						}
+						xmlMenu();
 					}
 					case 0: {
 						control = false;
@@ -138,6 +129,98 @@ public class Menu {
 			sc.close();
 		}
 
+	}
+
+	private static void xmlMenu() {
+		while (true) {
+			try {
+				System.out.println("What do you want to turn into an XML? :");
+				System.out.println("1. Hospital");
+				System.out.println("2. Illness");
+				System.out.println("3. Machine");
+				System.out.println("0. Back to  principal menu");
+				
+				Scanner sc = new Scanner(System.in);
+				int choice = Integer.parseInt(sc.nextLine()); 
+
+				switch (choice) {
+					case 1: {
+						createHospitalXML();
+						System.out.println("Do you want to create and HTML? Y/N");
+						String answer = sc.nextLine();
+						if (answer.equals("Y")) {
+							xmlMI.xml2Html("./xmls/Hospital.xml", "./xmls/Hospital-Style.xslt", "./xmls/Hospital.html");
+							break;
+						}
+						else {
+							break;
+						}
+					}
+					case 2: {
+						createIllnessXML();
+						System.out.println("Do you want to create and HTML? Y/N");
+						String answer = sc.nextLine();
+						if (answer.equals("Y")) {
+							xmlMI.xml2Html("./xmls/Illness.xml", "./xmls/Illness-Style.xslt", "./xmls/Illness.html");
+							break;
+						}
+						else {
+							break;
+						}
+					}
+					case 3: {
+						createMachineXML();
+						System.out.println("Do you want to create and HTML? Y/N");
+						String answer = sc.nextLine();
+						if (answer.equals("Y")) {
+							xmlMI.xml2Html("./xmls/Machine.xml", "./xmls/Machine-Style.xslt", "./xmls/Machine.html");
+							break;
+						}
+						else {
+							break;
+						}
+					}
+					case 0: {
+						return;
+					}
+				}
+
+			} catch (NumberFormatException e) {
+				System.out.println("Please select a number");
+				e.printStackTrace();
+				return;}
+		}
+		
+	}
+
+	private static void createMachineXML() {
+		System.out.println("Which machine do you want to create an XML out of? \n");
+		List<Machine> listM = machineM.getMachines();
+		System.out.println(listM);
+		System.out.println("\n Choose an id: ");
+		Integer mId = Integer.parseInt(sc.nextLine());
+		Machine m = machineM.getMachine(mId);
+		while(m == null) {
+			System.out.println("\n Choose an id: ");
+			mId = Integer.parseInt(sc.nextLine());
+			m = machineM.getMachine(mId);
+		}
+		xmlMI.machine2Xml(m);
+	}
+
+	private static void createIllnessXML() {
+		System.out.println("Which illness do you want to create an XML out of? \n");
+		List<Illness> listI = illnessM.getIllnesses();
+		System.out.println(listI);
+		System.out.println("\n Choose an id: ");
+		Integer iId = Integer.parseInt(sc.nextLine());
+		Illness i = illnessM.getIllness(iId);
+		while(i == null) {
+			System.out.println("\n Choose an id: ");
+			iId = Integer.parseInt(sc.nextLine());
+			i = illnessM.getIllness(iId);
+		}
+		xmlMI.illness2Xml(i);
 	}
 
 	private static void showHospitals() {
