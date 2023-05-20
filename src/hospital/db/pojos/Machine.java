@@ -41,7 +41,7 @@ public class Machine implements Serializable {
 	   	pkColumnValue="machine")
 	@XmlTransient
 	private Integer id;
-	@XmlElement
+	@XmlAttribute
 	private String name;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)

@@ -6,7 +6,7 @@ IDs that start with a number
 <!ELEMENT Hospital (location, Machines)>
    <!ATTLIST Hospital name CDATA #REQUIRED>
    <!ELEMENT location (#PCDATA)>
-   <!ELEMENT Machines (Machine+)>
-   <!ELEMENT Machine (#PCDATA)>
+   <!ELEMENT Machines (Machine*)>
+   <!ELEMENT Machine EMPTY>
    <!ATTLIST Machine name CDATA #REQUIRED>
    <!ELEMENT treats (#PCDATA)>

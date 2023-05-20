@@ -5,7 +5,7 @@
    <html>
    <p><b><xsl:value-of select="Hospital/@name" /></b></p>
    <p><b>C<xsl:value-of select="//location" /></b></p>
-   <p><b>Machines inside the hospital:</b></p>
+   <p><b>Machines/treatments inside the hospital:</b></p>
    <table border="1">
       <th>Name</th>
       <xsl:for-each select="Hospital/Machines/Machine">
