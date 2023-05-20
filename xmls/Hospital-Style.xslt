@@ -7,10 +7,11 @@
    <p><b>C<xsl:value-of select="//location" /></b></p>
    <p><b>Machines/treatments inside the hospital:</b></p>
    <table border="1">
-      <th>Name</th>
       <xsl:for-each select="Hospital/Machines/Machine">
       <xsl:sort select="@name" />        
             <tr>
+				
+      <th>Name</th>
             <td><i><xsl:value-of select="@name" /></i></td>           
             </tr>
       </xsl:for-each>
