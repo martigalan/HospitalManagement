@@ -14,16 +14,18 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import hospital.db.ifaces.IllnessManager;
 import hospital.jdbc.ConnectionManager;
 import hospital.jdbc.JDBCIllnessManager;
+import hospital.xml.SQLDateAdapter;
 
 @Entity
 @Table(name = "doctor")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Doctor")
-@XmlType(propOrder = { "dob", "speciality", "salary", "hospital" }) //order of the elements
+@XmlType(propOrder = { "dob", "speciality", "salary" }) //order of the elements
 public class Doctor implements Serializable {
 
 	private static final long serialVersionUID = 6814981867922225263L;
@@ -40,6 +42,7 @@ public class Doctor implements Serializable {
 	@XmlAttribute
 	private String surname;
 	@XmlElement
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date dob;
 	@XmlElement
 	private String speciality;
@@ -48,7 +51,7 @@ public class Doctor implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "hospitalId")
-	@XmlElement
+	@XmlTransient
 	private Hospital hospital;
 	
 	@ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
