@@ -7,9 +7,9 @@
    <table border="1">
       <th>Name</th>
       <th>Surname</th>
-      <th>dob</th>
-      <th>speciality</th>
-      <th>salary</th>
+      <th>Dob</th>
+      <th>Speciality</th>
+      <th>Salary</th>
 
       <xsl:for-each select="Doctor">
       <xsl:sort select="@name" />
