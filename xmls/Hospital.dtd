@@ -3,12 +3,10 @@ The type of the attribute "id" of Employee needs
 to be CDATA instead of ID, since DTD doesn't allow
 IDs that start with a number
 -->
-<!DOCTYPE Hospital [
-   <!ELEMENT Hospital (location, Machines)>
+<!ELEMENT Hospital (location, Machines)>
    <!ATTLIST Hospital name CDATA #REQUIRED>
    <!ELEMENT location (#PCDATA)>
    <!ELEMENT Machines (Machine+)>
    <!ELEMENT Machine (#PCDATA)>
    <!ATTLIST Machine name CDATA #REQUIRED>
    <!ELEMENT treats (#PCDATA)>
-]>

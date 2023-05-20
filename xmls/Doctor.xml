@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Doctor>
-	<name>John</name>/<surname>Beckett</surname>
+<Doctor name="John" surname ="Beckett">
     <dob>1975-06-05</dob>
     <speciality>Endocrinologist</speciality>
     <salary>55.000€</salary>
