@@ -4,10 +4,5 @@ to be CDATA instead of ID, since DTD doesn't allow
 IDs that start with a number
 -->
 <!DOCTYPE Illness [
-   <!ATTLIST Illness condition CDATA #REQUIRED>
-   <!ELEMENT Illness (Doctors, Machines)>
-   <!ELEMENT Doctors (Doctor+)>
-   <!ATTLIST Doctor name, surname CDATA #REQUIRED>
-   <!ELEMENT Machines (Machine+)>
-   <!ATTLIST Machine name CDATA #REQUIRED>
+   <!ELEMENT Illness (condition)>
 ]>

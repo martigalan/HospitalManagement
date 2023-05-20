@@ -3,22 +3,15 @@
 
 <xsl:template match="/">
    <html>
-   <p><b><xsl:value-of select="Machine/@name" /></b></p>
-   <p><b>C<xsl:value-of select="//hospital" /></b></p>
-   <p><b>C<xsl:value-of select="//treats" /></b></p>
-   <p><b>Hospital:</b></p>
+   <p><b>Machine:</b></p>
    <table border="1">
       <th>Name</th>
-      <xsl:for-each select="Machine/Hospitals/Hospital">
-      <xsl:sort select="@name" />
-       <xsl:sort select="//location" />
-      </xsl:for-each>
-   </table>
-   <p><b>Treats:</b></p>
-   <table border="1">
-      <th>Name</th>
-      <xsl:for-each select="Machine/Treats/Treats">
-       <xsl:sort select="//illness" />
+
+      <xsl:for-each select="Machine">
+      <xsl:sort select="//name" />
+      <tr>
+		  <td><i><xsl:value-of select="//name" /></i></td>		  
+	  </tr>
       </xsl:for-each>
    </table>
    </html>

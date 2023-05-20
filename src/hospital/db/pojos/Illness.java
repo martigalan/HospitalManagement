@@ -21,7 +21,7 @@ import hospital.jdbc.JDBCIllnessManager;
 @Table(name = "illness")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Illness")
-@XmlType(propOrder = { "doctors", "machines" }) //order of the elements
+@XmlType(propOrder = { "condition" }) //order of the elements
 public class Illness implements Serializable {
 
 	private static final long serialVersionUID = -7606688736830380305L;
@@ -33,7 +33,7 @@ public class Illness implements Serializable {
 	   	pkColumnValue="illness")
 	@XmlTransient
 	private Integer id;
-	@XmlAttribute
+	@XmlElement
 	private String condition;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "illness")
@@ -41,11 +41,11 @@ public class Illness implements Serializable {
 	private List<Has> patients;
 	
 	@ManyToMany(mappedBy = "treatsIllness")
-	@XmlElement
+	@XmlTransient
 	private List<Doctor> doctors;
 	
 	@ManyToMany(mappedBy = "treats")
-	@XmlElement
+	@XmlTransient
 	private List<Machine> machines;
 	
 	public Illness() {
