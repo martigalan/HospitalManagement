@@ -1,0 +1,11 @@
+<!--
+The type of the attribute "id" of Employee needs
+to be CDATA instead of ID, since DTD doesn't allow
+IDs that start with a number
+-->
+<!DOCTYPE Machine [
+   <!ATTLIST Machine name CDATA #REQUIRED>
+   <!ELEMENT Machine (Hospital, Treats)>
+   <!ELEMENT Hospital (#PCDATA)>
+   <!ELEMENT Treats (#PCDATA)>
+]>

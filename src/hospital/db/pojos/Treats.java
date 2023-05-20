@@ -2,11 +2,17 @@ package hospital.db.pojos;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 public class Treats implements Serializable{
 
 	private static final long serialVersionUID = 3510089229536778364L;
+	@XmlTransient
 	private Machine machine;
+	@XmlElement
 	private Illness illness;
+	@XmlTransient
 	private String success_rate;
 	
 	public Treats(Machine machine, Illness illness, String success_rate) {

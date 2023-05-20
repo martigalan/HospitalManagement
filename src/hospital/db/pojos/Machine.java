@@ -21,12 +21,18 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 
 @Entity
 @Table(name = "machine")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Machine")
+<<<<<<< HEAD
+=======
+@XmlType(propOrder = { "hospital", "illnessTreats" }) //order of the elements
+
+>>>>>>> branch 'master' of https://github.com/martigalan/HospitalManagement
 public class Machine implements Serializable {
 
 	private static final long serialVersionUID = -8134369376393308505L;
@@ -43,14 +49,14 @@ public class Machine implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "hospitalId")
-	@XmlTransient
+	@XmlElement
 	private Hospital hospital;
 	
 	@ManyToMany 
 	@JoinTable(name = "treats",
 	        joinColumns={@JoinColumn(name="machineId", referencedColumnName="id")},
 	   		inverseJoinColumns={@JoinColumn(name="illnessId", referencedColumnName="id")})
-	@XmlTransient
+	@XmlElement
 	private List<Illness> treats;
 	
 	public Machine(String name, Hospital hospital) {

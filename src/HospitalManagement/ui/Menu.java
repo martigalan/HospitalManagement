@@ -130,7 +130,8 @@ public class Menu {
 			}
 
 		} catch (NumberFormatException e) {
-			System.out.println("  NOT A NUMBER \n");
+			System.out.println("  NOT A NUMBER. Closing application... \n");
+			sc.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -458,6 +459,7 @@ public class Menu {
 				System.out.println("1. Update data");
 				System.out.println("2. Show data");
 				System.out.println("3. Delete doctor");
+				System.out.println("4. Create doctor XML");
 				System.out.println("0. Back to  principal menu");
 				
 				Scanner sc = new Scanner(System.in);
@@ -475,6 +477,19 @@ public class Menu {
 					case 3: {
 						removeDoctor(id);
 						return;
+					}
+					case 4: {
+						Doctor d = doctorM.getDoctor(id);
+						xmlMI.doctor2Xml(d);
+						System.out.println("Do you want to create and HTML? Y/N");
+						String answer = sc.nextLine();
+						if (answer.equals("Y")) {
+							xmlMI.xml2Html("./xmls/Doctor.xml", "./xmls/Doctor-Style.xslt", "./xmls/Doctor.html");
+							break;
+						}
+						else {
+							break;
+						}
 					}
 					case 0: {
 						return;

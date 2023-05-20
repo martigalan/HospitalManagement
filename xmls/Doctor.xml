@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Doctor name="John" surname ="Beckett">
+    <dob>1975-06-05</dob>
+    <speciality>Endocrinologist</speciality>
+    <salary>55.000€</salary>
+    <Hospital/>
+	    <Hospital id="3" name="HM Universitario Sanchinarro">
+	        <location>Calle Oña 10, Madrid</location>
+	    </Hospital>
+	<Hospital/>
+</Doctor>

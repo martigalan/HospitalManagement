@@ -7,6 +7,13 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 import hospital.db.ifaces.IllnessManager;
 import hospital.jdbc.ConnectionManager;
@@ -14,6 +21,9 @@ import hospital.jdbc.JDBCIllnessManager;
 
 @Entity
 @Table(name = "doctor")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Doctor")
+@XmlType(propOrder = { "dob", "speciality", "salary", "hospital" }) //order of the elements
 public class Doctor implements Serializable {
 
 	private static final long serialVersionUID = 6814981867922225263L;
@@ -23,27 +33,29 @@ public class Doctor implements Serializable {
 	@TableGenerator(name="doctor", table="sqlite_sequence",
 	   	pkColumnName="name", valueColumnName="seq",
 	   	pkColumnValue="doctor")
+	@XmlTransient
 	private Integer id;
-	@Column(name = "name")
+	@XmlAttribute
 	private String name;
-	@Column(name = "surname")
+	@XmlAttribute
 	private String surname;
-	@Column(name = "dob")
+	@XmlElement
 	private Date dob;
-	@Column(name = "speciality")
+	@XmlElement
 	private String speciality;
-	@Column(name = "salary")
+	@XmlElement
 	private Double salary;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "hospitalId")
+	@XmlElement
 	private Hospital hospital;
 	
 	@ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "DoctorTreats",
 	        joinColumns={@JoinColumn(name="doctorId", referencedColumnName="id")},
 	   		inverseJoinColumns={@JoinColumn(name="illnessId", referencedColumnName="id")})
-	
+	@XmlTransient
 	private List<Illness> treatsIllness;
 
 	public Doctor(String name, String surname, Date dob, String speciality, Double salary, Hospital hospital) {
