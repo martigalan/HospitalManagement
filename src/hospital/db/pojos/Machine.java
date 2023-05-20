@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlType;
 @Table(name = "machine")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Machine")
-@XmlType(propOrder = { "hospital" }) //order of the elements
+@XmlType(propOrder = { "name" }) //order of the elements
 
 public class Machine implements Serializable {
 

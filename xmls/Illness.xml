@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<<<<<<< HEAD
 <Illness>
-    <condition>Wolfram Syndrome</condition>
-=======
-<Illness condition="IgA Nephropahy">
-    <Doctor/>
->>>>>>> branch 'master' of https://github.com/martigalan/HospitalManagement.git
+    <condition>Acoustic Neuroma</condition>
 </Illness>
