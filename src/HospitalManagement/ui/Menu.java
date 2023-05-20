@@ -192,7 +192,7 @@ public class Menu {
 			streamBlob.read(photo);
 			streamBlob.close();
 		}catch(FileNotFoundException ex) {
-			System.out.println("   Sorry, the file wasn't found. NO PHOTO ASSIGNED\n");
+			System.out.println("   Sorry, the file wasn't found. NO PHOTO HAS BEEN ASSIGNED\n");
 			photo = null;
 		}
 
@@ -249,11 +249,11 @@ public class Menu {
 			System.out.println("Please choose a patient, type the Id:");
 			Integer id = Integer.parseInt(sc.nextLine());
 			Patient p = patientM.getPatient(id);
-			while(p.getName() != name) {
+			/*while(p.getName() != name) {
 				System.out.println("Not an option, type the Id:");
 				id = Integer.parseInt(sc.nextLine());
 				p = patientM.getPatient(id);
-			}
+			}*/
 			// Go to the Patient's menu
 			PatientMenu(id);
 		}
