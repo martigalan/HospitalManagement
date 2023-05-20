@@ -4,9 +4,9 @@ to be CDATA instead of ID, since DTD doesn't allow
 IDs that start with a number
 -->
 <!DOCTYPE Patient [
-   <!ATTLIST Patient name CDATA #REQUIRED
-                  	 surname CDATA #REQUIRED>
    <!ELEMENT Patient (dob, Hospital)>
+   <!ATTLIST Patient name CDATA #REQUIRED
+                      surname CDATA #REQUIRED>
    <!ELEMENT dob (#PCDATA)>
    <!ELEMENT Hospital (#PCDATA)>
    <!ELEMENT Authors (#PCDATA)>

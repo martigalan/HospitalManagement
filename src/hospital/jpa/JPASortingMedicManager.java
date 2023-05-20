@@ -38,7 +38,7 @@ public class JPASortingMedicManager implements SortingMedicManager {
 			q1.setParameter(2, password);
 			SortingMedic sM = (SortingMedic) q1.getSingleResult();
 		}catch (Exception e){
-			e.printStackTrace();
+			System.out.println("      INCORRECT USERNAME / PASSWORD \n ");
 			return log=true;
 		} 
 		return log;

@@ -8,6 +8,7 @@ IDs that start with a number
    <!ATTLIST Hospital name CDATA #REQUIRED>
    <!ELEMENT location (#PCDATA)>
    <!ELEMENT Machines (Machine+)>
+   <!ELEMENT Machine (#PCDATA)>
    <!ATTLIST Machine name CDATA #REQUIRED>
    <!ELEMENT treats (#PCDATA)>
 ]>
