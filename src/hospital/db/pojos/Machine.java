@@ -44,14 +44,14 @@ public class Machine implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "hospitalId")
-	@XmlElement
+	@XmlTransient
 	private Hospital hospital;
 	
 	@ManyToMany 
 	@JoinTable(name = "treats",
 	        joinColumns={@JoinColumn(name="machineId", referencedColumnName="id")},
 	   		inverseJoinColumns={@JoinColumn(name="illnessId", referencedColumnName="id")})
-	@XmlElement
+	@XmlTransient
 	private List<Illness> treats;
 	
 	public Machine(String name, Hospital hospital) {
