@@ -2,4 +2,8 @@
 <Hospital name="Hospital Universitario Fundacion Jimenez Diaz">
     <location>Av. Reyes Catolicos 2, Madrid</location>
     <Machines/>
+	    <Machine id="5" name="Enzyme replacement therapy (ERT)">
+	        <treats>Sanfilippo syndrome</treats>
+	    </Machine>
+	<Machines/>
 </Hospital>

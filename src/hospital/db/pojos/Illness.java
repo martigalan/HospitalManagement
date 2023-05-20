@@ -5,6 +5,13 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 import hospital.db.ifaces.IllnessManager;
 import hospital.jdbc.ConnectionManager;
@@ -12,6 +19,9 @@ import hospital.jdbc.JDBCIllnessManager;
 
 @Entity
 @Table(name = "illness")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Illness")
+@XmlType(propOrder = { "doctors", "machines" }) //order of the elements
 public class Illness implements Serializable {
 
 	private static final long serialVersionUID = -7606688736830380305L;
@@ -21,16 +31,21 @@ public class Illness implements Serializable {
 	@TableGenerator(name="illness", table="sqlite_sequence",
 	   	pkColumnName="name", valueColumnName="seq",
 	   	pkColumnValue="illness")
+	@XmlTransient
 	private Integer id;
+	@XmlAttribute
 	private String condition;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "illness")
+	@XmlTransient
 	private List<Has> patients;
 	
 	@ManyToMany(mappedBy = "treatsIllness")
+	@XmlElement
 	private List<Doctor> doctors;
 	
 	@ManyToMany(mappedBy = "treats")
+	@XmlElement
 	private List<Machine> machines;
 	
 	public Illness() {

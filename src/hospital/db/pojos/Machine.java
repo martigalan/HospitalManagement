@@ -19,12 +19,16 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 
 @Entity
 @Table(name = "machine")
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Machine")
+@XmlType(propOrder = { "hospital", "illnessTreats" }) //order of the elements
 
 public class Machine implements Serializable {
 
@@ -42,14 +46,14 @@ public class Machine implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "hospitalId")
-	@XmlTransient
+	@XmlElement
 	private Hospital hospital;
 	
 	@ManyToMany 
 	@JoinTable(name = "treats",
 	        joinColumns={@JoinColumn(name="machineId", referencedColumnName="id")},
 	   		inverseJoinColumns={@JoinColumn(name="illnessId", referencedColumnName="id")})
-	@XmlTransient
+	@XmlElement
 	private List<Illness> treats;
 	
 	public Machine(String name, Hospital hospital) {
