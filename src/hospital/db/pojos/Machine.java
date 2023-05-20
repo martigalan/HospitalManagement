@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlType;
 @Table(name = "machine")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Machine")
-@XmlType(propOrder = { "hospital", "illnessTreats" }) //order of the elements
+@XmlType(propOrder = { "name" }) //order of the elements
 
 public class Machine implements Serializable {
 
@@ -41,19 +41,19 @@ public class Machine implements Serializable {
 	   	pkColumnValue="machine")
 	@XmlTransient
 	private Integer id;
-	@XmlAttribute
+	@XmlElement
 	private String name;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "hospitalId")
-	@XmlElement
+	@XmlTransient
 	private Hospital hospital;
 	
 	@ManyToMany 
 	@JoinTable(name = "treats",
 	        joinColumns={@JoinColumn(name="machineId", referencedColumnName="id")},
 	   		inverseJoinColumns={@JoinColumn(name="illnessId", referencedColumnName="id")})
-	@XmlElement
+	@XmlTransient
 	private List<Illness> treats;
 	
 	public Machine(String name, Hospital hospital) {

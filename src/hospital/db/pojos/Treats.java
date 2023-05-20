@@ -10,7 +10,7 @@ public class Treats implements Serializable{
 	private static final long serialVersionUID = 3510089229536778364L;
 	@XmlTransient
 	private Machine machine;
-	@XmlElement
+	@XmlTransient
 	private Illness illness;
 	@XmlTransient
 	private String success_rate;

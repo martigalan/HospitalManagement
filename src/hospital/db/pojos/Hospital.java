@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
 @Table(name = "hospital")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Hospital")
-@XmlType(propOrder = { "location", "machines"})
+@XmlType(propOrder = { "location" })
 public class Hospital implements Serializable{
 
 	private static final long serialVersionUID = 6590616788083928968L;
@@ -46,9 +46,10 @@ public class Hospital implements Serializable{
 	@XmlTransient
 	private List<Doctor> doctors;
 	
-	@OneToMany (mappedBy="hospital")
-	@XmlElement (name = "Machine")
-	@XmlElementWrapper(name = "Machines")
+	@OneToMany (fetch = FetchType.LAZY, mappedBy="hospital")
+	//@XmlElement (name = "Machine")
+	//@XmlElementWrapper(name = "Machines")
+	@XmlTransient
 	private List<Machine> machines;
 
 	public List<Machine> getMachines() {

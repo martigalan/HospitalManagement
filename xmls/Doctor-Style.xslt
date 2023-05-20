@@ -3,18 +3,31 @@
 
 <xsl:template match="/">
    <html>
-   <p><b><xsl:value-of select="Doctor/@name" /></b></p>
+   <!--<p><b><xsl:value-of select="Doctor/@name" /></b></p>
    <p><b><xsl:value-of select="Doctor/@surname" /></b></p>
    <p><b>C<xsl:value-of select="//dob" /></b></p>
    <p><b>C<xsl:value-of select="//speciality" /></b></p>
-   <p><b>C<xsl:value-of select="//salary" /></b></p>
-   <p><b>C<xsl:value-of select="//hospital" /></b></p>
-   <p><b>Hospital:</b></p>
+   <p><b>C<xsl:value-of select="//salary" /></b></p>-->
+   <p><b>Doctor:</b></p>
    <table border="1">
       <th>Name</th>
-      <xsl:for-each select="Doctor/Hospitals/Hospital">
+      <th>Surname</th>
+      <th>dob</th>
+      <th>speciality</th>
+      <th>salary</th>
+
+      <xsl:for-each select="Doctor">
       <xsl:sort select="@name" />
-       <xsl:sort select="//location" />
+      <tr>
+		  <td><i><xsl:value-of select="@name" /></i></td>
+		  <td><i><xsl:value-of select="@surname" /></i></td>
+		  <td><i><xsl:value-of select="//dob" /></i></td>
+		  <td><i><xsl:value-of select="//speciality" /></i></td>
+		  <td><i><xsl:value-of select="//salary" /></i></td>
+		  
+		  
+	  </tr>
+      <!-- <xsl:sort select="//location" />-->
       </xsl:for-each>
    </table>
    </html>

@@ -6,9 +6,8 @@ IDs that start with a number
 <!DOCTYPE Doctor [
    <!ATTLIST Doctor name CDATA #REQUIRED
                   	surname CDATA #REQUIRED>
-   <!ELEMENT Doctor (dob, speciality, salary, Hospital)>
+   <!ELEMENT Doctor (dob, speciality, salary)>
    <!ELEMENT dob (#PCDATA)>
    <!ELEMENT speciality (#PCDATA)>
     <!ELEMENT salary (#PCDATA)>
-   <!ELEMENT Hospital (#PCDATA)>
 ]>
