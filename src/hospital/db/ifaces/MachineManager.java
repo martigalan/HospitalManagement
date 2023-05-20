@@ -12,4 +12,5 @@ public interface MachineManager {
 	public Machine getMachine(Integer id); 
 	public List<Machine> machineTreatsIllness(Illness i);
 	public List<Machine> getMachines();
+	public List<Machine> machinesInHospital(Hospital h);
 }

@@ -154,6 +154,8 @@ public class Menu {
 		System.out.println("\n Choose an id: ");
 		Integer hId = Integer.parseInt(sc.nextLine());
 		Hospital h = hospitalM.getHospital(hId);
+		List<Machine> m = machineM.machinesInHospital(h);
+		h.setMachines(m);
 		while(h == null) {
 			System.out.println("\n Choose an id: ");
 			hId = Integer.parseInt(sc.nextLine());

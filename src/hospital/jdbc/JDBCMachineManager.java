@@ -143,6 +143,32 @@ public class JDBCMachineManager implements MachineManager {
 	}
 	
 	@Override
+	public List<Machine> machinesInHospital(Hospital h) {
+		List<Machine> machines = new ArrayList();
+		try {
+			String sql = "SELECT * FROM machine WHERE hospitalId = ?";
+			PreparedStatement st = c.prepareStatement(sql);
+			st.setInt(1, h.getId());
+			ResultSet rs = st.executeQuery();
+			List<Integer> mIds = new ArrayList();
+			while (rs.next()) {
+				Integer id = rs.getInt("id");
+				mIds.add(id);
+			}
+			//i have a list of machine ids that i have to convert to machines
+			for (Integer mId : mIds){
+				machines.add(this.getMachine(mId));
+			}
+			st.close();
+			rs.close();
+		} catch (SQLException e) {
+			System.out.println("Database exception.");
+			e.printStackTrace();
+		}
+		return machines;
+	}
+	
+	@Override
 	public List<Machine> getMachines(){
 		List<Machine> listM = new ArrayList<Machine>();
 		JDBCHospitalManager hospitalM = new JDBCHospitalManager(c);

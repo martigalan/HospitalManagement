@@ -19,13 +19,14 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 
 @Entity
 @Table(name = "machine")
 @XmlAccessorType(XmlAccessType.FIELD)
-
+@XmlRootElement(name = "Machine")
 public class Machine implements Serializable {
 
 	private static final long serialVersionUID = -8134369376393308505L;
