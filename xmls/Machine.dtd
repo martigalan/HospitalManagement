@@ -5,7 +5,8 @@ IDs that start with a number
 -->
 <!DOCTYPE Machine [
    <!ATTLIST Machine name CDATA #REQUIRED>
-   <!ELEMENT Machine (Hospital, Treats)>
-   <!ELEMENT Hospital (#PCDATA)>
-   <!ELEMENT Treats (#PCDATA)>
+   <!ELEMENT Machine (Hospital)>
+   <!ELEMENT Hospital (location)>
+   <!ATTLIST Hospital name CDATA #REQUIRED>
+   <!ELEMENT location (#PCDATA)>
 ]>

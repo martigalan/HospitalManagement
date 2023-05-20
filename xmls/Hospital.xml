@@ -2,6 +2,11 @@
 <Hospital name="HM Universitario Sanchinarro">
     <location>Calle Ona 10, Madrid</location>
     <Machines>
-        <Machine name="Tirzepatide"/>
+        <Machine name="Tirzepatide">
+            <hospital name="HM Universitario Sanchinarro">
+                <location>Calle Ona 10, Madrid</location>
+                <Machines/>
+            </hospital>
+        </Machine>
     </Machines>
 </Hospital>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Machine name="Abecma">
+    <hospital name="Hospital Infantil Universitario Nino Jesus">
+        <location>Av. Menendez Pelayo 65, Madrid</location>
+        <Machines/>
+    </hospital>
+</Machine>

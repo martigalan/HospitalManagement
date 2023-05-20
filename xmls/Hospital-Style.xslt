@@ -10,7 +10,6 @@
       <xsl:for-each select="Hospital/Machines/Machine">
       <xsl:sort select="@name" />        
             <tr>
-				
       <th>Name</th>
             <td><i><xsl:value-of select="@name" /></i></td>           
             </tr>

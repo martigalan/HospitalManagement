@@ -109,6 +109,7 @@ public class Menu {
 					}
 					case 5: {
 						xmlMenu();
+						break;
 					}
 					case 0: {
 						control = false;
@@ -188,7 +189,8 @@ public class Menu {
 			} catch (NumberFormatException e) {
 				System.out.println("Please select a number");
 				e.printStackTrace();
-				return;}
+				xmlMenu();
+			}
 		}
 		
 	}

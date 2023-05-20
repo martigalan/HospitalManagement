@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlType;
 @Table(name = "machine")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Machine")
-@XmlType(propOrder = { "name" }) //order of the elements
+@XmlType(propOrder = { "hospital" }) //order of the elements
 
 public class Machine implements Serializable {
 
@@ -46,7 +46,7 @@ public class Machine implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "hospitalId")
-	@XmlTransient
+	@XmlElement
 	private Hospital hospital;
 	
 	@ManyToMany 

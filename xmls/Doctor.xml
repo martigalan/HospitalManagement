@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Doctor name="John" surname="Beckett">
+<Doctor name="Adele" surname="Brown">
     <dob>1970-01-01</dob>
-    <speciality>Endocrininologist</speciality>
+    <speciality>Nephrologist</speciality>
     <salary>55000.0</salary>
 </Doctor>
