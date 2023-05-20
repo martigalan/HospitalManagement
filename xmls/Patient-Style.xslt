@@ -5,14 +5,17 @@
    <html>
    <p><b><xsl:value-of select="Patient/@name" /></b></p>
    <p><b><xsl:value-of select="Patient/@surname" /></b></p>
-   <p><b>C<xsl:value-of select="//dob" /></b></p>
-   <p><b>Hospital:</b></p>
    <table border="1">
       <th>Name</th>
-      <xsl:for-each select="Patient/Hospital">
+      <th>Surname</th>
+      <th>dob</th>
+      
+      <xsl:for-each select="Patient">
       <xsl:sort select="@name" />        
             <tr>
-            <td><i><xsl:value-of select="@name" /></i></td>           
+            <td><i><xsl:value-of select="@name" /></i></td>
+            <td><i><xsl:value-of select="@surname" /></i></td>
+		    <td><i><xsl:value-of select="//dob" /></i></td>           
             </tr>
       </xsl:for-each>
    </table>

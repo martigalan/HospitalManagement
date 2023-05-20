@@ -1,17 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Patient name="blanca" surname="pueche">
     <dob>2003-05-07</dob>
-    <hospital name="Hospital Universitario Fundacion Jimenez Diaz">
-        <location>Av. Reyes Catolicos 2, Madrid</location>
-        <Machines>
-            <Machine name="Enzyme replacement therapy"/>
-        </Machines>
-    </hospital>
-</Patient>
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Patient name="Bob" surname="Simpson">
-    <dob>1980-02-13</dob>
-    <hospital name="Hospital Universitario Fundacion Jimenez Diaz">
-        <location>Av. Reyes Catolicos 2, Madrid</location>
-    </hospital>
 </Patient>

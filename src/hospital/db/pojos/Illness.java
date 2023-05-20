@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
@@ -21,7 +22,11 @@ import hospital.jdbc.JDBCIllnessManager;
 @Table(name = "illness")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Illness")
+<<<<<<< HEAD
+@XmlType(propOrder = { "doctors" }) //order of the elements
+=======
 @XmlType(propOrder = { "condition" }) //order of the elements
+>>>>>>> branch 'master' of https://github.com/martigalan/HospitalManagement
 public class Illness implements Serializable {
 
 	private static final long serialVersionUID = -7606688736830380305L;
@@ -41,7 +46,12 @@ public class Illness implements Serializable {
 	private List<Has> patients;
 	
 	@ManyToMany(mappedBy = "treatsIllness")
+<<<<<<< HEAD
+	@XmlElement (name = "Doctors")
+	@XmlElementWrapper(name = "Doctor")
+=======
 	@XmlTransient
+>>>>>>> branch 'master' of https://github.com/martigalan/HospitalManagement
 	private List<Doctor> doctors;
 	
 	@ManyToMany(mappedBy = "treats")

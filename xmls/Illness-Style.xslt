@@ -3,8 +3,19 @@
 
 <xsl:template match="/">
    <html>
+<<<<<<< HEAD
+   <p><b><xsl:value-of select="Illness/@condition" /></b></p>
+   <p><b>Doctors:</b></p>
+=======
    <p><b>Illness:</b></p>
+>>>>>>> branch 'master' of https://github.com/martigalan/HospitalManagement
    <table border="1">
+<<<<<<< HEAD
+      <th>Name</th>
+      <xsl:for-each select="Illness/Doctors/Doctor">
+      <xsl:sort select="@name" />
+      <xsl:sort select="@surname" />
+=======
       <th>Condition</th>
 
       <xsl:for-each select="Illness">
@@ -12,6 +23,7 @@
       <tr>
 		  <td><i><xsl:value-of select="//condition" /></i></td>		  
 	  </tr>
+>>>>>>> branch 'master' of https://github.com/martigalan/HospitalManagement
       </xsl:for-each>
    </table>
    </html>

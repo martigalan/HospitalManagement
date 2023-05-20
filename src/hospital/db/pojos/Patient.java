@@ -26,7 +26,7 @@ import hospital.xml.SQLDateAdapter;
 @Table(name = "patient")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Patient")
-@XmlType(propOrder = { "dob", "hospital" }) //order of the elements
+@XmlType(propOrder = { "dob" }) //order of the elements
 public class Patient implements Serializable{
 	
 	private static final long serialVersionUID = 2424327075260915600L;
@@ -48,7 +48,7 @@ public class Patient implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "hospitalId")
-	@XmlElement
+	@XmlTransient
 	private Hospital hospital;
 	@XmlTransient
 	private byte[] photo;
