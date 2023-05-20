@@ -221,11 +221,6 @@ public class Menu {
 			System.out.println("Please choose a doctor, type the Id:");
 			Integer id = Integer.parseInt(sc.nextLine());
 			Doctor d = doctorM.getDoctor(id);
-			while(d.getName() != nameDoc) {
-				System.out.println("Not an option, type the Id:");
-				id = Integer.parseInt(sc.nextLine());
-				d = doctorM.getDoctor(id);
-			}
 			// Go to the Doctor's menu
 			DoctorMenu(id);
 		}
@@ -249,11 +244,6 @@ public class Menu {
 			System.out.println("Please choose a patient, type the Id:");
 			Integer id = Integer.parseInt(sc.nextLine());
 			Patient p = patientM.getPatient(id);
-			/*while(p.getName() != name) {
-				System.out.println("Not an option, type the Id:");
-				id = Integer.parseInt(sc.nextLine());
-				p = patientM.getPatient(id);
-			}*/
 			// Go to the Patient's menu
 			PatientMenu(id);
 		}
