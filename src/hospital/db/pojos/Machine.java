@@ -28,11 +28,6 @@ import javax.xml.bind.annotation.XmlType;
 @Table(name = "machine")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Machine")
-<<<<<<< HEAD
-=======
-@XmlType(propOrder = { "hospital", "illnessTreats" }) //order of the elements
-
->>>>>>> branch 'master' of https://github.com/martigalan/HospitalManagement
 public class Machine implements Serializable {
 
 	private static final long serialVersionUID = -8134369376393308505L;

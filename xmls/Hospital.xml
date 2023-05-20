@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Hospital name="Hospital Infantil Universitario Nino Jesus">
     <location>Av. Menendez Pelayo 65, Madrid</location>
-<<<<<<< HEAD
     <Machines>
         <Machine name="Abecma"/>
     </Machines>
-=======
     <Machine/>
 	    <Machine id="5" name="Enzyme replacement therapy (ERT)">
 	        <treats>Sanfilippo syndrome</treats>
 	    </Machine>
 	<Machine/>
->>>>>>> branch 'master' of https://github.com/martigalan/HospitalManagement
 </Hospital>
