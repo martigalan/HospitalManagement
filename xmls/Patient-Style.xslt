@@ -3,20 +3,19 @@
 
 <xsl:template match="/">
    <html>
-   <p><b><xsl:value-of select="Patient/@name" /></b></p>
-   <p><b><xsl:value-of select="Patient/@surname" /></b></p>
+   <p><b>Patient:</b></p>
    <table border="1">
       <th>Name</th>
       <th>Surname</th>
-      <th>dob</th>
-      
+      <th>Dob</th>
+
       <xsl:for-each select="Patient">
-      <xsl:sort select="@name" />        
-            <tr>
-            <td><i><xsl:value-of select="@name" /></i></td>
-            <td><i><xsl:value-of select="@surname" /></i></td>
-		    <td><i><xsl:value-of select="//dob" /></i></td>           
-            </tr>
+      <xsl:sort select="@name" />
+      <tr>
+		  <td><i><xsl:value-of select="@name" /></i></td>
+		  <td><i><xsl:value-of select="@surname" /></i></td>
+		  <td><i><xsl:value-of select="//dob" /></i></td>		  
+	  </tr>
       </xsl:for-each>
    </table>
    </html>

@@ -192,7 +192,6 @@ public class Menu {
 				xmlMenu();
 			}
 		}
-		
 	}
 
 	private static void createMachineXML() {

@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Patient name="blanca" surname="pueche">
-    <dob>2003-05-07</dob>
+<Patient name="Bob" surname="Simpson">
+    <dob>2020-02-12</dob>
 </Patient>
