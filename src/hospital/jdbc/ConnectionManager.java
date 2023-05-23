@@ -102,17 +102,17 @@ public class ConnectionManager {
 			doctorM = new JPADoctorManager();
 			
 			Doctor doc1 = new Doctor("John", "Beckett", new Date(1975-06-05), 
-					"Endocrininologist", 55000.00, hosp4); 
+					"Endocrininologist", 55000, hosp4); 
 			Doctor doc2 = new Doctor("Adele", "Brown", new Date(1975-06-05), 
-					"Nephrologist", 55000.00, hosp3); 
+					"Nephrologist", 55000, hosp3); 
 			Doctor doc3 = new Doctor("Agnes", "Simpson", new Date(1975-06-05), 
-					"Neurologist", 55000.00, hosp4); 
+					"Neurologist", 55000, hosp4); 
 			Doctor doc4 = new Doctor("Michael", "Howland", new Date(1975-06-05), 
-					"Endocrininologist", 55000.00, hosp5); 
+					"Endocrininologist", 55000, hosp5); 
 			Doctor doc5 = new Doctor("Luke", "Donaldson", new Date(1975-06-05), 
-					"Neurologist", 55000.00, hosp2); 
+					"Neurologist", 55000, hosp2); 
 			Doctor doc6 = new Doctor("Samantha", "Wilson", new Date(1975-06-05), 
-					"Haematologist", 55000.00, hosp4); 
+					"Haematologist", 55000, hosp4); 
 			
 			doctorM.insertDoctor(doc1);
 			doctorM.insertDoctor(doc2);

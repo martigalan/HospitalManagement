@@ -603,6 +603,11 @@ public class Menu {
 		if (!surname.equals("")) {
 			p.setSurname(surname);
 		}
+		System.out.println("Salary (" + p.getSalary() + "):");
+		Integer salary = sc.nextInt();
+		if (!salary.equals("")) {
+			p.setSalary(salary);
+		}
 		doctorM.updateDoctor(p);
 	}
 

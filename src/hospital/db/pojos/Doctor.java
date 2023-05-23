@@ -47,7 +47,7 @@ public class Doctor implements Serializable {
 	@XmlElement
 	private String speciality;
 	@XmlElement
-	private Double salary;
+	private Integer salary;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "hospitalId")
@@ -61,7 +61,7 @@ public class Doctor implements Serializable {
 	@XmlTransient
 	private List<Illness> treatsIllness;
 
-	public Doctor(String name, String surname, Date dob, String speciality, Double salary, Hospital hospital) {
+	public Doctor(String name, String surname, Date dob, String speciality, Integer salary, Hospital hospital) {
 		super();
 		this.name = name;
 		this.surname = surname;
@@ -72,7 +72,7 @@ public class Doctor implements Serializable {
 		this.treatsIllness = new ArrayList();
 	}
 	
-	public Doctor(Integer id, String name, String surname, Date dob, String speciality, Double salary, Hospital hospital) {
+	public Doctor(Integer id, String name, String surname, Date dob, String speciality, Integer salary, Hospital hospital) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -127,11 +127,11 @@ public class Doctor implements Serializable {
 		this.speciality = speciality;
 	}
 
-	public Double getSalary() {
+	public Integer getSalary() {
 		return salary;
 	}
 
-	public void setSalary(Double salary) {
+	public void setSalary(Integer salary) {
 		this.salary = salary;
 	}
 

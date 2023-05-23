@@ -35,6 +35,7 @@ public class JPADoctorManager implements DoctorManager {
 		em.getTransaction().begin();
 		doctor.setName(doctor.getName());
 		doctor.setSurname(doctor.getSurname());
+		doctor.setSalary(doctor.getSalary());
 		em.getTransaction().commit();
 	}
 	
