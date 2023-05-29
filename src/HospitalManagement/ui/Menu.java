@@ -404,11 +404,9 @@ public class Menu {
 
 			} catch (NumberFormatException e) {
 				System.out.println("Please select a number");
-				e.printStackTrace();
 				PatientMenu(id);
 			} catch (IOException e) {
 				System.out.println("I/O Exception.");
-				e.printStackTrace();
 			}
 		}
 	}
@@ -418,17 +416,22 @@ public class Menu {
 		Patient p = patientM.getPatient(id);
 		System.out.println("This patient has the following illnesses: ");
 		List<Has> illnessesPHas = hasM.getListHas(id);
-		for (Has hIllness : illnessesPHas) {
-			System.out.println(hIllness.toString());
+		if(illnessesPHas.isEmpty()) {
+			System.out.println("   THE PATIENT HAS NO ILLNESSES\n");
+			PatientMenu(id);
+		}else {
+			for (Has hIllness : illnessesPHas) {
+				System.out.println(hIllness.toString());
+			}
+			System.out.println("Enter the illness that need to be updated: ");
+			Integer illnessId = Integer.parseInt(sc.nextLine());
+			Has hasIllness = hasM.getHas(id, illnessId);
+			System.out.println("Enter the new severity: ");
+			String sev = sc.nextLine();
+			hasIllness.setSeverity(sev);
+			String severity = hasIllness.getSeverity();
+			patientM.update(p);
 		}
-		System.out.println("Enter the illness that need to be updated: ");
-		Integer illnessId = Integer.parseInt(sc.nextLine());
-		Has hasIllness = hasM.getHas(id, illnessId);
-		System.out.println("Enter the new severity: ");
-		String sev = sc.nextLine();
-		hasIllness.setSeverity(sev);
-		String severity = hasIllness.getSeverity();
-		patientM.update(p);
 	}
 
 	private static void lookForIllness(Integer id) {
