@@ -2,17 +2,39 @@ package hospital.db.pojos;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+@Entity
+@Table(name = "treats")
+@IdClass(TreatsId.class)
 public class Treats implements Serializable{
 
 	private static final long serialVersionUID = 3510089229536778364L;
 	@XmlTransient
+	@ManyToOne
+	@PrimaryKeyJoinColumn(name = "machineId", referencedColumnName = "id")
 	private Machine machine;
+	@Id
+	private Integer machineId;
+	
 	@XmlTransient
+	@ManyToOne(cascade = CascadeType.REMOVE)
+	@PrimaryKeyJoinColumn(name = "illnessId", referencedColumnName = "id")
 	private Illness illness;
+	@Id
+	private Integer illnessId;
+	
 	@XmlTransient
+	@Column(name = "successRate")
 	private String success_rate;
 	
 	public Treats(Machine machine, Illness illness, String success_rate) {
@@ -20,6 +42,10 @@ public class Treats implements Serializable{
 		this.machine = machine;
 		this.illness = illness;
 		this.success_rate = success_rate;
+	}
+
+	public Treats() {
+		super();
 	}
 
 	public Machine getMachine() {

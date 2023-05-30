@@ -37,7 +37,7 @@ public class Illness implements Serializable {
 	@XmlElement
 	private String condition;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "illness")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "illness", cascade = CascadeType.REMOVE)
 	@XmlTransient
 	private List<Has> patients;
 	

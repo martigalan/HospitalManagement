@@ -26,7 +26,7 @@ public class JDBCIllnessManager implements IllnessManager {
 			p.setString(1, i.getCondition());
 			p.executeUpdate();
 			p.close();
-			String query = "SELECT last_insert_rowid() AS lastId"; //comprobar último ID de esa tabla
+			String query = "SELECT last_insert_rowid() AS lastId"; // comprobar último ID de esa tabla
 			PreparedStatement p2 = c.prepareStatement(query);
 			ResultSet rs = p2.executeQuery();
 			Integer lastId = rs.getInt("lastId");
@@ -36,8 +36,8 @@ public class JDBCIllnessManager implements IllnessManager {
 			System.out.println("Database error");
 			e.printStackTrace();
 		}
-	} 
-	
+	}
+
 	@Override
 	public Illness getIllness(int id) {
 		try {
@@ -57,7 +57,7 @@ public class JDBCIllnessManager implements IllnessManager {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public List<Illness> relationDoctorIllness(int id) {
 		List<Illness> list = new ArrayList<Illness>();
@@ -66,7 +66,7 @@ public class JDBCIllnessManager implements IllnessManager {
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setInt(1, id);
 			ResultSet rs = p.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				Integer iId = rs.getInt("illnessId");
 				Illness i = new Illness(iId);
 				list.add(i);
@@ -80,15 +80,15 @@ public class JDBCIllnessManager implements IllnessManager {
 		}
 		return list;
 	}
-	
+
 	@Override
-	public List<Illness> getIllnesses(){
+	public List<Illness> getIllnesses() {
 		List<Illness> listIllnesses = new ArrayList<Illness>();
 		try {
 			String sql = "SELECT * FROM illness";
 			PreparedStatement p = c.prepareStatement(sql);
 			ResultSet rs = p.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				int id = rs.getInt("id");
 				String condition = rs.getString("condition");
 				Illness i = new Illness(id, condition);
@@ -96,22 +96,22 @@ public class JDBCIllnessManager implements IllnessManager {
 			}
 			p.close();
 			rs.close();
-		}catch(SQLException e){
+		} catch (SQLException e) {
 			System.out.println("Database error");
 			e.printStackTrace();
 		}
 		return listIllnesses;
 	}
-	
+
 	@Override
 	public void deleteIllness(int id) {
 		try {
-		String sql = "DELETE FROM illness WHERE id = ?";
-		PreparedStatement prep = c.prepareStatement(sql);
-		prep.setInt(1, id);
-		prep.executeUpdate();
-		prep.close();
-		} catch(SQLException e){
+			String sql = "DELETE FROM illness WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, id);
+			prep.executeUpdate();
+			prep.close();
+		} catch (SQLException e) {
 			System.out.println("Database error");
 			e.printStackTrace();
 		}

@@ -65,10 +65,10 @@ public class ConnectionManager {
 					+ " surname TEXT NOT NULL," + " dob DATE NOT NULL," + " hospitalId INTEGER NOT NULL REFERENCES hospital(id),"
 					+ " photo BLOB);";
 			s.executeUpdate(table6);
-			String table7 = "CREATE TABLE treats (machineId INTEGER NOT NULL REFERENCES machine(id), " + "illnessId INTEGER NOT NULL REFERENCES illness(id), " 
+			String table7 = "CREATE TABLE treats (machineId INTEGER NOT NULL REFERENCES machine(id), " + "illnessId INTEGER NOT NULL REFERENCES illness(id) ON DELETE CASCADE, " 
 			        + "successRate TEXT NOT NULL, " + "PRIMARY KEY (machineId, illnessId));";
 			s.executeUpdate(table7);
-			String table8 = "CREATE TABLE hasIllness (illnessId INTEGER NOT NULL REFERENCES illness(id), " + "patientId INTEGER NOT NULL REFERENCES patient(id), " 
+			String table8 = "CREATE TABLE hasIllness (illnessId INTEGER NOT NULL REFERENCES illness(id) ON DELETE CASCADE, " + "patientId INTEGER NOT NULL REFERENCES patient(id), " 
 			        + "severity TEXT NOT NULL, " + "PRIMARY KEY (illnessId, patientId));";
 			s.executeUpdate(table8);
 			String table9 = "CREATE TABLE doctorTreats (illnessId INTEGER NOT NULL REFERENCES illness(id), " + "doctorId INTEGER NOT NULL REFERENCES doctor(id)," +

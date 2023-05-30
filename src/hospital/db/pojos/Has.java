@@ -52,7 +52,7 @@ public class Has implements Serializable{
 	@PrimaryKeyJoinColumn(name = "patientId", referencedColumnName = "id")
 	private Patient patient;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	@PrimaryKeyJoinColumn(name = "illnessId", referencedColumnName = "id")
 	private Illness illness;
 	

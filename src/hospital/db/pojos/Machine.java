@@ -44,12 +44,12 @@ public class Machine implements Serializable {
 	@XmlElement
 	private String name;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "hospitalId")
 	@XmlTransient
 	private Hospital hospital;
 	
-	@ManyToMany 
+	@ManyToMany (cascade = CascadeType.REMOVE)
 	@JoinTable(name = "treats",
 	        joinColumns={@JoinColumn(name="machineId", referencedColumnName="id")},
 	   		inverseJoinColumns={@JoinColumn(name="illnessId", referencedColumnName="id")})

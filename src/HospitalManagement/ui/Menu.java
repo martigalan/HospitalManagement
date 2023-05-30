@@ -32,7 +32,7 @@ import hospital.xml.XMLManagerImp;
 import hospital.db.graphics.ImageWindow;
 
 public class Menu {
-	
+
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	private static PatientManager patientM;
 	private static DoctorManager doctorM;
@@ -47,7 +47,7 @@ public class Menu {
 	private static Scanner sc = new Scanner(System.in);
 	private static XMLManagerImp xmlMI = new XMLManagerImp();
 	private static boolean control;
-	
+
 	public static boolean logIn() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Type the user name:");
@@ -85,40 +85,45 @@ public class Menu {
 				System.out.println("-3. Select doctor data");
 				System.out.println("-4. Show hospitals");
 				System.out.println("-5. Create XMLs");
+				System.out.println("-6. Delete illness");
 				System.out.println("-0. Exit");
 
 				Scanner sc = new Scanner(System.in);
 				Integer choice = Integer.parseInt(sc.nextLine());
 				switch (choice) {
-					case 1: {
-						registerPatient();
-						break;
-					}
-					case 2: {
-						selectPatient();
-						break;
-					}
-					case 3: {
-						selectDoctor();
-						break;
-					}
-	
-					case 4: {
-						showHospitals();
-						break;
-					}
-					case 5: {
-						xmlMenu();
-						break;
-					}
-					case 0: {
-						control = false;
-						break;
-					}
-					default:
-						System.out.println("  NOT AN OPTION \n");
-						break;
-					}
+				case 1: {
+					registerPatient();
+					break;
+				}
+				case 2: {
+					selectPatient();
+					break;
+				}
+				case 3: {
+					selectDoctor();
+					break;
+				}
+
+				case 4: {
+					showHospitals();
+					break;
+				}
+				case 5: {
+					xmlMenu();
+					break;
+				}
+				case 6: {
+					removeIllness();
+					break;
+				}
+				case 0: {
+					control = false;
+					break;
+				}
+				default:
+					System.out.println("  NOT AN OPTION \n");
+					break;
+				}
 			}
 
 		} catch (NumberFormatException e) {
@@ -140,50 +145,47 @@ public class Menu {
 				System.out.println("2. Illness");
 				System.out.println("3. Machine");
 				System.out.println("0. Back to  principal menu");
-				
+
 				Scanner sc = new Scanner(System.in);
-				int choice = Integer.parseInt(sc.nextLine()); 
+				int choice = Integer.parseInt(sc.nextLine());
 
 				switch (choice) {
-					case 1: {
-						createHospitalXML();
-						System.out.println("Do you want to create and HTML? Y/N");
-						String answer = sc.nextLine();
-						if (answer.equals("Y")) {
-							xmlMI.xml2Html("./xmls/Hospital.xml", "./xmls/Hospital-Style.xslt", "./xmls/Hospital.html");
-							break;
-						}
-						else {
-							break;
-						}
+				case 1: {
+					createHospitalXML();
+					System.out.println("Do you want to create and HTML? Y/N");
+					String answer = sc.nextLine();
+					if (answer.equals("Y")) {
+						xmlMI.xml2Html("./xmls/Hospital.xml", "./xmls/Hospital-Style.xslt", "./xmls/Hospital.html");
+						break;
+					} else {
+						break;
 					}
-					case 2: {
-						createIllnessXML();
-						System.out.println("Do you want to create and HTML? Y/N");
-						String answer = sc.nextLine();
-						if (answer.equals("Y")) {
-							xmlMI.xml2Html("./xmls/Illness.xml", "./xmls/Illness-Style.xslt", "./xmls/Illness.html");
-							break;
-						}
-						else {
-							break;
-						}
+				}
+				case 2: {
+					createIllnessXML();
+					System.out.println("Do you want to create and HTML? Y/N");
+					String answer = sc.nextLine();
+					if (answer.equals("Y")) {
+						xmlMI.xml2Html("./xmls/Illness.xml", "./xmls/Illness-Style.xslt", "./xmls/Illness.html");
+						break;
+					} else {
+						break;
 					}
-					case 3: {
-						createMachineXML();
-						System.out.println("Do you want to create and HTML? Y/N");
-						String answer = sc.nextLine();
-						if (answer.equals("Y")) {
-							xmlMI.xml2Html("./xmls/Machine.xml", "./xmls/Machine-Style.xslt", "./xmls/Machine.html");
-							break;
-						}
-						else {
-							break;
-						}
+				}
+				case 3: {
+					createMachineXML();
+					System.out.println("Do you want to create and HTML? Y/N");
+					String answer = sc.nextLine();
+					if (answer.equals("Y")) {
+						xmlMI.xml2Html("./xmls/Machine.xml", "./xmls/Machine-Style.xslt", "./xmls/Machine.html");
+						break;
+					} else {
+						break;
 					}
-					case 0: {
-						return;
-					}
+				}
+				case 0: {
+					return;
+				}
 				}
 
 			} catch (NumberFormatException e) {
@@ -201,7 +203,7 @@ public class Menu {
 		System.out.println("\n Choose an id: ");
 		Integer mId = Integer.parseInt(sc.nextLine());
 		Machine m = machineM.getMachine(mId);
-		while(m == null) {
+		while (m == null) {
 			System.out.println("\n Choose an id: ");
 			mId = Integer.parseInt(sc.nextLine());
 			m = machineM.getMachine(mId);
@@ -216,7 +218,7 @@ public class Menu {
 		System.out.println("\n Choose an id: ");
 		Integer iId = Integer.parseInt(sc.nextLine());
 		Illness i = illnessM.getIllness(iId);
-		while(i == null) {
+		while (i == null) {
 			System.out.println("\n Choose an id: ");
 			iId = Integer.parseInt(sc.nextLine());
 			i = illnessM.getIllness(iId);
@@ -231,7 +233,7 @@ public class Menu {
 		}
 
 	}
-	
+
 	public static void createHospitalXML() {
 		System.out.println("Which hospital do you want to create an XML out of? \n");
 		List<Hospital> listH = hospitalM.getHospitals();
@@ -241,7 +243,7 @@ public class Menu {
 		Hospital h = hospitalM.getHospital(hId);
 		List<Machine> m = machineM.machinesInHospital(h);
 		h.setMachines(m);
-		while(h == null) {
+		while (h == null) {
 			System.out.println("\n Choose an id: ");
 			hId = Integer.parseInt(sc.nextLine());
 			h = hospitalM.getHospital(hId);
@@ -278,7 +280,7 @@ public class Menu {
 			photo = new byte[streamBlob.available()];
 			streamBlob.read(photo);
 			streamBlob.close();
-		}catch(FileNotFoundException ex) {
+		} catch (FileNotFoundException ex) {
 			System.out.println("   Sorry, the file wasn't found. NO PHOTO HAS BEEN ASSIGNED\n");
 			photo = null;
 		}
@@ -294,47 +296,47 @@ public class Menu {
 
 	public static void selectDoctor() throws IOException {
 		try {
-		System.out.println("Type the name:");
-		String nameDoc = sc.nextLine();
-		System.out.println("Type the surname:");
-		String snDoc = sc.nextLine();
-		List<Doctor> doctorList = doctorM.searchByName(nameDoc, snDoc);
-		for (Doctor d : doctorList) {
-			System.out.println(d.shortInfo());
-		}
-		if (doctorList.isEmpty()) {
-			System.out.println("There is no one with that name.");
-		} else {
-			System.out.println("Please choose a doctor, type the Id:");
-			Integer id = Integer.parseInt(sc.nextLine());
-			Doctor d = doctorM.getDoctor(id);
-			// Go to the Doctor's menu
-			DoctorMenu(id);
-		}
-		}catch(NoResultException ex) {
+			System.out.println("Type the name:");
+			String nameDoc = sc.nextLine();
+			System.out.println("Type the surname:");
+			String snDoc = sc.nextLine();
+			List<Doctor> doctorList = doctorM.searchByName(nameDoc, snDoc);
+			for (Doctor d : doctorList) {
+				System.out.println(d.shortInfo());
+			}
+			if (doctorList.isEmpty()) {
+				System.out.println("There is no one with that name.");
+			} else {
+				System.out.println("Please choose a doctor, type the Id:");
+				Integer id = Integer.parseInt(sc.nextLine());
+				Doctor d = doctorM.getDoctor(id);
+				// Go to the Doctor's menu
+				DoctorMenu(id);
+			}
+		} catch (NoResultException ex) {
 			System.out.println("  NO DOCTOR WITH THAT ID\n");
 		}
 	}
 
 	public static void selectPatient() throws IOException {
 		try {
-		System.out.println("Type the name:");
-		String name = sc.nextLine();
-		List<Patient> patientlist = patientM.searchByName(name);
-		Iterator it = patientlist.iterator();
-		while (it.hasNext()) {
-			System.out.println(((Patient) it.next()).shortInfo());
-		}
-		if (patientlist.isEmpty()) {
-			System.out.println("There is no one with that name.");
-		} else {
-			System.out.println("Please choose a patient, type the Id:");
-			Integer id = Integer.parseInt(sc.nextLine());
-			Patient p = patientM.getPatient(id);
-			// Go to the Patient's menu
-			PatientMenu(id);
-		}
-		}catch(NoResultException ex) {
+			System.out.println("Type the name:");
+			String name = sc.nextLine();
+			List<Patient> patientlist = patientM.searchByName(name);
+			Iterator it = patientlist.iterator();
+			while (it.hasNext()) {
+				System.out.println(((Patient) it.next()).shortInfo());
+			}
+			if (patientlist.isEmpty()) {
+				System.out.println("There is no one with that name.");
+			} else {
+				System.out.println("Please choose a patient, type the Id:");
+				Integer id = Integer.parseInt(sc.nextLine());
+				Patient p = patientM.getPatient(id);
+				// Go to the Patient's menu
+				PatientMenu(id);
+			}
+		} catch (NoResultException ex) {
 			System.out.println("  NO PATIENT WITH THAT ID\n");
 		}
 
@@ -349,62 +351,55 @@ public class Menu {
 				System.out.println("3. Search hospital");
 				System.out.println("4. Assign illness");
 				System.out.println("5. Update state of an illness");
-				System.out.println("6. Delete illness");
-				System.out.println("7. Create patient XML");
+				System.out.println("6. Create patient XML");
 				System.out.println("0. Back to  principal menu");
-				
+
 				Scanner sc = new Scanner(System.in);
-				int choice = Integer.parseInt(sc.nextLine()); 
+				int choice = Integer.parseInt(sc.nextLine());
 
 				switch (choice) {
-					case 1: {
-						updatePatient(id);
-						System.out.println("Do you want to update an illness severity? Y/N");
-						String answer = sc.nextLine();
-						if (answer.equals("Y")) {
-							updateIllnessSeverity(id);
-							break;
-						}
-						else {
-							break;
-						}
-					}
-					case 2: {
-						showPatient(id); 
-						break;
-					}
-					case 3: {
-						searchHospital(id);
-						break;
-					}
-					case 4: {
-						lookForIllness(id);
-						break;
-					}
-					case 5: {
+				case 1: {
+					updatePatient(id);
+					System.out.println("Do you want to update an illness severity? Y/N");
+					String answer = sc.nextLine();
+					if (answer.equals("Y")) {
 						updateIllnessSeverity(id);
 						break;
-					}
-					case 6: {
-						removeIllness(id);
+					} else {
 						break;
 					}
-					case 7: {
-						Patient p = patientM.getPatient(id);
-						xmlMI.patient2Xml(p);
-						System.out.println("Do you want to create and HTML? Y/N");
-						String answer = sc.nextLine();
-						if (answer.equals("Y")) {
-							xmlMI.xml2Html("./xmls/Patient.xml", "./xmls/Patient-Style.xslt", "./xmls/Patient.html");
-							break;
-						}
-						else {
-							break;
-						}
+				}
+				case 2: {
+					showPatient(id);
+					break;
+				}
+				case 3: {
+					searchHospital(id);
+					break;
+				}
+				case 4: {
+					lookForIllness(id);
+					break;
+				}
+				case 5: {
+					updateIllnessSeverity(id);
+					break;
+				}
+				case 6: {
+					Patient p = patientM.getPatient(id);
+					xmlMI.patient2Xml(p);
+					System.out.println("Do you want to create and HTML? Y/N");
+					String answer = sc.nextLine();
+					if (answer.equals("Y")) {
+						xmlMI.xml2Html("./xmls/Patient.xml", "./xmls/Patient-Style.xslt", "./xmls/Patient.html");
+						break;
+					} else {
+						break;
 					}
-					case 0: {
-						return;
-					}
+				}
+				case 0: {
+					return;
+				}
 				}
 
 			} catch (NumberFormatException e) {
@@ -421,10 +416,10 @@ public class Menu {
 		Patient p = patientM.getPatient(id);
 		System.out.println("This patient has the following illnesses: ");
 		List<Has> illnessesPHas = hasM.getListHas(id);
-		if(illnessesPHas.isEmpty()) {
+		if (illnessesPHas.isEmpty()) {
 			System.out.println("   THE PATIENT HAS NO ILLNESSES\n");
 			PatientMenu(id);
-		}else {
+		} else {
 			for (Has hIllness : illnessesPHas) {
 				System.out.println(hIllness.toString());
 			}
@@ -457,17 +452,18 @@ public class Menu {
 		String severity = sc.nextLine();
 		patientM.assignIllness(p, illness, severity);
 	}
-	
-	public static void removeIllness(int id) throws IOException {
-		List<Illness> illnessList = illnessM.getIllnesses(); //TODO revisar si está bien
+
+	public static void removeIllness() throws IOException {
+		List<Illness> illnessList = illnessM.getIllnesses(); // TODO revisar si está bien
 		for (Illness i : illnessList) {
 			System.out.println(i);
 		}
 		System.out.println("What illness do you want to remove?\n Please enter illness id: ");
-		int illnessId = sc.nextInt();
+		int illnessId = Integer.parseInt(sc.nextLine());
 		illnessM.deleteIllness(illnessId);
 		System.out.println("The illness has been removed.");
 	}
+
 	private static void searchHospital(int id) {
 		Patient p = patientM.getPatient(id);
 		List<Has> illnesses = p.getIllness();
@@ -531,7 +527,7 @@ public class Menu {
 
 	public static void showPatient(int id) throws IOException {
 		Patient p = patientM.getPatient(id);
-		System.out.println(p); 
+		System.out.println(p);
 		// If patient.getPhoto != null
 		// open window and show it
 		if (p.getPhoto() != null) {
@@ -563,39 +559,38 @@ public class Menu {
 				System.out.println("3. Delete doctor");
 				System.out.println("4. Create doctor XML");
 				System.out.println("0. Back to  principal menu");
-				
+
 				Scanner sc = new Scanner(System.in);
 				int choice = Integer.parseInt(sc.nextLine());
 
 				switch (choice) {
-					case 1: {
-						updateDoctor(id);
+				case 1: {
+					updateDoctor(id);
+					break;
+				}
+				case 2: {
+					showDoctor(id);
+					break;
+				}
+				case 3: {
+					removeDoctor(id);
+					return;
+				}
+				case 4: {
+					Doctor d = doctorM.getDoctor(id);
+					xmlMI.doctor2Xml(d);
+					System.out.println("Do you want to create and HTML? Y/N");
+					String answer = sc.nextLine();
+					if (answer.equals("Y")) {
+						xmlMI.xml2Html("./xmls/Doctor.xml", "./xmls/Doctor-Style.xslt", "./xmls/Doctor.html");
+						break;
+					} else {
 						break;
 					}
-					case 2: {
-						showDoctor(id); 
-						break;
-					}
-					case 3: {
-						removeDoctor(id);
-						return;
-					}
-					case 4: {
-						Doctor d = doctorM.getDoctor(id);
-						xmlMI.doctor2Xml(d);
-						System.out.println("Do you want to create and HTML? Y/N");
-						String answer = sc.nextLine();
-						if (answer.equals("Y")) {
-							xmlMI.xml2Html("./xmls/Doctor.xml", "./xmls/Doctor-Style.xslt", "./xmls/Doctor.html");
-							break;
-						}
-						else {
-							break;
-						}
-					}
-					case 0: {
-						return;
-					}
+				}
+				case 0: {
+					return;
+				}
 				}
 
 			} catch (NumberFormatException e) {

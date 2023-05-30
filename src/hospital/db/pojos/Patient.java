@@ -53,7 +53,7 @@ public class Patient implements Serializable{
 	@XmlTransient
 	private byte[] photo;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "patient")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "patient", cascade = CascadeType.REMOVE)
 	@XmlTransient
 	private List<Has> illness;
 	

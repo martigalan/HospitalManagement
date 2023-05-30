@@ -54,7 +54,7 @@ public class Doctor implements Serializable {
 	@XmlTransient
 	private Hospital hospital;
 	
-	@ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	@JoinTable(name = "DoctorTreats",
 	        joinColumns={@JoinColumn(name="doctorId", referencedColumnName="id")},
 	   		inverseJoinColumns={@JoinColumn(name="illnessId", referencedColumnName="id")})
