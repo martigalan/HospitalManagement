@@ -349,7 +349,8 @@ public class Menu {
 				System.out.println("3. Search hospital");
 				System.out.println("4. Assign illness");
 				System.out.println("5. Update state of an illness");
-				System.out.println("6. Create patient XML");
+				System.out.println("6. Delete illness");
+				System.out.println("7. Create patient XML");
 				System.out.println("0. Back to  principal menu");
 				
 				Scanner sc = new Scanner(System.in);
@@ -385,6 +386,10 @@ public class Menu {
 						break;
 					}
 					case 6: {
+						removeIllness(id);
+						break;
+					}
+					case 7: {
 						Patient p = patientM.getPatient(id);
 						xmlMI.patient2Xml(p);
 						System.out.println("Do you want to create and HTML? Y/N");
@@ -452,7 +457,17 @@ public class Menu {
 		String severity = sc.nextLine();
 		patientM.assignIllness(p, illness, severity);
 	}
-
+	
+	public static void removeIllness(int id) throws IOException {
+		List<Illness> illnessList = illnessM.getIllnesses(); //TODO revisar si está bien
+		for (Illness i : illnessList) {
+			System.out.println(i);
+		}
+		System.out.println("What illness do you want to remove?\n Please enter illness id: ");
+		int illnessId = sc.nextInt();
+		illnessM.deleteIllness(illnessId);
+		System.out.println("The illness has been removed.");
+	}
 	private static void searchHospital(int id) {
 		Patient p = patientM.getPatient(id);
 		List<Has> illnesses = p.getIllness();

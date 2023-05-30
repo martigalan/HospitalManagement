@@ -9,4 +9,5 @@ public interface IllnessManager {
 	public Illness getIllness(int id);
 	public List<Illness> getIllnesses();
 	public List<Illness> relationDoctorIllness(int id);
+	public void deleteIllness(int id);
 }

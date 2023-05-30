@@ -102,4 +102,19 @@ public class JDBCIllnessManager implements IllnessManager {
 		}
 		return listIllnesses;
 	}
+	
+	@Override
+	public void deleteIllness(int id) {
+		try {
+		String sql = "DELETE FROM illness WHERE illnessId = ?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1, id);
+		prep.executeUpdate();
+		prep.close();
+		} catch(SQLException e){
+			System.out.println("Database error");
+			e.printStackTrace();
+		}
+	}
+
 }
