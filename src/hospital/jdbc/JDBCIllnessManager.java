@@ -106,7 +106,7 @@ public class JDBCIllnessManager implements IllnessManager {
 	@Override
 	public void deleteIllness(int id) {
 		try {
-		String sql = "DELETE FROM illness WHERE illnessId = ?";
+		String sql = "DELETE FROM illness WHERE id = ?";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1, id);
 		prep.executeUpdate();
