@@ -45,7 +45,7 @@ public class Machine implements Serializable {
 	private String name;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "hospital")
+	@JoinColumn(name = "hospitalId")
 	@XmlTransient
 	private Hospital hospital;
 	
