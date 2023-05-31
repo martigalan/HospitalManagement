@@ -454,7 +454,7 @@ public class Menu {
 	}
 
 	public static void removeIllness() throws IOException {
-		List<Illness> illnessList = illnessM.getIllnesses(); // TODO revisar si está bien
+		List<Illness> illnessList = illnessM.getIllnesses();
 		for (Illness i : illnessList) {
 			System.out.println(i);
 		}

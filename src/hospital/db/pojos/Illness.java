@@ -41,7 +41,7 @@ public class Illness implements Serializable {
 	@XmlTransient
 	private List<Has> patients;
 	
-	@ManyToMany(mappedBy = "treatsIllness")
+	@ManyToMany(mappedBy = "treatsIllness", cascade = CascadeType.PERSIST)
 	@XmlTransient
 	private List<Doctor> doctors;
 	

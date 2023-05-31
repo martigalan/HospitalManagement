@@ -42,7 +42,7 @@ public class Hospital implements Serializable{
 	@OneToMany(mappedBy = "hospital")
 	@XmlTransient
 	private List<Patient> patients;	
-	@OneToMany(mappedBy= "hospital")
+	@OneToMany(mappedBy= "hospital", cascade = CascadeType.PERSIST)
 	@XmlTransient
 	private List<Doctor> doctors;
 	

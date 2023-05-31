@@ -71,7 +71,7 @@ public class ConnectionManager {
 			String table8 = "CREATE TABLE hasIllness (illnessId INTEGER NOT NULL REFERENCES illness(id) ON DELETE CASCADE, " + "patientId INTEGER NOT NULL REFERENCES patient(id), " 
 			        + "severity TEXT NOT NULL, " + "PRIMARY KEY (illnessId, patientId));";
 			s.executeUpdate(table8);
-			String table9 = "CREATE TABLE doctorTreats (illnessId INTEGER NOT NULL REFERENCES illness(id), " + "doctorId INTEGER NOT NULL REFERENCES doctor(id)," +
+			String table9 = "CREATE TABLE doctorTreats (illnessId INTEGER NOT NULL REFERENCES illness(id) ON DELETE CASCADE, " + "doctorId INTEGER NOT NULL REFERENCES doctor(id) ON DELETE CASCADE," +
 			        "PRIMARY KEY (illnessId, doctorId));";
 			s.executeUpdate(table9);
 			String table10 = "CREATE TABLE sortingMedic (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, " + "password TEXT);";
