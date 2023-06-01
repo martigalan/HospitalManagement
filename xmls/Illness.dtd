@@ -5,4 +5,5 @@ IDs that start with a number
 -->
 <!DOCTYPE Illness [
    <!ELEMENT Illness (condition)>
+   <!ELEMENT condition (#PCDATA)>
 ]>

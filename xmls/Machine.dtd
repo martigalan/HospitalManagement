@@ -4,13 +4,6 @@ to be CDATA instead of ID, since DTD doesn't allow
 IDs that start with a number
 -->
 <!DOCTYPE Machine [
-<<<<<<< HEAD
-   <!ATTLIST Machine name CDATA #REQUIRED>
-   <!ELEMENT Machine (Hospital)>
-   <!ELEMENT Hospital (location)>
-   <!ATTLIST Hospital name CDATA #REQUIRED>
-   <!ELEMENT location (#PCDATA)>
-=======
    <!ELEMENT Machine (name)>
->>>>>>> branch 'master' of https://github.com/martigalan/HospitalManagement
+   <!ELEMENT name (#PCDATA)>
 ]>
